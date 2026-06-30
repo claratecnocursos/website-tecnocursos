@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<template id="__bundler_thumbnail" data-bg-color="#0A1326">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0A1326"/>
+    <rect x="470" y="250" width="260" height="260" rx="54" fill="none" stroke="#32AD78" stroke-width="22"/>
+    <rect x="548" y="328" width="104" height="104" rx="22" fill="#6ABB8C"/>
+    <text x="600" y="620" font-family="Poppins,Arial,sans-serif" font-size="74" font-weight="700" fill="#ffffff" text-anchor="middle">TecnoCursos</text>
+  </svg>
+</template>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0A1326}
+img{display:block;max-width:100%}
+::selection{background:#32AD78;color:#fff}
+input,textarea{outline:none}
+input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px rgba(50,173,120,.16)}
+[data-burger]{display:none}
+@keyframes tcpulse{0%,100%{opacity:.55}50%{opacity:.9}}
+@keyframes tcgrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes tcpop{0%{opacity:0;transform:translateY(14px) scale(.96)}100%{opacity:1;transform:none}}
+@keyframes tcblink{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes tcspin{to{transform:rotate(360deg)}}
+[data-rail]{scrollbar-width:none;-ms-overflow-style:none}
+[data-rail]::-webkit-scrollbar{display:none}
+[data-anim-grad]{background-size:200% 200%;animation:tcgrad 14s ease infinite}
+@media(max-width:900px){
+  [data-navlinks]{display:none!important}
+  [data-burger]{display:flex!important}
+}
+@media(max-width:620px){
+  [data-hide-sm]{display:none!important}
+}
+</style>
+</helmet>
+
+<div style="font-family:'Poppins',system-ui,sans-serif;color:#1B2848;background:#0A1326;overflow-x:hidden;position:relative">
+
+  <!-- ===================== NAV ===================== -->
+  <header style="position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);background:rgba(10,19,38,.72);border-bottom:1px solid rgba(255,255,255,.08)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <img src="assets/logo-white.png" alt="TecnoCursos" onClick="{{ goHome }}" style="height:32px;width:auto;cursor:pointer"/>
+      <nav data-navlinks style="display:flex;align-items:center;gap:34px">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+          <span onClick="{{ item.onClick }}" style="position:relative;font-size:15px;font-weight:500;cursor:pointer;padding:6px 0;color:rgba(255,255,255,.82)" style-hover="color:#fff">
+            <span>{{ item.label }}</span>
+            <sc-if value="{{ item.active }}"><span style="position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:#32AD78;box-shadow:0 0 8px #32AD78"></span></sc-if>
+          </span>
+        </sc-for>
+      </nav>
+      <div data-navlinks style="display:flex;align-items:center;gap:16px">
+        <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:15px;font-weight:600;padding:11px 20px;border-radius:10px;box-shadow:0 6px 18px rgba(50,173,120,.32)" style-hover="background:#2b9568">Fale com a gente</button>
+      </div>
+      <button data-burger onClick="{{ toggleMenu }}" style="font-family:inherit;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px">
+        <span style="width:22px;height:2px;background:#fff;border-radius:2px;display:block"></span>
+        <span style="width:22px;height:2px;background:#fff;border-radius:2px;display:block"></span>
+        <span style="width:22px;height:2px;background:#fff;border-radius:2px;display:block"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== MOBILE MENU ===================== -->
+  <sc-if value="{{ menu }}">
+    <div style="position:fixed;inset:0;z-index:99;background:rgba(10,19,38,.97);backdrop-filter:blur(10px);padding:96px 28px 40px;display:flex;flex-direction:column;gap:4px">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+        <span onClick="{{ item.onClick }}" style="font-size:24px;font-weight:600;color:#fff;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer">{{ item.label }}</span>
+      </sc-for>
+      <button onClick="{{ goContato }}" style="font-family:inherit;margin-top:24px;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:17px;font-weight:600;padding:16px;border-radius:12px">Fale com a gente</button>
+    </div>
+  </sc-if>
+
+  <!-- ===================== HOME ===================== -->
+  <sc-if value="{{ home }}" hint-placeholder-val="{{ true }}">
+  <main>
+    <!-- HERO -->
+    <section style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#03060a">
+      <img src="assets/fundo.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.95"/>
+      <div style="position:absolute;inset:0;background:radial-gradient(125% 95% at 16% 42%, rgba(3,6,12,.84) 0%, rgba(4,9,18,.5) 46%, rgba(4,9,18,.12) 100%)"></div>
+
+      <!-- floating parallax glass squares -->
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
+        <div data-float data-depth="1.7" style="position:absolute;left:7%;top:62%;width:70px;height:70px;border-radius:18px;background:linear-gradient(145deg,rgba(50,173,120,.22),rgba(50,173,120,.04));border:1px solid rgba(106,187,140,.5);box-shadow:0 0 40px rgba(50,173,120,.22),inset 0 0 20px rgba(106,187,140,.16);will-change:transform"></div>
+        <div data-float data-depth="1.1" style="position:absolute;left:19%;top:22%;width:46px;height:46px;border-radius:13px;background:linear-gradient(145deg,rgba(106,187,140,.16),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.4);box-shadow:0 0 26px rgba(50,173,120,.18);will-change:transform"></div>
+        <div data-float data-depth="2.2" style="position:absolute;left:44%;top:74%;width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,rgba(0,92,139,.22),rgba(50,173,120,.05));border:1px solid rgba(0,92,139,.55);box-shadow:0 0 22px rgba(0,92,139,.28);will-change:transform"></div>
+        <div data-float data-depth="2.6" style="position:absolute;left:90%;top:30%;width:28px;height:28px;border-radius:9px;background:rgba(50,173,120,.12);border:1px solid rgba(106,187,140,.5);box-shadow:0 0 18px rgba(50,173,120,.28);will-change:transform"></div>
+        <div data-float data-depth="0.7" style="position:absolute;left:62%;top:84%;width:54px;height:54px;border-radius:15px;background:linear-gradient(145deg,rgba(106,187,140,.13),rgba(3,6,12,0));border:1px solid rgba(106,187,140,.32);box-shadow:0 0 30px rgba(50,173,120,.14);will-change:transform"></div>
+      </div>
+
+      <div data-hero-pad style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:120px 24px 90px;width:100%;display:grid;gap:48px;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));align-items:center">
+        <div>
+          <span style="display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.06em;color:#6ABB8C;background:rgba(50,173,120,.12);border:1px solid rgba(106,187,140,.28);padding:7px 14px;border-radius:100px;text-transform:uppercase">Tecnologia em segurança do trabalho</span>
+          <h1 style="font-size:clamp(36px,5.6vw,64px);line-height:1.03;letter-spacing:-.03em;font-weight:700;color:#fff;margin:24px 0 0">A plataforma que gerencia seus <span style="background:linear-gradient(100deg,#6ABB8C,#32AD78,#3FA9D6);-webkit-background-clip:text;background-clip:text;color:transparent">treinamentos NR</span> de ponta a ponta.</h1>
+          <p style="font-size:clamp(17px,2vw,20px);line-height:1.6;color:rgba(255,255,255,.72);margin:24px 0 0;max-width:520px">Teoria na nossa plataforma digital, prática na sua empresa. Lista de presença digital, gestão de validades e capacitação nas principais Normas Regulamentadoras.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:38px">
+            <button onClick="{{ goServicos }}" style="font-family:inherit;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:16px;font-weight:600;padding:15px 26px;border-radius:12px;box-shadow:0 10px 30px rgba(50,173,120,.38)" style-hover="background:#2b9568;transform:translateY(-2px)">Conheça a plataforma</button>
+            <button onClick="{{ goContato }}" style="font-family:inherit;cursor:pointer;background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.26);font-size:16px;font-weight:600;padding:15px 26px;border-radius:12px" style-hover="background:rgba(255,255,255,.16)">Fale com a gente</button>
+          </div>
+          <div style="display:flex;gap:26px;margin-top:46px;flex-wrap:wrap">
+            <div><div style="font-size:25px;font-weight:700;color:#fff">+20 anos</div><div style="font-size:13px;color:rgba(255,255,255,.55)">de experiência</div></div>
+            <div style="width:1px;background:rgba(255,255,255,.16)"></div>
+            <div><div style="font-size:25px;font-weight:700;color:#fff">13 NRs</div><div style="font-size:13px;color:rgba(255,255,255,.55)">normas atendidas</div></div>
+            <div style="width:1px;background:rgba(255,255,255,.16)"></div>
+            <div><div style="font-size:25px;font-weight:700;color:#fff">Brasil</div><div style="font-size:13px;color:rgba(255,255,255,.55)">atendimento nacional</div></div>
+          </div>
+        </div>
+
+        <!-- HERO PRODUCT CLUSTER (Stripe Cloud style) -->
+        <div data-hide-sm style="position:relative;min-height:480px">
+          <!-- main dashboard card -->
+          <div data-float data-depth="0.5" style="position:absolute;left:2%;top:8%;width:min(420px,92%);background:rgba(255,255,255,.97);border-radius:18px;box-shadow:0 34px 80px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14);overflow:hidden;will-change:transform">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 18px;background:#1B2848">
+              <span style="color:#fff;font-size:14px;font-weight:600">Gestão de treinamentos</span>
+              <span style="font-size:10.5px;font-weight:600;color:#6ABB8C;background:rgba(50,173,120,.16);padding:4px 9px;border-radius:100px">JUN 2026</span>
+            </div>
+            <div style="padding:16px 18px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px">
+                <div style="background:#F4F7FB;border-radius:11px;padding:11px 13px"><div style="font-size:10.5px;color:#9098A8">Capacitações ativas</div><div style="font-size:20px;font-weight:700;color:#1B2848">128</div></div>
+                <div style="background:#F4F7FB;border-radius:11px;padding:11px 13px"><div style="font-size:10.5px;color:#9098A8">Conformidade</div><div style="font-size:20px;font-weight:700;color:#218a5d">98%</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="color:#2B3550;font-weight:500">NR-35 Trabalho em Altura</span><span style="color:#9098A8">92%</span></div><div style="height:6px;border-radius:6px;background:#EEF1F6;overflow:hidden"><div style="width:92%;height:100%;background:#32AD78"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="color:#2B3550;font-weight:500">NR-10 Eletricidade</span><span style="color:#9098A8">76%</span></div><div style="height:6px;border-radius:6px;background:#EEF1F6;overflow:hidden"><div style="width:76%;height:100%;background:#005C8B"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="color:#2B3550;font-weight:500">NR-12 Máquinas</span><span style="color:#9098A8">64%</span></div><div style="height:6px;border-radius:6px;background:#EEF1F6;overflow:hidden"><div style="width:64%;height:100%;background:#6ABB8C"></div></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- presence list card -->
+          <div data-float data-depth="1.3" style="position:absolute;left:-6%;top:58%;width:min(290px,80%);background:rgba(255,255,255,.98);border-radius:15px;box-shadow:0 26px 60px rgba(0,0,0,.46);border:1px solid rgba(255,255,255,.14);overflow:hidden;will-change:transform">
+            <div style="padding:12px 15px;border-bottom:1px solid #EEF1F6;display:flex;align-items:center;justify-content:space-between"><span style="font-size:12.5px;font-weight:600;color:#1B2848">Lista de presença</span><span style="width:7px;height:7px;border-radius:50%;background:#32AD78;box-shadow:0 0 8px #32AD78;animation:tcpulse 2s infinite"></span></div>
+            <div style="padding:7px 8px">
+              <div style="display:flex;align-items:center;gap:9px;padding:7px 8px"><span style="width:26px;height:26px;border-radius:50%;background:#E7F4ED;color:#218a5d;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center">CM</span><span style="flex:1;font-size:12px;font-weight:500;color:#1B2848">Carlos Mendes</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#32AD78" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:7px 8px"><span style="width:26px;height:26px;border-radius:50%;background:#E7EEF6;color:#005C8B;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center">AS</span><span style="flex:1;font-size:12px;font-weight:500;color:#1B2848">Ana Souza</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#32AD78" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            </div>
+          </div>
+          <!-- certificate card -->
+          <div data-float data-depth="2" style="position:absolute;right:-4%;top:64%;width:min(230px,66%);background:linear-gradient(150deg,#1B2848,#005C8B);border-radius:15px;box-shadow:0 26px 60px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14);padding:16px;color:#fff;will-change:transform">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="width:30px;height:30px;border-radius:50%;background:rgba(50,173,120,.25);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6ABB8C" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><span style="font-size:12px;font-weight:600;color:rgba(255,255,255,.85)">Certificado digital</span></div>
+            <div style="font-size:14px;font-weight:700">NR-35 concluído</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:2px">Válido até jun/2028</div>
+            <div style="margin-top:11px;height:1px;background:rgba(255,255,255,.15)"></div>
+            <div style="font-size:10.5px;color:rgba(255,255,255,.55);margin-top:8px">Reconhecido pelo Ministério do Trabalho</div>
+          </div>
+          <!-- floating mini KPI -->
+          <div data-float data-depth="2.6" style="position:absolute;right:6%;top:4%;background:rgba(255,255,255,.97);border-radius:13px;box-shadow:0 20px 46px rgba(0,0,0,.42);padding:12px 15px;will-change:transform"><div style="font-size:10.5px;color:#9098A8">Validades em dia</div><div style="font-size:19px;font-weight:700;color:#218a5d;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#32AD78"></span>312</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section style="position:relative;background:linear-gradient(180deg,#0A1326,#0C1C36);padding:clamp(48px,6vw,72px) 0;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(circle at 50% 50%,#000,transparent 80%);-webkit-mask-image:radial-gradient(circle at 50% 50%,#000,transparent 80%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(54% 86% at 50% 50%,rgba(0,92,139,.34),transparent 62%)"></div>
+      <div style="position:relative;max-width:1200px;margin:0 auto;padding:0 24px">
+        <p data-reveal style="text-align:center;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 30px;opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Empresas que confiam na TecnoCursos</p>
+        <div data-reveal style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:24px 46px;opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .1s,transform .7s cubic-bezier(.22,.61,.36,1) .1s">{{ partnerNodes }}</div>
+      </div>
+    </section>
+
+    <!-- O QUE OFERECEMOS -->
+    <section style="position:relative;background:linear-gradient(180deg,#F2F6FB,#E6EDF6);padding:clamp(72px,9vw,124px) 0;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(27,40,72,.08) 1.2px,transparent 1.2px);background-size:22px 22px;mask-image:radial-gradient(circle at 30% 25%,#000,transparent 90%);-webkit-mask-image:radial-gradient(circle at 30% 25%,#000,transparent 90%);pointer-events:none"></div>
+      <div style="position:absolute;top:-10%;right:-5%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(0,92,139,.1),transparent 68%);pointer-events:none"></div>
+      <div style="position:relative;max-width:1200px;margin:0 auto;padding:0 24px">
+        <div data-reveal style="max-width:660px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+          <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#218a5d;margin-bottom:16px">O que oferecemos</span>
+          <h2 style="font-size:clamp(30px,4.4vw,48px);line-height:1.06;letter-spacing:-.025em;font-weight:700;color:#1B2848;margin:0">Treinamento, tecnologia e gestão — em um só lugar.</h2>
+          <p style="font-size:19px;line-height:1.6;color:#586174;margin:18px 0 0">A parte teórica acontece na nossa plataforma digital; a prática, na sua empresa, com instrutores especializados.</p>
+        </div>
+        <div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));margin-top:50px">
+          <sc-for list="{{ offerings }}" as="s" hint-placeholder-count="3">
+            <div data-reveal style="position:relative;background:#fff;border:1px solid rgba(27,40,72,.08);border-radius:18px;padding:32px;cursor:pointer;overflow:hidden;opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),box-shadow .25s;box-shadow:0 1px 3px rgba(16,24,40,.05)" style-hover="box-shadow:0 22px 50px rgba(16,24,40,.13)" onClick="{{ s.onClick }}">
+              <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#005C8B,#32AD78)"></div>
+              <div style="width:52px;height:52px;border-radius:14px;background:{{ s.iconBg }};display:flex;align-items:center;justify-content:center;margin-bottom:22px" data-svg="{{ s.icon }}"></div>
+              <h3 style="font-size:20px;font-weight:600;color:#1B2848;margin:0 0 10px">{{ s.title }}</h3>
+              <p style="font-size:15px;line-height:1.62;color:#6B7488;margin:0">{{ s.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE: PLATAFORMA / LISTA DE PRESENÇA (DARK) -->
+    <section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#0A1326,#0C1C36);padding:clamp(80px,10vw,140px) 0">
+      <div style="position:absolute;inset:0;background:radial-gradient(68% 85% at 86% -8%,rgba(0,92,139,.52),transparent 58%),radial-gradient(58% 78% at 2% 110%,rgba(50,173,120,.32),transparent 58%),radial-gradient(46% 60% at 52% 46%,rgba(0,92,139,.2),transparent 66%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 60% 40%,#000,transparent 78%);-webkit-mask-image:radial-gradient(circle at 60% 40%,#000,transparent 78%);pointer-events:none"></div>
+      <div style="position:relative;max-width:1200px;margin:0 auto;padding:0 24px;display:grid;gap:56px;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));align-items:center">
+        <div data-reveal style="opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+          <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:16px">Lista de presença digital</span>
+          <h2 style="font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-.025em;font-weight:700;color:#fff;margin:0">Sem papel. Sem planilha. Sem retrabalho.</h2>
+          <p style="font-size:18px;line-height:1.65;color:rgba(255,255,255,.7);margin:18px 0 28px">Organize turmas, registre presença com assinatura digital, gere relatórios detalhados e acompanhe o desempenho dos participantes — tudo em tempo real.</p>
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <sc-for list="{{ platformBenefits }}" as="b" hint-placeholder-count="4">
+              <div style="display:flex;gap:12px;align-items:center"><span style="width:24px;height:24px;border-radius:7px;background:rgba(50,173,120,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6ABB8C" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span style="font-size:16px;color:rgba(255,255,255,.86)">{{ b }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+        <div data-reveal style="opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,.61,.36,1) .12s,transform .8s cubic-bezier(.22,.61,.36,1) .12s">
+          <div style="background:#fff;border-radius:18px;box-shadow:0 30px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);overflow:hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#1B2848"><div style="display:flex;align-items:center;gap:10px"><span style="width:9px;height:9px;border-radius:50%;background:#32AD78;box-shadow:0 0 8px #32AD78;animation:tcpulse 2s infinite"></span><span style="color:#fff;font-size:14px;font-weight:600">NR-35 · Trabalho em Altura</span></div><span style="font-size:11px;font-weight:600;color:#6ABB8C;background:rgba(50,173,120,.16);padding:4px 10px;border-radius:100px">AO VIVO</span></div>
+            <div style="padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #EEF1F6"><div><div style="font-size:12px;color:#8A93A6">Presenças confirmadas</div><div style="font-size:22px;font-weight:700;color:#1B2848">18<span style="color:#B6BECC;font-weight:600;font-size:16px"> / 20</span></div></div><div style="flex:1;max-width:150px;margin-left:18px"><div style="height:8px;border-radius:8px;background:#EEF1F6;overflow:hidden"><div style="width:90%;height:100%;background:linear-gradient(90deg,#005C8B,#32AD78)"></div></div></div></div>
+            <div style="padding:8px 10px">
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px" style-hover="background:#F6F8FB"><span style="width:34px;height:34px;border-radius:50%;background:#E7F4ED;color:#218a5d;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">CM</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1B2848">Carlos Mendes</div><div style="font-size:12px;color:#9098A8">Operador · 09:02</div></div><span style="font-size:12px;font-weight:600;color:#218a5d;display:flex;align-items:center;gap:5px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#32AD78" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Assinado</span></div>
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px"><span style="width:34px;height:34px;border-radius:50%;background:#E7EEF6;color:#005C8B;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">AS</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1B2848">Ana Souza</div><div style="font-size:12px;color:#9098A8">Técnica · 09:03</div></div><span style="font-size:12px;font-weight:600;color:#218a5d;display:flex;align-items:center;gap:5px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#32AD78" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Assinado</span></div>
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px"><span style="width:34px;height:34px;border-radius:50%;background:#F2EEF8;color:#6a4bb5;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">RP</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1B2848">Rafael Pinto</div><div style="font-size:12px;color:#9098A8">Supervisor</div></div><span style="font-size:12px;font-weight:600;color:#C99A2E;background:#FBF3DF;padding:3px 9px;border-radius:100px">Pendente</span></div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#F6F8FB;border-top:1px solid #EEF1F6"><span style="font-size:12px;color:#6B7488;display:flex;align-items:center;gap:7px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#32AD78" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Assinatura digital validada</span><span style="font-size:12px;font-weight:600;color:#005C8B">Exportar PDF</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NRs PREVIEW -->
+    <section style="position:relative;background:linear-gradient(180deg,#0A1326,#0C1C36);padding:clamp(72px,9vw,120px) 0;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 60% 30%,#000,transparent 82%);-webkit-mask-image:radial-gradient(circle at 60% 30%,#000,transparent 82%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(54% 72% at 50% 44%,rgba(0,92,139,.36),transparent 62%),radial-gradient(40% 58% at 8% 100%,rgba(50,173,120,.2),transparent 60%)"></div>
+      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px">
+        <div data-reveal style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:40px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+          <div style="max-width:620px">
+            <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:16px">Normas Regulamentadoras</span>
+            <h2 style="font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-.025em;font-weight:700;color:#fff;margin:0">Capacitação nas principais NRs.</h2>
+            <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.7);margin:16px 0 0">Online e presencial, em todo o território nacional, com suporte em Libras nos treinamentos teóricos.</p>
+          </div>
+          <button onClick="{{ goServicos }}" style="font-family:inherit;cursor:pointer;background:#32AD78;border:none;color:#fff;font-size:15px;font-weight:600;padding:13px 22px;border-radius:11px" style-hover="background:#2b9568">Ver todos os treinamentos</button>
+        </div>
+        <div data-reveal style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(132px,100%),1fr));opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .1s,transform .7s cubic-bezier(.22,.61,.36,1) .1s">
+          <sc-for list="{{ nrs }}" as="n" hint-placeholder-count="13">
+            <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:16px 14px;cursor:default;transition:border-color .2s,transform .2s,box-shadow .2s,background .2s" style-hover="border-color:#32AD78;transform:translateY(-3px);box-shadow:0 16px 32px rgba(0,0,0,.4);background:rgba(255,255,255,.08)">
+              <div style="font-size:18px;font-weight:700;color:#6ABB8C">{{ n.code }}</div>
+              <div style="font-size:12px;line-height:1.35;color:rgba(255,255,255,.6);margin-top:5px">{{ n.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- VANTAGENS (DARK BAND) -->
+    <section style="position:relative;overflow:hidden;background:linear-gradient(120deg,#0C1A30,#102A4A);padding:clamp(64px,8vw,104px) 0">
+      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(58% 78% at 50% 50%,rgba(0,92,139,.5),transparent 60%),radial-gradient(40% 60% at 88% 8%,rgba(50,173,120,.32),transparent 60%),radial-gradient(42% 60% at 6% 100%,rgba(106,187,140,.24),transparent 60%);will-change:transform"></div>
+      <div style="position:relative;max-width:1200px;margin:0 auto;padding:0 24px">
+        <h2 data-reveal style="font-size:clamp(26px,3.6vw,40px);font-weight:700;color:#fff;margin:0 0 40px;letter-spacing:-.02em;max-width:560px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Por que treinar com a TecnoCursos.</h2>
+        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))">
+          <sc-for list="{{ advantages }}" as="a" hint-placeholder-count="5">
+            <div data-reveal style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:26px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),background .25s,border-color .25s" style-hover="background:rgba(255,255,255,.09);border-color:rgba(106,187,140,.4)">
+              <div style="width:44px;height:44px;border-radius:12px;background:rgba(50,173,120,.16);display:flex;align-items:center;justify-content:center;margin-bottom:18px" data-svg="{{ a.icon }}"></div>
+              <h3 style="font-size:17px;font-weight:600;color:#fff;margin:0 0 8px;line-height:1.3">{{ a.title }}</h3>
+              <p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,.62);margin:0">{{ a.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTEÚDO PREVIEW -->
+    <section style="position:relative;background:linear-gradient(180deg,#E6EDF6,#F2F6FB);padding:clamp(72px,9vw,120px) 0;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(27,40,72,.08) 1.2px,transparent 1.2px);background-size:22px 22px;mask-image:radial-gradient(circle at 50% 40%,#000,transparent 90%);-webkit-mask-image:radial-gradient(circle at 50% 40%,#000,transparent 90%);pointer-events:none"></div>
+      <div style="position:absolute;top:-8%;left:-6%;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(50,173,120,.1),transparent 68%);pointer-events:none"></div>
+      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px">
+        <div data-reveal style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:42px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+          <div>
+            <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#218a5d;margin-bottom:16px">Central de conhecimento</span>
+            <h2 style="font-size:clamp(28px,4vw,42px);line-height:1.08;letter-spacing:-.025em;font-weight:700;color:#1B2848;margin:0">Conteúdo sobre NR e segurança do trabalho.</h2>
+          </div>
+          <button onClick="{{ goBlog }}" style="font-family:inherit;cursor:pointer;background:#fff;border:1px solid #D6DDE6;color:#1B2848;font-size:15px;font-weight:600;padding:12px 22px;border-radius:11px" style-hover="border-color:#1B2848">Ver todos os artigos</button>
+        </div>
+        <div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))">
+          <sc-for list="{{ featuredPosts }}" as="p" hint-placeholder-count="3">
+            <article data-reveal onClick="{{ goBlog }}" style="cursor:pointer;border:1px solid rgba(27,40,72,.08);border-radius:16px;overflow:hidden;background:#fff;opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),box-shadow .25s" style-hover="box-shadow:0 18px 44px rgba(16,24,40,.12)">
+              <div style="height:152px;background:{{ p.cover }};position:relative"><div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:26px 26px"></div></div>
+              <div style="padding:22px"><span style="font-size:12px;font-weight:600;color:#005C8B;text-transform:uppercase;letter-spacing:.06em">{{ p.cat }}</span><h3 style="font-size:18px;font-weight:600;line-height:1.3;color:#1B2848;margin:10px 0 0">{{ p.title }}</h3><div style="font-size:13px;color:#9098A8;margin-top:14px">{{ p.date }} · {{ p.read }}</div></div>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(180deg,#0A1326,#070F1E);padding:0 24px clamp(72px,9vw,120px)">
+      <div data-reveal style="max-width:1200px;margin:0 auto;background:linear-gradient(120deg,#0C1A30,#005C8B);border-radius:26px;padding:clamp(48px,7vw,82px) clamp(28px,5vw,72px);position:relative;overflow:hidden;opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1)">
+        <div style="position:absolute;bottom:-40%;right:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(50,173,120,.32),transparent 68%)"></div>
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(circle at 30% 40%,#000,transparent 75%);-webkit-mask-image:radial-gradient(circle at 30% 40%,#000,transparent 75%)"></div>
+        <div style="position:relative;max-width:640px">
+          <h2 style="font-size:clamp(28px,4.4vw,46px);line-height:1.08;letter-spacing:-.02em;font-weight:700;color:#fff;margin:0">Pronto para digitalizar a segurança do trabalho?</h2>
+          <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.78);margin:18px 0 34px">Fale com nosso time e veja a plataforma funcionando com os treinamentos da sua empresa.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px">
+            <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:16px;font-weight:600;padding:15px 28px;border-radius:12px;box-shadow:0 10px 30px rgba(50,173,120,.35)" style-hover="background:#2b9568;transform:translateY(-2px)">Fale com a gente</button>
+            <button onClick="{{ goServicos }}" style="font-family:inherit;cursor:pointer;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:16px;font-weight:600;padding:15px 28px;border-radius:12px" style-hover="background:rgba(255,255,255,.2)">Ver serviços</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ===================== SOBRE ===================== -->
+  <sc-if value="{{ sobre }}">
+  <main style="padding-top:72px">
+    <section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#0A1326,#0C1C36);padding:clamp(72px,9vw,118px) 0 clamp(60px,7vw,96px)">
+      <div style="position:absolute;inset:0;background:radial-gradient(68% 85% at 88% -8%,rgba(0,92,139,.52),transparent 58%),radial-gradient(58% 78% at 2% 110%,rgba(50,173,120,.32),transparent 58%),radial-gradient(46% 60% at 52% 46%,rgba(0,92,139,.2),transparent 66%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 40% 30%,#000,transparent 78%);-webkit-mask-image:radial-gradient(circle at 40% 30%,#000,transparent 78%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
+        <div data-float data-depth="1.4" style="position:absolute;left:82%;top:32%;width:62px;height:62px;border-radius:16px;background:linear-gradient(145deg,rgba(50,173,120,.18),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.4);box-shadow:0 0 34px rgba(50,173,120,.2);will-change:transform"></div>
+        <div data-float data-depth="2.2" style="position:absolute;left:91%;top:66%;width:30px;height:30px;border-radius:9px;background:rgba(0,92,139,.18);border:1px solid rgba(63,169,214,.5);box-shadow:0 0 20px rgba(0,92,139,.3);will-change:transform"></div>
+        <div data-float data-depth="0.8" style="position:absolute;left:72%;top:6%;width:46px;height:46px;border-radius:13px;background:linear-gradient(145deg,rgba(106,187,140,.13),transparent);border:1px solid rgba(106,187,140,.3);will-change:transform"></div>
+      </div>
+      <div style="position:relative;max-width:900px;margin:0 auto;padding:0 24px">
+        <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:18px">Sobre nós</span>
+        <h1 style="font-size:clamp(34px,5.4vw,60px);line-height:1.04;letter-spacing:-.03em;font-weight:700;color:#fff;margin:0;max-width:760px">Uma jornada de dedicação e crescimento.</h1>
+        <p style="font-size:clamp(18px,2.2vw,22px);line-height:1.6;color:rgba(255,255,255,.72);margin:24px 0 0;max-width:680px">Desde 2004 ajudando empresas a manterem-se em conformidade com as Normas Regulamentadoras — hoje, com tecnologia para gerir tudo isso.</p>
+      </div>
+    </section>
+
+    <section style="position:relative;background:linear-gradient(180deg,#0C1C36,#0A1326);padding:clamp(56px,7vw,100px) 0;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 50% 40%,#000,transparent 82%);-webkit-mask-image:radial-gradient(circle at 50% 40%,#000,transparent 82%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(56% 72% at 78% 22%,rgba(0,92,139,.46),transparent 62%),radial-gradient(46% 62% at 6% 92%,rgba(50,173,120,.24),transparent 62%)"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
+        <div data-float data-depth="1.5" style="position:absolute;left:87%;top:18%;width:58px;height:58px;border-radius:15px;background:linear-gradient(145deg,rgba(50,173,120,.18),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.4);box-shadow:0 0 34px rgba(50,173,120,.2);will-change:transform"></div>
+        <div data-float data-depth="2.4" style="position:absolute;left:5%;top:76%;width:30px;height:30px;border-radius:9px;background:rgba(0,92,139,.2);border:1px solid rgba(63,169,214,.5);box-shadow:0 0 20px rgba(0,92,139,.3);will-change:transform"></div>
+      </div>
+      <div style="position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:28px">
+        <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+          <p style="font-size:19px;line-height:1.75;color:rgba(255,255,255,.8);margin:0">Tudo começou em <strong style="color:#6ABB8C">2004</strong>, quando João Arthur fundou uma escola de capacitação focada em Normas Regulamentadoras. A missão era clara: ajudar empresas a se manterem em conformidade, garantindo um ambiente mais seguro para todos.</p>
+        </div>
+        <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .05s,transform .7s cubic-bezier(.22,.61,.36,1) .05s">
+          <p style="font-size:19px;line-height:1.75;color:rgba(255,255,255,.8);margin:0">Nos primeiros anos, João fazia de tudo — criava conteúdos, ministrava treinamentos e até dirigia a Unidade Móvel para treinamentos práticos, como os de brigada de incêndio. Ao seu lado, Alessandra cuidava da logística, do financeiro e da emissão dos certificados, com excelência em cada detalhe.</p>
+        </div>
+        <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .1s,transform .7s cubic-bezier(.22,.61,.36,1) .1s">
+          <p style="font-size:19px;line-height:1.75;color:rgba(255,255,255,.8);margin:0">Em <strong style="color:#6ABB8C">2009</strong>, a formalização do CNPJ consolidou nossa atuação e expandiu horizontes. Desde então crescemos de forma expressiva e hoje contamos com uma equipe altamente qualificada — administração, TI, suporte e instrutores espalhados por diversas regiões do Brasil.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="position:relative;overflow:hidden;background:linear-gradient(120deg,#0C1A30,#102A4A);padding:clamp(56px,7vw,96px) 0">
+      <div style="position:absolute;top:-30%;left:-5%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(50,173,120,.2),transparent 68%);pointer-events:none"></div>
+      <div style="position:relative;max-width:1200px;margin:0 auto;padding:0 24px">
+        <h2 data-reveal style="font-size:clamp(26px,3.6vw,40px);font-weight:700;color:#fff;margin:0 0 38px;letter-spacing:-.02em;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Nossos valores</h2>
+        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))">
+          <sc-for list="{{ values }}" as="v" hint-placeholder-count="4">
+            <div data-reveal style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+              <div style="font-size:13px;font-weight:700;color:#6ABB8C;margin-bottom:14px;letter-spacing:.05em">{{ v.n }}</div>
+              <h3 style="font-size:19px;font-weight:600;color:#fff;margin:0 0 8px">{{ v.title }}</h3>
+              <p style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.62);margin:0">{{ v.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ===================== SERVIÇOS ===================== -->
+  <sc-if value="{{ servicos }}">
+  <main style="padding-top:72px">
+    <section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#0A1326,#0C1C36);padding:clamp(72px,9vw,110px) 0">
+      <div style="position:absolute;inset:0;background:radial-gradient(68% 85% at 86% -8%,rgba(0,92,139,.52),transparent 58%),radial-gradient(58% 78% at 2% 110%,rgba(50,173,120,.32),transparent 58%),radial-gradient(46% 60% at 52% 46%,rgba(0,92,139,.2),transparent 66%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 78%);-webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 78%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
+        <div data-float data-depth="1.6" style="position:absolute;left:80%;top:24%;width:58px;height:58px;border-radius:15px;background:linear-gradient(145deg,rgba(50,173,120,.18),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.4);box-shadow:0 0 34px rgba(50,173,120,.2);will-change:transform"></div>
+        <div data-float data-depth="2.4" style="position:absolute;left:92%;top:58%;width:28px;height:28px;border-radius:9px;background:rgba(0,92,139,.18);border:1px solid rgba(63,169,214,.5);box-shadow:0 0 20px rgba(0,92,139,.3);will-change:transform"></div>
+        <div data-float data-depth="0.7" style="position:absolute;left:88%;top:80%;width:48px;height:48px;border-radius:13px;background:linear-gradient(145deg,rgba(106,187,140,.13),transparent);border:1px solid rgba(106,187,140,.3);will-change:transform"></div>
+      </div>
+      <div style="position:relative;max-width:900px;margin:0 auto;padding:0 24px">
+        <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:18px">Serviços</span>
+        <h1 style="font-size:clamp(34px,5.4vw,58px);line-height:1.04;letter-spacing:-.03em;font-weight:700;color:#fff;margin:0;max-width:720px">Soluções de treinamento e segurança do trabalho.</h1>
+        <p style="font-size:20px;line-height:1.6;color:rgba(255,255,255,.72);margin:22px 0 0;max-width:640px">Treinamentos teóricos e práticos, plataforma digital, lista de presença e consultoria nas Normas Regulamentadoras.</p>
+      </div>
+    </section>
+
+    <section style="position:relative;background:linear-gradient(180deg,#0A1326,#0C1C36);padding:clamp(48px,6vw,80px) 0;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 82%);-webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 82%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(52% 72% at 50% 42%,rgba(0,92,139,.4),transparent 62%),radial-gradient(40% 58% at 92% 92%,rgba(50,173,120,.22),transparent 60%)"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
+        <div data-float data-depth="1.3" style="position:absolute;left:90%;top:12%;width:54px;height:54px;border-radius:15px;background:linear-gradient(145deg,rgba(50,173,120,.16),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.36);box-shadow:0 0 32px rgba(50,173,120,.18);will-change:transform"></div>
+        <div data-float data-depth="2.2" style="position:absolute;left:3%;top:64%;width:28px;height:28px;border-radius:9px;background:rgba(0,92,139,.18);border:1px solid rgba(63,169,214,.5);box-shadow:0 0 20px rgba(0,92,139,.3);will-change:transform"></div>
+      </div>
+      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:22px">
+        <sc-for list="{{ servicesFull }}" as="s" hint-placeholder-count="6">
+          <div data-reveal style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:clamp(26px,4vw,40px);display:grid;gap:26px;grid-template-columns:64px 1fr;align-items:start;opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),box-shadow .25s,border-color .25s,background .25s;box-shadow:0 1px 3px rgba(0,0,0,.2)" style-hover="box-shadow:0 24px 50px rgba(0,0,0,.4);border-color:rgba(106,187,140,.4);background:rgba(255,255,255,.08)">
+            <div style="width:64px;height:64px;border-radius:16px;background:{{ s.iconBg }};display:flex;align-items:center;justify-content:center" data-svg="{{ s.icon }}"></div>
+            <div>
+              <h2 style="font-size:23px;font-weight:700;color:#fff;margin:0 0 10px;letter-spacing:-.01em">{{ s.title }}</h2>
+              <p style="font-size:16px;line-height:1.65;color:rgba(255,255,255,.72);margin:0;max-width:720px">{{ s.desc }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="position:relative;background:linear-gradient(180deg,#0C1C36,#0A1326);padding:clamp(56px,7vw,96px) 0;overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 40% 30%,#000,transparent 82%);-webkit-mask-image:radial-gradient(circle at 40% 30%,#000,transparent 82%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(54% 72% at 50% 56%,rgba(0,92,139,.4),transparent 62%),radial-gradient(42% 60% at 90% 6%,rgba(50,173,120,.26),transparent 60%)"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
+        <div data-float data-depth="1.5" style="position:absolute;left:88%;top:62%;width:50px;height:50px;border-radius:14px;background:linear-gradient(145deg,rgba(50,173,120,.16),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.36);box-shadow:0 0 30px rgba(50,173,120,.18);will-change:transform"></div>
+      </div>
+      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px">
+        <div data-reveal style="margin-bottom:36px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+          <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:14px">Treinamentos disponíveis</span>
+          <h2 style="font-size:clamp(26px,3.6vw,40px);font-weight:700;color:#fff;margin:0;letter-spacing:-.02em">Capacitação nas principais NRs</h2>
+        </div>
+        <div data-reveal style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(168px,100%),1fr));opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .08s,transform .7s cubic-bezier(.22,.61,.36,1) .08s">
+          <sc-for list="{{ nrs }}" as="n" hint-placeholder-count="13">
+            <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 16px;transition:border-color .2s,transform .2s,box-shadow .2s,background .2s" style-hover="border-color:#32AD78;transform:translateY(-3px);box-shadow:0 16px 32px rgba(0,0,0,.4);background:rgba(255,255,255,.08)">
+              <div style="font-size:19px;font-weight:700;color:#6ABB8C">{{ n.code }}</div>
+              <div style="font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.6);margin-top:6px">{{ n.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="position:relative;overflow:hidden;background:linear-gradient(120deg,#0C1A30,#005C8B);padding:0 24px">
+      <div style="position:absolute;bottom:-40%;right:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(50,173,120,.3),transparent 68%);pointer-events:none"></div>
+      <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(52px,6vw,80px) 0;text-align:center">
+        <h2 style="font-size:clamp(26px,3.6vw,38px);font-weight:700;color:#fff;margin:0 0 24px;letter-spacing:-.02em">Quer ver a plataforma na prática?</h2>
+        <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:16px;font-weight:600;padding:15px 30px;border-radius:12px;box-shadow:0 10px 30px rgba(50,173,120,.35)" style-hover="background:#2b9568;transform:translateY(-2px)">Agendar demonstração</button>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ===================== CONTEÚDO (NETFLIX-STYLE) ===================== -->
+  <sc-if value="{{ blog }}">
+  <main style="padding-top:72px;background:#070F1E">
+    <!-- BILLBOARD -->
+    <section data-anim-grad style="position:relative;overflow:hidden;background:linear-gradient(120deg,#0A1326,#0C2138,#063356,#0A1326);padding:clamp(56px,7vw,96px) 0 clamp(44px,5vw,64px)">
+      <div style="position:absolute;inset:0;background:radial-gradient(70% 90% at 88% -10%,rgba(0,92,139,.4),transparent 55%),radial-gradient(60% 80% at 0% 120%,rgba(50,173,120,.24),transparent 55%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 60% 40%,#000,transparent 80%);-webkit-mask-image:radial-gradient(circle at 60% 40%,#000,transparent 80%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
+        <div data-float data-depth="1.5" style="position:absolute;left:84%;top:24%;width:54px;height:54px;border-radius:15px;background:linear-gradient(145deg,rgba(50,173,120,.2),rgba(0,92,139,.05));border:1px solid rgba(106,187,140,.45);box-shadow:0 0 32px rgba(50,173,120,.22);will-change:transform"></div>
+        <div data-float data-depth="2.3" style="position:absolute;left:92%;top:62%;width:30px;height:30px;border-radius:9px;background:rgba(0,92,139,.18);border:1px solid rgba(63,169,214,.5);box-shadow:0 0 20px rgba(0,92,139,.3);will-change:transform"></div>
+      </div>
+      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;display:grid;gap:48px;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));align-items:center">
+        <div>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6ABB8C;background:rgba(50,173,120,.14);border:1px solid rgba(106,187,140,.3);padding:7px 14px;border-radius:100px">★ Em destaque · {{ featured.tag }}</span>
+          <h1 style="font-size:clamp(34px,5.4vw,60px);line-height:1.03;letter-spacing:-.03em;font-weight:700;color:#fff;margin:20px 0 0">{{ featured.title }}</h1>
+          <p style="font-size:clamp(16px,2vw,19px);line-height:1.62;color:rgba(255,255,255,.74);margin:18px 0 0;max-width:520px">{{ featured.desc }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px">
+            <sc-for list="{{ featured.meta }}" as="m" hint-placeholder-count="3">
+              <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,.82);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:6px 13px;border-radius:8px">{{ m }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:30px">
+            <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#fff;color:#0A1326;font-size:16px;font-weight:600;padding:14px 26px;border-radius:12px;display:inline-flex;align-items:center;gap:9px" style-hover="transform:translateY(-2px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="#0A1326"><path d="M8 5v14l11-7z"/></svg>Explorar trilha</button>
+            <button onClick="{{ goServicos }}" style="font-family:inherit;cursor:pointer;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:16px;font-weight:600;padding:14px 26px;border-radius:12px;display:inline-flex;align-items:center;gap:9px" style-hover="background:rgba(255,255,255,.18)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Mais informações</button>
+          </div>
+        </div>
+        <div data-hide-sm data-float data-depth="0.6" style="position:relative;will-change:transform">
+          <div style="position:relative;border-radius:18px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.12);aspect-ratio:16/10;background:linear-gradient(135deg,#0C2138,#005C8B)">
+            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:34px 34px"></div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 36px rgba(0,0,0,.4)"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></div>
+            <div style="position:absolute;left:18px;top:16px;font-size:12px;font-weight:600;color:#fff;background:rgba(10,19,38,.6);padding:5px 11px;border-radius:7px">{{ featured.tag }}</div>
+            <div style="position:absolute;left:18px;bottom:16px;right:18px"><div style="height:5px;border-radius:5px;background:rgba(255,255,255,.25);overflow:hidden"><div style="width:42%;height:100%;background:#32AD78"></div></div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:7px">Prévia · Plataforma de treinamentos em vídeo (em breve)</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RAILS -->
+    <section style="position:relative;background:linear-gradient(180deg,#070F1E,#0A1733);padding:clamp(36px,5vw,56px) 0 clamp(64px,8vw,100px);overflow:hidden">
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:0 max(16px,calc((100% - 1232px)/2))">
+        <sc-for list="{{ rails }}" as="r" hint-placeholder-count="3">
+          <div data-reveal style="margin-top:clamp(32px,4vw,48px);opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+            <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:0 24px;margin-bottom:16px">
+              <div>
+                <h2 style="font-size:clamp(20px,2.6vw,27px);font-weight:700;color:#fff;margin:0;letter-spacing:-.01em">{{ r.title }}</h2>
+                <p style="font-size:14px;color:rgba(255,255,255,.5);margin:4px 0 0">{{ r.subtitle }}</p>
+              </div>
+              <div style="display:flex;gap:8px;flex:0 0 auto">
+                <button onClick="{{ r.onPrev }}" style="font-family:inherit;cursor:pointer;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(255,255,255,.18)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg></button>
+                <button onClick="{{ r.onNext }}" style="font-family:inherit;cursor:pointer;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(255,255,255,.18)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M9 18l6-6-6-6"/></svg></button>
+              </div>
+            </div>
+            <div data-rail id="{{ r.domId }}" style="display:flex;gap:16px;overflow-x:auto;scroll-padding:24px;padding:6px 24px 14px;scroll-snap-type:x mandatory">
+              <sc-for list="{{ r.items }}" as="it" hint-placeholder-count="6">
+                <div data-card onClick="{{ it.onClick }}" style="scroll-snap-align:start;flex:0 0 auto;width:262px;cursor:pointer;border-radius:14px;overflow:hidden;background:#0E1B33;border:1px solid rgba(255,255,255,.08);transition:transform .25s cubic-bezier(.22,.61,.36,1),box-shadow .25s,border-color .25s" style-hover="transform:translateY(-6px);box-shadow:0 24px 50px rgba(0,0,0,.5);border-color:rgba(106,187,140,.45)">
+                  <div style="position:relative;height:148px;background:{{ it.cover }}">
+                    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:24px 24px"></div>
+                    <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(7,15,30,.55))"></div>
+                    <span style="position:absolute;left:11px;top:11px;font-size:11px;font-weight:700;color:#fff;background:rgba(10,19,38,.55);backdrop-filter:blur(4px);padding:4px 10px;border-radius:7px">{{ it.tag }}</span>
+                    <span data-play style="position:absolute;right:11px;bottom:11px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);transition:opacity .25s,transform .25s"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+                  </div>
+                  <div style="padding:15px 16px 17px">
+                    <h3 style="font-size:15.5px;font-weight:600;line-height:1.32;color:#fff;margin:0">{{ it.title }}</h3>
+                    <div style="font-size:12.5px;color:rgba(255,255,255,.52);margin-top:8px;display:flex;align-items:center;gap:7px"><span style="width:5px;height:5px;border-radius:50%;background:#32AD78"></span>{{ it.meta }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ===================== CONTATO ===================== -->
+  <sc-if value="{{ contato }}">
+  <main style="padding-top:72px">
+    <section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#0A1326,#0C1C36)">
+      <div style="position:absolute;inset:0;background:radial-gradient(68% 85% at 88% -8%,rgba(0,92,139,.52),transparent 58%),radial-gradient(58% 78% at 2% 110%,rgba(50,173,120,.32),transparent 58%),radial-gradient(46% 60% at 52% 46%,rgba(0,92,139,.2),transparent 66%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 30% 40%,#000,transparent 78%);-webkit-mask-image:radial-gradient(circle at 30% 40%,#000,transparent 78%);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
+        <div data-float data-depth="1.5" style="position:absolute;left:46%;top:18%;width:54px;height:54px;border-radius:15px;background:linear-gradient(145deg,rgba(50,173,120,.16),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.38);box-shadow:0 0 32px rgba(50,173,120,.18);will-change:transform"></div>
+        <div data-float data-depth="2.3" style="position:absolute;left:40%;top:72%;width:28px;height:28px;border-radius:9px;background:rgba(0,92,139,.18);border:1px solid rgba(63,169,214,.5);box-shadow:0 0 20px rgba(0,92,139,.3);will-change:transform"></div>
+      </div>
+      <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,104px) 24px;display:grid;gap:56px;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr))">
+        <div>
+          <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:16px">Contato</span>
+          <h1 style="font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-.03em;font-weight:700;color:#fff;margin:0">Fale com a gente.</h1>
+          <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.7);margin:18px 0 36px;max-width:420px">Conte sobre sua operação e mostramos como a TecnoCursos pode digitalizar seus treinamentos NR.</p>
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:42px;height:42px;border-radius:11px;background:rgba(50,173,120,.16);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ABB8C" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></span><div><div style="font-size:13px;color:rgba(255,255,255,.5)">E-mail</div><div style="font-size:16px;font-weight:600;color:#fff"><span>suporte</span><span>&#64;</span><span>escolatecnocursos.com.br</span></div></div></div>
+            <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:42px;height:42px;border-radius:11px;background:rgba(0,92,139,.22);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3FA9D6" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></span><div><div style="font-size:13px;color:rgba(255,255,255,.5)">Telefone</div><div style="font-size:16px;font-weight:600;color:#fff">(16) 99714-3932</div></div></div>
+            <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:42px;height:42px;border-radius:11px;background:rgba(106,187,140,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ABB8C" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><div style="font-size:13px;color:rgba(255,255,255,.5)">Endereço</div><div style="font-size:16px;font-weight:600;color:#fff">Av. Trolesi, 4495 · Parque Imperial</div><div style="font-size:14px;color:rgba(255,255,255,.6)">Matão · São Paulo</div></div></div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.97);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:clamp(26px,4vw,38px);box-shadow:0 30px 70px rgba(0,0,0,.4)">
+          <div style="display:grid;gap:16px">
+            <div><label style="display:block;font-size:13px;font-weight:600;color:#2B3550;margin-bottom:7px">Nome</label><input placeholder="Seu nome" style="font-family:inherit;width:100%;padding:13px 15px;border:1px solid #D9E0E9;border-radius:10px;font-size:15px;background:#fff;color:#1B2848;transition:border-color .2s,box-shadow .2s"/></div>
+            <div><label style="display:block;font-size:13px;font-weight:600;color:#2B3550;margin-bottom:7px">E-mail corporativo</label><input placeholder="voce@empresa.com.br" style="font-family:inherit;width:100%;padding:13px 15px;border:1px solid #D9E0E9;border-radius:10px;font-size:15px;background:#fff;color:#1B2848;transition:border-color .2s,box-shadow .2s"/></div>
+            <div><label style="display:block;font-size:13px;font-weight:600;color:#2B3550;margin-bottom:7px">Empresa</label><input placeholder="Nome da empresa" style="font-family:inherit;width:100%;padding:13px 15px;border:1px solid #D9E0E9;border-radius:10px;font-size:15px;background:#fff;color:#1B2848;transition:border-color .2s,box-shadow .2s"/></div>
+            <div><label style="display:block;font-size:13px;font-weight:600;color:#2B3550;margin-bottom:7px">Mensagem</label><textarea placeholder="Como podemos ajudar?" rows="4" style="font-family:inherit;width:100%;padding:13px 15px;border:1px solid #D9E0E9;border-radius:10px;font-size:15px;background:#fff;color:#1B2848;resize:vertical;transition:border-color .2s,box-shadow .2s"></textarea></div>
+            <button style="font-family:inherit;border:none;cursor:pointer;background:#1B2848;color:#fff;font-size:16px;font-weight:600;padding:15px;border-radius:11px;margin-top:4px" style-hover="background:#005C8B">Enviar mensagem</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer style="background:#070F1E;padding:clamp(48px,6vw,72px) 0 40px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px">
+      <div style="display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1)">
+        <div style="max-width:300px">
+          <img src="assets/logo-white.png" alt="TecnoCursos" style="height:30px;width:auto;margin-bottom:16px"/>
+          <p style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.55);margin:0">Tecnologia, treinamento e segurança. A plataforma de gestão de treinamentos em Normas Regulamentadoras.</p>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Navegação</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <span onClick="{{ goHome }}" style="font-size:15px;color:rgba(255,255,255,.78);cursor:pointer">Home</span>
+            <span onClick="{{ goSobre }}" style="font-size:15px;color:rgba(255,255,255,.78);cursor:pointer">Sobre nós</span>
+            <span onClick="{{ goServicos }}" style="font-size:15px;color:rgba(255,255,255,.78);cursor:pointer">Serviços</span>
+            <span onClick="{{ goBlog }}" style="font-size:15px;color:rgba(255,255,255,.78);cursor:pointer">Conteúdo</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Plataforma</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <span style="font-size:15px;color:rgba(255,255,255,.78)">Lista de presença digital</span>
+            <span style="font-size:15px;color:rgba(255,255,255,.78)">Treinamentos NR</span>
+            <span style="font-size:15px;color:rgba(255,255,255,.78)">Gestão de validades</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Contato</div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <span style="font-size:15px;color:rgba(255,255,255,.78)"><span>suporte</span><span>&#64;</span><span>escolatecnocursos.com.br</span></span>
+            <span style="font-size:15px;color:rgba(255,255,255,.78)">(16) 99714-3932</span>
+            <span style="font-size:15px;color:rgba(255,255,255,.78)">Matão · São Paulo</span>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:26px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.4)">
+        <span>© 2026 TecnoCursos. Todos os direitos reservados.</span>
+        <span>Tecnologia · Treinamento · Segurança</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== ASSISTENTE VIRTUAL ===================== -->
+  <button onClick="{{ toggleAssist }}" style="position:fixed;right:24px;bottom:24px;z-index:201;width:62px;height:62px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#005C8B,#32AD78);box-shadow:0 12px 34px rgba(50,173,120,.45);display:flex;align-items:center;justify-content:center" style-hover="transform:translateY(-2px)">
+    <sc-if value="{{ assistClosed }}" hint-placeholder-val="{{ true }}">
+      <span style="position:absolute;inset:0;border-radius:50%;border:2px solid rgba(50,173,120,.5);animation:tcpulse 2.4s infinite"></span>
+      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/><path d="M9.5 10.5h.01M13.5 10.5h.01"/></svg>
+    </sc-if>
+    <sc-if value="{{ assistOpen }}">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </sc-if>
+  </button>
+
+  <sc-if value="{{ assistOpen }}">
+  <div style="position:fixed;right:24px;bottom:98px;z-index:201;width:min(384px,calc(100vw - 32px));height:min(580px,calc(100vh - 140px));display:flex;flex-direction:column;border-radius:20px;overflow:hidden;background:#0B1426;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 70px rgba(0,0,0,.55);animation:tcpop .32s cubic-bezier(.22,.61,.36,1)">
+    <!-- header -->
+    <div style="display:flex;align-items:center;gap:12px;padding:16px 18px;background:linear-gradient(120deg,#0C1A30,#005C8B);border-bottom:1px solid rgba(255,255,255,.1)">
+      <span style="position:relative;width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#32AD78,#6ABB8C);display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:0 6px 16px rgba(50,173,120,.4)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 4.6L18.5 8l-3.5 3.2.9 4.8L12 13.7 8.1 16l.9-4.8L5.5 8l4.7-1.4z"/></svg></span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:15px;font-weight:700;color:#fff">Assistente TecnoCursos</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.66);display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#32AD78;box-shadow:0 0 8px #32AD78"></span>Online · responde na hora</div>
+      </div>
+      <button onClick="{{ toggleAssist }}" style="font-family:inherit;background:rgba(255,255,255,.1);border:none;cursor:pointer;width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(255,255,255,.2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <!-- messages -->
+    <div id="tcchat" data-rail style="flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;background:radial-gradient(120% 60% at 100% 0%,rgba(0,92,139,.16),transparent 60%),#0B1426">
+      <sc-for list="{{ assistMessages }}" as="m" hint-placeholder-count="1">
+        <sc-if value="{{ m.isBot }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:9px;align-items:flex-start;max-width:90%">
+            <div style="background:#16233E;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.9);font-size:14px;line-height:1.55;padding:12px 14px;border-radius:4px 14px 14px 14px;white-space:pre-line">{{ m.text }}</div>
+            <sc-if value="{{ m.hasActions }}">
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ m.actions }}" as="a" hint-placeholder-count="0">
+                  <button onClick="{{ a.onClick }}" style="font-family:inherit;cursor:pointer;font-size:13px;font-weight:600;color:#fff;background:linear-gradient(135deg,#005C8B,#32AD78);border:none;padding:9px 14px;border-radius:9px;display:inline-flex;align-items:center;gap:6px" style-hover="opacity:.92">{{ a.label }} →</button>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ m.hasChips }}">
+              <div style="display:flex;flex-direction:column;gap:7px;width:100%">
+                <sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="0">
+                  <button onClick="{{ c.onClick }}" style="font-family:inherit;cursor:pointer;text-align:left;font-size:13px;font-weight:500;color:#9FD8C0;background:rgba(50,173,120,.1);border:1px solid rgba(50,173,120,.28);padding:9px 13px;border-radius:10px" style-hover="background:rgba(50,173,120,.2);color:#fff">{{ c.label }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+        <sc-if value="{{ m.isUser }}">
+          <div style="align-self:flex-end;max-width:85%;background:linear-gradient(135deg,#005C8B,#0a7fb8);color:#fff;font-size:14px;line-height:1.5;padding:11px 14px;border-radius:14px 4px 14px 14px">{{ m.text }}</div>
+        </sc-if>
+      </sc-for>
+      <sc-if value="{{ typing }}">
+        <div style="background:#16233E;border:1px solid rgba(255,255,255,.08);padding:13px 15px;border-radius:4px 14px 14px 14px;display:flex;gap:5px;align-self:flex-start"><span style="width:7px;height:7px;border-radius:50%;background:#6ABB8C;animation:tcblink 1s infinite"></span><span style="width:7px;height:7px;border-radius:50%;background:#6ABB8C;animation:tcblink 1s infinite .2s"></span><span style="width:7px;height:7px;border-radius:50%;background:#6ABB8C;animation:tcblink 1s infinite .4s"></span></div>
+      </sc-if>
+    </div>
+    <!-- input -->
+    <div style="padding:12px;border-top:1px solid rgba(255,255,255,.1);background:#0C1426;display:flex;gap:9px;align-items:center">
+      <input value="{{ draft }}" onInput="{{ setDraft }}" onKeyDown="{{ onAssistKey }}" placeholder="Escreva sua pergunta..." style="font-family:inherit;flex:1;min-width:0;background:#16233E;border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:12px 14px;font-size:14px;color:#fff"/>
+      <button onClick="{{ sendAssist }}" style="font-family:inherit;flex:0 0 auto;cursor:pointer;width:44px;height:44px;border-radius:11px;border:none;background:linear-gradient(135deg,#005C8B,#32AD78);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(50,173,120,.36)" style-hover="opacity:.92"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { page: 'home', menu: false, cat: 'Todos', assistOpen: false, messages: [], typing: false, draft: '' };
+
+  kb() {
+    return [
+      { id: 'quem', chip: 'Quem é a TecnoCursos?', q: 'Quem é a TecnoCursos?', kw: ['quem', 'sobre', 'empresa', 'história', 'historia', 'vocês são'],
+        a: 'Somos uma empresa de tecnologia e capacitação fundada em 2004, em Matão-SP. Unimos treinamento, plataforma digital e gestão para manter empresas em conformidade com as Normas Regulamentadoras.', follow: ['treinos', 'plataforma', 'contato'], actions: [{ label: 'Conhecer a empresa', page: 'sobre' }] },
+      { id: 'treinos', chip: 'Quais treinamentos vocês oferecem?', q: 'Quais treinamentos vocês oferecem?', kw: ['treinamento', 'treino', 'curso', 'nr', 'norma', 'libras', 'simula', 'presencial', 'online', 'consultoria'],
+        a: 'Oferecemos treinamentos teóricos (online) e práticos (presenciais) nas principais NRs: NR-05, 06, 10, 11, 12, 13, 17, 18, 20, 23, 33, 34 e 35. Também temos suporte em Libras, simulações de emergência e resgate, e consultoria personalizada.', follow: ['plataforma', 'atende', 'contato'], actions: [{ label: 'Ver serviços', page: 'servicos' }] },
+      { id: 'plataforma', chip: 'Como funciona a lista de presença digital?', q: 'Como funciona a lista de presença digital?', kw: ['plataforma', 'lista', 'presença', 'presenca', 'digital', 'certificado', 'gestão', 'gestao', 'relatório', 'relatorio', 'validade'],
+        a: 'Nossa plataforma digitaliza toda a gestão dos treinamentos: lista de presença com assinatura digital, turmas organizadas, relatórios detalhados, controle de validade das capacitações e emissão de certificados — sem papel e sem planilha.', follow: ['treinos', 'conteudo', 'contato'], actions: [{ label: 'Ver a plataforma', page: 'servicos' }] },
+      { id: 'atende', chip: 'Vocês atendem minha empresa?', q: 'Vocês atendem minha empresa?', kw: ['atende', 'atendem', 'minha empresa', 'porte', 'região', 'regiao', 'brasil', 'cidade'],
+        a: 'Sim! Atendemos empresas de todos os portes — de pequenas a grandes multinacionais — em todo o Brasil, com treinamentos online e presenciais. Conte sua necessidade que retornamos rapidamente.', follow: ['contato', 'treinos'], actions: [{ label: 'Falar com a gente', page: 'contato' }] },
+      { id: 'conteudo', chip: 'Onde encontro os conteúdos?', q: 'Onde encontro os conteúdos?', kw: ['conteúdo', 'conteudo', 'artigo', 'blog', 'vídeo', 'video', 'biblioteca', 'trilha', 'material'],
+        a: 'Na Central de Conhecimento você encontra trilhas por NR, modalidades de treinamento e artigos sobre legislação e segurança do trabalho. Em breve, também treinamentos em vídeo.', follow: ['treinos', 'contato'], actions: [{ label: 'Abrir Central de Conhecimento', page: 'blog' }] },
+      { id: 'contato', chip: 'Como entro em contato?', q: 'Como entro em contato?', kw: ['contato', 'email', 'e-mail', 'telefone', 'whats', 'falar', 'endereço', 'endereco', 'fone'],
+        a: 'Você fala com a gente por:\n• E-mail: suporte@escolatecnocursos.com.br\n• Telefone: (16) 99714-3932\n• Matão · São Paulo\nOu pelo formulário na página de Contato.', follow: ['atende', 'treinos'], actions: [{ label: 'Ir para Contato', page: 'contato' }] },
+    ];
+  }
+
+  ask(input) {
+    const topics = this.kb();
+    let topic, userText;
+    const byId = topics.find(t => t.id === input);
+    if (byId) { topic = byId; userText = byId.q; }
+    else {
+      userText = input;
+      const low = String(input).toLowerCase();
+      topic = topics.find(t => t.kw.some(k => low.includes(k)));
+    }
+    this.setState(s => ({ messages: s.messages.concat([{ role: 'user', text: userText }]), typing: true }));
+    this.scrollChat();
+    clearTimeout(this._typeT);
+    this._typeT = setTimeout(() => {
+      const ans = topic
+        ? { role: 'bot', text: topic.a, chips: topic.follow, actions: topic.actions }
+        : { role: 'bot', text: 'Posso te ajudar com isso! Escolha um dos temas abaixo ou me diga com outras palavras 👇', chips: ['quem', 'treinos', 'plataforma', 'conteudo', 'contato'] };
+      this.setState(s => ({ messages: s.messages.concat([ans]), typing: false }));
+      this.scrollChat();
+    }, 540);
+  }
+
+  scrollChat() {
+    clearTimeout(this._scrollT);
+    this._scrollT = setTimeout(() => { const el = document.getElementById('tcchat'); if (el) el.scrollTop = el.scrollHeight; }, 60);
+  }
+
+  componentDidMount() {
+    this.mouse = { x: 0, y: 0 };
+    this.scrollY = 0;
+    this.t0 = performance.now();
+    this.seen = new WeakSet();
+    this._move = (e) => { this.mouse = { x: e.clientX / window.innerWidth - 0.5, y: e.clientY / window.innerHeight - 0.5 }; };
+    this._scroll = () => { this.scrollY = window.scrollY; };
+    window.addEventListener('mousemove', this._move);
+    window.addEventListener('scroll', this._scroll, { passive: true });
+    this._loop = () => {
+      const t = (performance.now() - this.t0) / 1000;
+      document.querySelectorAll('[data-float]').forEach((el, i) => {
+        const d = parseFloat(el.getAttribute('data-depth')) || 1;
+        const dx = Math.sin(t * 0.4 + i * 1.7) * 15 * d + this.mouse.x * 26 * d;
+        const dy = Math.cos(t * 0.33 + i * 1.1) * 17 * d + this.mouse.y * 26 * d - (this.scrollY || 0) * 0.035 * d;
+        const rot = Math.sin(t * 0.28 + i) * 5;
+        el.style.transform = `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) rotate(${rot.toFixed(2)}deg)`;
+      });
+      this.raf = requestAnimationFrame(this._loop);
+    };
+    this.raf = requestAnimationFrame(this._loop);
+
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this.io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    }
+    this.scanReveal();
+    this.paintSvgs();
+
+    this._cardOver = (e) => { const c = e.target.closest && e.target.closest('[data-card]'); if (!c) return; const pl = c.querySelector('[data-play]'); if (pl) { pl.style.opacity = '1'; pl.style.transform = 'scale(1)'; } };
+    this._cardOut = (e) => { const c = e.target.closest && e.target.closest('[data-card]'); if (!c) return; if (e.relatedTarget && c.contains(e.relatedTarget)) return; const pl = c.querySelector('[data-play]'); if (pl) { pl.style.opacity = '0'; pl.style.transform = 'scale(.8)'; } };
+    document.addEventListener('mouseover', this._cardOver);
+    document.addEventListener('mouseout', this._cardOut);
+  }
+
+  componentDidUpdate() { this.scanReveal(); this.paintSvgs(); }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.raf);
+    window.removeEventListener('mousemove', this._move);
+    window.removeEventListener('scroll', this._scroll);
+    if (this._cardOver) document.removeEventListener('mouseover', this._cardOver);
+    if (this._cardOut) document.removeEventListener('mouseout', this._cardOut);
+    if (this.io) this.io.disconnect();
+  }
+
+  scanReveal() {
+    const els = document.querySelectorAll('[data-reveal]');
+    if (!this.io) { els.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); return; }
+    els.forEach(el => { if (!this.seen.has(el)) { this.seen.add(el); this.io.observe(el); } });
+  }
+
+  paintSvgs() {
+    document.querySelectorAll('[data-svg]').forEach(el => {
+      const k = el.getAttribute('data-svg');
+      if (el._k !== k) { el.innerHTML = this.svg(k, 26, el.closest('[style*="0C1A30"],[style*="102A4A"]') ? '#6ABB8C' : this.iconColor(k)); el._k = k; }
+    });
+  }
+
+  iconColor(k) {
+    const map = { presenca: '#218a5d', treino: '#005C8B', nr: '#6a4bb5', libras: '#218a5d', emergencia: '#C0492E', consultoria: '#005C8B', plataforma: '#218a5d', presencial: '#005C8B', online: '#218a5d', shield: '#218a5d', award: '#005C8B', law: '#6a4bb5', users: '#218a5d' };
+    return map[k] || '#005C8B';
+  }
+
+  svg(name, size, color) {
+    const s = `width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"`;
+    const p = {
+      presenca: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/><path d="M9 15l2 2 4-4"/>',
+      treino: '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+      nr: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13l2 2 4-4"/>',
+      libras: '<path d="M18 11V6a2 2 0 00-4 0v5M14 10V4a2 2 0 00-4 0v7M10 10.5V6a2 2 0 00-4 0v8M18 8a2 2 0 014 0v6a8 8 0 01-8 8h-2a8 8 0 01-7-4l-2.5-4"/>',
+      emergencia: '<path d="M12 2L2 21h20L12 2z"/><path d="M12 9v5M12 17h.01"/>',
+      consultoria: '<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M9 10h.01M13 10h.01M17 10h.01"/>',
+      plataforma: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 9l2.5 2.5L7 14M13 14h4"/>',
+      presencial: '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>',
+      online: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M10 8l4 2.5L10 13z"/>',
+      shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>',
+      award: '<circle cx="12" cy="8" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/>',
+      law: '<path d="M12 3v18M5 7h14M7 7l-3 7a3 3 0 006 0L7 7zM17 7l-3 7a3 3 0 006 0l-3-7zM7 21h10"/>',
+      users: '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>',
+    };
+    return `<svg ${s}>${p[name] || p.shield}</svg>`;
+  }
+
+  go = (p) => { this.setState({ page: p, menu: false }); window.scrollTo(0, 0); };
+
+  scrollRail(id, dir) {
+    const el = document.getElementById(id);
+    if (el) el.scrollBy({ left: dir * Math.min(el.clientWidth * 0.85, 560), behavior: 'smooth' });
+  }
+
+  renderVals() {
+    const page = this.state.page;
+    const nav = [
+      { key: 'home', label: 'Home' },
+      { key: 'sobre', label: 'Sobre nós' },
+      { key: 'servicos', label: 'Serviços' },
+      { key: 'blog', label: 'Conteúdo' },
+      { key: 'contato', label: 'Contato' },
+    ];
+    const navItems = nav.map(n => ({ label: n.label, active: page === n.key, onClick: () => this.go(n.key) }));
+
+    const base = 'https://www.escolatecnocursos.com.br/assets/images/parceiros/';
+    const partners = [
+      { name: 'Baldan' }, { name: 'Antoniosi' }, { name: 'Piracanjuba' }, { name: 'Metalfer' }, { name: 'Leroy Merlin' }, { name: 'Coca-Cola' },
+    ];
+    const partnerNodes = partners.map((p, i) => React.createElement('span', {
+      key: i,
+      style: { fontSize: '20px', fontWeight: 700, letterSpacing: '.01em', color: 'rgba(255,255,255,.55)', transition: 'color .25s' },
+      onMouseEnter: (e) => { e.currentTarget.style.color = '#fff'; },
+      onMouseLeave: (e) => { e.currentTarget.style.color = 'rgba(255,255,255,.55)'; },
+    }, p.name));
+
+    const offerings = [
+      { title: 'Treinamentos Teóricos e Práticos', icon: 'treino', iconBg: '#E7EEF6', desc: 'Completos e alinhados às Normas Regulamentadoras. A teoria acontece na nossa plataforma digital; a prática, na sua empresa, com instrutores especializados.', onClick: () => this.go('servicos') },
+      { title: 'Normas Regulamentadoras', icon: 'nr', iconBg: '#EFEAF8', desc: 'Capacitação nas principais NRs — NR5, NR6, NR10, NR11, NR12, NR13, NR17, NR18, NR23, NR33, NR34 e NR35. Online e presencial, com suporte em Libras.', onClick: () => this.go('servicos') },
+      { title: 'Lista de Presença Digital', icon: 'presenca', iconBg: '#E7F4ED', desc: 'Eficiência e praticidade na gestão de treinamentos: sem papel, com turmas organizadas, relatórios detalhados, controle de validade e acompanhamento de desempenho.', onClick: () => this.go('servicos') },
+    ];
+
+    const platformBenefits = [
+      'Eliminação do papel na gestão de turmas',
+      'Relatórios detalhados em poucos cliques',
+      'Controle de prazos e validade das capacitações',
+      'Acompanhamento do desempenho dos participantes',
+    ];
+
+    const servicesFull = [
+      { title: 'Treinamentos Presenciais em Sala de Aula', icon: 'presencial', iconBg: '#E7EEF6', desc: 'Capacitação presencial conduzida por instrutores especializados, com a parte prática realizada na sua empresa.' },
+      { title: 'Treinamento Teórico Online', icon: 'online', iconBg: '#E7F4ED', desc: 'A parte teórica das NRs realizada na nossa plataforma digital, com flexibilidade de horário e acompanhamento de progresso.' },
+      { title: 'Treinamento com Suporte em Libras', icon: 'libras', iconBg: '#E7F4ED', desc: 'Inclusão de verdade: suporte em Libras nos treinamentos teóricos, garantindo acessibilidade a todos os colaboradores.' },
+      { title: 'Simulações de Emergência e Resgate', icon: 'emergencia', iconBg: '#FBEDE8', desc: 'Simulações práticas de situações de emergência e resgate, preparando as equipes para reagir com segurança.' },
+      { title: 'Consultoria Personalizada das NRs', icon: 'consultoria', iconBg: '#E7EEF6', desc: 'Consultoria adaptada à realidade da sua operação para manter a empresa em conformidade com as Normas Regulamentadoras.' },
+      { title: 'Plataforma de Treinamentos e Lista de Presença Digital', icon: 'plataforma', iconBg: '#EFEAF8', desc: 'Gestão completa: organização de turmas, lista de presença digital, relatórios, controle de validade e emissão de certificados.' },
+    ];
+
+    const nrs = [
+      { code: 'NR-05', label: 'CIPAA' },
+      { code: 'NR-06', label: 'EPI' },
+      { code: 'NR-10', label: 'Eletricidade' },
+      { code: 'NR-11', label: 'Movimentação de materiais' },
+      { code: 'NR-12', label: 'Máquinas e equipamentos' },
+      { code: 'NR-13', label: 'Caldeiras e vasos de pressão' },
+      { code: 'NR-17', label: 'Ergonomia' },
+      { code: 'NR-18', label: 'Construção civil' },
+      { code: 'NR-20', label: 'Inflamáveis e combustíveis' },
+      { code: 'NR-23', label: 'Combate a incêndio' },
+      { code: 'NR-33', label: 'Espaços confinados' },
+      { code: 'NR-34', label: 'Trabalhos a quente' },
+      { code: 'NR-35', label: 'Trabalho em altura' },
+    ];
+
+    const advantages = [
+      { icon: 'award', title: 'Capacitação de alta qualidade', desc: 'Conteúdo atualizado e instrutores altamente especializados.' },
+      { icon: 'shield', title: 'Certificação reconhecida', desc: 'Certificados reconhecidos pelo Ministério do Trabalho.' },
+      { icon: 'users', title: 'Proteção de pessoas e empresa', desc: 'Equipes preparadas reduzem riscos e acidentes na operação.' },
+      { icon: 'law', title: 'Conformidade legal', desc: 'Sua empresa em dia com as Normas Regulamentadoras.' },
+      { icon: 'consultoria', title: 'Atendimento personalizado', desc: 'Soluções adaptadas às necessidades da sua operação.' },
+    ];
+
+    const values = [
+      { n: '01', title: 'Compromisso', desc: 'Treinamentos de qualidade, de pequenas empresas a grandes multinacionais.' },
+      { n: '02', title: 'Inovação', desc: 'Acompanhamos as inovações do mercado e as melhores tecnologias disponíveis.' },
+      { n: '03', title: 'Acessibilidade', desc: 'Conhecimento compreendido e aplicado por todos, com suporte em Libras.' },
+      { n: '04', title: 'Segurança', desc: 'Quando o aprendizado é sólido, o futuro se torna mais seguro e promissor.' },
+    ];
+
+    const covers = {
+      'Legislação': 'linear-gradient(135deg,#1B2848,#005C8B)',
+      'Segurança': 'linear-gradient(135deg,#005C8B,#32AD78)',
+      'Tecnologia': 'linear-gradient(135deg,#0C1A30,#005C8B)',
+      'Gestão': 'linear-gradient(135deg,#218a5d,#6ABB8C)',
+    };
+    const allPosts = [
+      { cat: 'Legislação', title: 'NR-1: o que muda com o GRO e o PGR', excerpt: 'Entenda as obrigações do Gerenciamento de Riscos Ocupacionais e como se preparar.', date: '12 jun 2026', read: '6 min' },
+      { cat: 'Tecnologia', title: 'Como digitalizar a lista de presença sem perder validade', excerpt: 'O passo a passo para abandonar o papel mantendo a conformidade legal.', date: '04 jun 2026', read: '5 min' },
+      { cat: 'Segurança', title: 'NR-35: checklist para trabalho em altura', excerpt: 'Os pontos essenciais que toda empresa precisa verificar antes da operação.', date: '28 mai 2026', read: '8 min' },
+      { cat: 'Gestão', title: 'Treinamentos vencidos: o risco invisível', excerpt: 'Como o controle de vencimentos evita multas e acidentes.', date: '20 mai 2026', read: '4 min' },
+      { cat: 'Legislação', title: 'EAD em NRs: o que a legislação permite', excerpt: 'Modalidades de ensino aceitas para cada norma regulamentadora.', date: '11 mai 2026', read: '7 min' },
+      { cat: 'Gestão', title: 'Indicadores de SST que todo gestor deveria acompanhar', excerpt: 'Métricas que mostram a real maturidade de segurança da empresa.', date: '02 mai 2026', read: '5 min' },
+    ].map(p => ({ ...p, cover: covers[p.cat] }));
+
+    const catNames = ['Todos', 'Legislação', 'Segurança', 'Tecnologia', 'Gestão'];
+    const cats = catNames.map(c => {
+      const on = this.state.cat === c;
+      return { label: c, onClick: () => this.setState({ cat: c }), bg: on ? '#1B2848' : '#fff', color: on ? '#fff' : '#2B3550', border: on ? '#1B2848' : '#D6DDE6' };
+    });
+    const filteredPosts = this.state.cat === 'Todos' ? allPosts : allPosts.filter(p => p.cat === this.state.cat);
+
+    // ---- Central de Conhecimento (estilo Netflix) ----
+    const railGrads = ['linear-gradient(135deg,#0C1A30,#005C8B)','linear-gradient(135deg,#005C8B,#32AD78)','linear-gradient(135deg,#1B2848,#3FA9D6)','linear-gradient(135deg,#218a5d,#6ABB8C)','linear-gradient(135deg,#102A4A,#0C1A30)','linear-gradient(135deg,#0C2138,#218a5d)'];
+    const g = (i) => railGrads[i % railGrads.length];
+    const featured = {
+      tag: 'NR-35 · Trabalho em Altura',
+      title: 'Trilha de Trabalho em Altura',
+      desc: 'Capacitação completa na NR-35: teoria na nossa plataforma digital e prática na sua empresa, com instrutores especializados, suporte em Libras e certificado reconhecido.',
+      meta: ['Teórico online + prático', 'Suporte em Libras', 'Certificado reconhecido'],
+    };
+    const trilhas = nrs.map((n, i) => ({ tag: n.code, title: n.label, meta: 'Teórico + Prático', cover: g(i), onClick: () => this.go('servicos') }));
+    const modalidades = servicesFull.map((s, i) => ({ tag: 'Modalidade', title: s.title, meta: 'Ver serviço', cover: g(i + 1), onClick: () => this.go('servicos') }));
+    const artigos = allPosts.map((p) => ({ tag: p.cat, title: p.title, meta: p.date + ' · ' + p.read, cover: p.cover, onClick: () => this.go('blog') }));
+    const rails = [
+      { title: 'Trilhas por Norma Regulamentadora', subtitle: 'Capacitação nas principais NRs', items: trilhas },
+      { title: 'Modalidades de treinamento', subtitle: 'Presencial, online, Libras, simulações e plataforma', items: modalidades },
+      { title: 'Artigos e guias', subtitle: 'Legislação, segurança e gestão de SST', items: artigos },
+    ].map((r, i) => { const domId = 'tcrail' + i; return { ...r, domId, onPrev: () => this.scrollRail(domId, -1), onNext: () => this.scrollRail(domId, 1) }; });
+
+    // ---- Assistente virtual ----
+    const chipLabel = {};
+    this.kb().forEach(t => { chipLabel[t.id] = t.chip; });
+    const mkChips = (ids) => (ids || []).map(id => ({ label: chipLabel[id] || id, onClick: () => this.ask(id) }));
+    const assistMessages = (this.state.messages || []).map(m => ({
+      isBot: m.role === 'bot', isUser: m.role === 'user', text: m.text,
+      chips: m.role === 'bot' ? mkChips(m.chips) : [],
+      hasChips: m.role === 'bot' && (m.chips || []).length > 0,
+      actions: m.role === 'bot' ? (m.actions || []).map(a => ({ label: a.label, onClick: () => this.go(a.page) })) : [],
+      hasActions: m.role === 'bot' && (m.actions || []).length > 0,
+    }));
+
+    return {
+      home: page === 'home', sobre: page === 'sobre', servicos: page === 'servicos', blog: page === 'blog', contato: page === 'contato',
+      menu: this.state.menu, navItems,
+      goHome: () => this.go('home'), goSobre: () => this.go('sobre'), goServicos: () => this.go('servicos'),
+      goBlog: () => this.go('blog'), goContato: () => this.go('contato'),
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      partners, partnerNodes, offerings, platformBenefits, servicesFull, nrs, advantages, values,
+      cats, filteredPosts, featuredPosts: allPosts.slice(0, 3),
+      featured, rails,
+      assistOpen: this.state.assistOpen, assistClosed: !this.state.assistOpen, typing: this.state.typing, draft: this.state.draft || '',
+      assistMessages,
+      toggleAssist: () => this.setState(s => {
+        const open = !s.assistOpen;
+        let messages = s.messages;
+        if (open && messages.length === 0) {
+          messages = [{ role: 'bot', text: 'Olá! 👋 Sou a assistente virtual da TecnoCursos. Posso explicar nossos treinamentos, a plataforma, contar quem somos e indicar os melhores caminhos. Como posso ajudar?', chips: ['quem', 'treinos', 'plataforma', 'conteudo', 'contato'] }];
+        }
+        if (open) this.scrollChat();
+        return { assistOpen: open, messages };
+      }),
+      setDraft: (e) => this.setState({ draft: e.target.value }),
+      onAssistKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); const t = (this.state.draft || '').trim(); if (t) { this.ask(t); this.setState({ draft: '' }); } } },
+      sendAssist: () => { const t = (this.state.draft || '').trim(); if (t) { this.ask(t); this.setState({ draft: '' }); } },
+    };
+  }
+}
+</script>
+</body>
+</html>
