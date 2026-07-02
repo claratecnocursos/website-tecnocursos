@@ -16,17 +16,42 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:#0A1326}
 img{display:block;max-width:100%}
-::selection{background:#32AD78;color:#fff}
+::selection{background:#10ffcb;color:#070F1E}
 input,textarea{outline:none}
 input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px rgba(50,173,120,.16)}
 [data-burger]{display:none}
 @keyframes tcpulse{0%,100%{opacity:.55}50%{opacity:.9}}
 @keyframes tcgrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes tcpop{0%{opacity:0;transform:translateY(14px) scale(.96)}100%{opacity:1;transform:none}}
+[data-offering-card]{opacity:0;transform:translateY(44px) scale(.88);filter:blur(6px);transition:opacity 1.2s ease,transform 1.4s cubic-bezier(.34,1.18,.64,1),filter 1.1s ease}
+[data-offering-card].tc-svc-on{opacity:1;transform:none;filter:blur(0)}
+[data-offering-card]:hover{transform:translateY(-5px)!important;box-shadow:0 20px 48px rgba(0,0,0,.38),0 0 0 1px rgba(68,229,231,.3),0 0 24px rgba(68,229,231,.08)!important;border-color:rgba(68,229,231,.45)!important;background:linear-gradient(180deg,rgba(16,26,48,.95),rgba(10,18,34,.95))!important}
 @keyframes tcblink{0%,100%{opacity:.3}50%{opacity:1}}
 @keyframes tcspin{to{transform:rotate(360deg)}}
 @keyframes tcmarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes tcSlideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tcFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes tcChatEntry{0%{opacity:0;transform:scale(0) translateY(16px)}65%{opacity:1;transform:scale(1.14) translateY(-4px)}85%{transform:scale(.96)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes tcChatAttention{0%,100%{transform:scale(1) rotate(0)}18%{transform:scale(1.18) rotate(-12deg)}36%{transform:scale(1.18) rotate(12deg)}54%{transform:scale(1.1) rotate(-6deg)}72%{transform:scale(1.05) rotate(6deg)}88%{transform:scale(1.02) rotate(-2deg)}}
+[data-float]{animation:tcFadeIn 1.6s ease-out both}
+[data-float]:nth-child(3n+1){animation-delay:.1s}
+[data-float]:nth-child(3n+2){animation-delay:.45s}
+[data-float]:nth-child(3n){animation-delay:.8s}
+@keyframes phoneFloat{0%,100%{transform:rotate(13deg) translateY(0)}50%{transform:rotate(13deg) translateY(-3px)}}
+[data-phone-float]{animation:phoneFloat 7s ease-in-out infinite;will-change:transform}
+@keyframes tcFeatFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+[data-feat-grid]{animation:tcFeatFloat 6s ease-in-out infinite;will-change:transform}
+@keyframes tcCursor{0%,100%{opacity:1}50%{opacity:0}}
+[data-feat-section] [data-feat]{opacity:0!important;transform:translateY(44px) scale(.88)!important;filter:blur(6px)!important;transition:opacity 1.2s ease,transform 1.4s cubic-bezier(.34,1.18,.64,1),filter 1.1s ease!important}
+[data-feat-section] [data-feat].tc-feat-on{opacity:1!important;transform:none!important;filter:blur(0)!important}
 @keyframes tcreveal{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes tcrevealCard{from{opacity:0;transform:translateY(36px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes tcRevealPop{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media(max-width:640px){.tc-stats-row{flex-direction:column!important;align-items:center!important;gap:20px!important}.tc-stat-sep{display:none!important}.tc-nr-header{flex-direction:column!important;align-items:flex-start!important;margin-bottom:16px!important}.tc-nr-header-text{max-width:100%!important}.tc-footer-grid{grid-template-columns:1fr!important;gap:32px!important}[data-hide-sm]{display:none!important}[data-feat-grid]{grid-template-columns:1fr!important;column-gap:0!important;gap:16px!important;animation:none!important}[data-feat-grid]>div:not([data-phone-float]){height:auto!important;display:flex!important;flex-direction:column!important;gap:16px!important}[data-feat-grid] [data-feat]{position:static!important;top:auto!important}[data-feat-grid]>svg{display:none!important}}
+sc-for{display:contents}
+[data-nr-card]{opacity:1!important;transform:none!important;animation:none!important}
+[data-reveal-pop]{opacity:0}
+.tc-pop{animation:tcRevealPop 1.15s cubic-bezier(.22,.61,.36,1) both}
 @supports (animation-timeline: view()){
   [data-reveal]{animation:tcreveal both;animation-timeline:view();animation-range:entry 8% entry 55%}
 }
@@ -49,17 +74,17 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
   <!-- ===================== NAV ===================== -->
   <header style="position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);background:rgba(10,19,38,.72);border-bottom:1px solid rgba(255,255,255,.08)">
     <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <img src="assets/logo-white.png" alt="TecnoCursos" onClick="{{ goHome }}" style="height:32px;width:auto;cursor:pointer"/>
+      <img src="uploads/NOVA%20LOGO%20TECNOCURSOS%20BRANCO%20SEM%20SLOGAN%201.png" alt="TecnoCursos" onClick="{{ goHome }}" style="height:44px;width:auto;cursor:pointer"/>
       <nav data-navlinks style="display:flex;align-items:center;gap:34px">
         <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
           <span onClick="{{ item.onClick }}" style="position:relative;font-size:15px;font-weight:500;cursor:pointer;padding:6px 0;color:rgba(255,255,255,.82)" style-hover="color:#fff">
             <span>{{ item.label }}</span>
-            <sc-if value="{{ item.active }}"><span style="position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:#32AD78;box-shadow:0 0 8px #32AD78"></span></sc-if>
+            <sc-if value="{{ item.active }}"><span style="position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:#10ffcb;box-shadow:0 0 8px #10ffcb"></span></sc-if>
           </span>
         </sc-for>
       </nav>
       <div data-navlinks style="display:flex;align-items:center;gap:16px">
-        <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:15px;font-weight:600;padding:11px 20px;border-radius:10px;box-shadow:0 6px 18px rgba(50,173,120,.32)" style-hover="background:#2b9568">Fale com a gente</button>
+        <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#10ffcb;color:#070F1E;font-size:15px;font-weight:600;padding:11px 20px;border-radius:10px;box-shadow:0 6px 18px rgba(68,229,231,.32)" style-hover="background:#0de0b3">Fale com a gente</button>
       </div>
       <button data-burger onClick="{{ toggleMenu }}" style="font-family:inherit;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px">
         <span style="width:22px;height:2px;background:#fff;border-radius:2px;display:block"></span>
@@ -75,7 +100,7 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
       <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
         <span onClick="{{ item.onClick }}" style="font-size:24px;font-weight:600;color:#fff;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer">{{ item.label }}</span>
       </sc-for>
-      <button onClick="{{ goContato }}" style="font-family:inherit;margin-top:24px;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:17px;font-weight:600;padding:16px;border-radius:12px">Fale com a gente</button>
+      <button onClick="{{ goContato }}" style="font-family:inherit;margin-top:24px;border:none;cursor:pointer;background:#10ffcb;color:#070F1E;font-size:17px;font-weight:600;padding:16px;border-radius:12px">Fale com a gente</button>
     </div>
   </sc-if>
 
@@ -83,247 +108,208 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
   <sc-if value="{{ home }}" hint-placeholder-val="{{ true }}">
   <main>
     <!-- HERO -->
-    <section style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#03060a">
-      <img src="assets/fundo.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.95"/>
+    <section style="position:relative;min-height:84vh;display:flex;align-items:center;overflow:hidden;background:#03060a">
+      <img src="uploads/FUNDO%20TECNOCURSOS.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.95"/>
       <div style="position:absolute;inset:0;background:radial-gradient(125% 95% at 16% 42%, rgba(3,6,12,.84) 0%, rgba(4,9,18,.5) 46%, rgba(4,9,18,.12) 100%)"></div>
 
       <!-- floating parallax glass squares -->
       <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
+        <!-- originais -->
         <div data-float data-depth="1.7" style="position:absolute;left:7%;top:62%;width:70px;height:70px;border-radius:18px;background:linear-gradient(145deg,rgba(50,173,120,.22),rgba(50,173,120,.04));border:1px solid rgba(106,187,140,.5);box-shadow:0 0 40px rgba(50,173,120,.22),inset 0 0 20px rgba(106,187,140,.16);will-change:transform"></div>
         <div data-float data-depth="1.1" style="position:absolute;left:19%;top:22%;width:46px;height:46px;border-radius:13px;background:linear-gradient(145deg,rgba(106,187,140,.16),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.4);box-shadow:0 0 26px rgba(50,173,120,.18);will-change:transform"></div>
         <div data-float data-depth="2.2" style="position:absolute;left:44%;top:74%;width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,rgba(0,92,139,.22),rgba(50,173,120,.05));border:1px solid rgba(0,92,139,.55);box-shadow:0 0 22px rgba(0,92,139,.28);will-change:transform"></div>
         <div data-float data-depth="2.6" style="position:absolute;left:90%;top:30%;width:28px;height:28px;border-radius:9px;background:rgba(50,173,120,.12);border:1px solid rgba(106,187,140,.5);box-shadow:0 0 18px rgba(50,173,120,.28);will-change:transform"></div>
         <div data-float data-depth="0.7" style="position:absolute;left:62%;top:84%;width:54px;height:54px;border-radius:15px;background:linear-gradient(145deg,rgba(106,187,140,.13),rgba(3,6,12,0));border:1px solid rgba(106,187,140,.32);box-shadow:0 0 30px rgba(50,173,120,.14);will-change:transform"></div>
+        <!-- novas bolhas -->
+        <div data-float data-depth="1.4" style="position:absolute;left:2%;top:10%;width:88px;height:88px;border-radius:22px;background:linear-gradient(145deg,rgba(50,173,120,.18),rgba(0,92,139,.06));border:1px solid rgba(106,187,140,.42);box-shadow:0 0 50px rgba(50,173,120,.18),inset 0 0 24px rgba(106,187,140,.12);will-change:transform"></div>
+        <div data-float data-depth="2.0" style="position:absolute;left:78%;top:8%;width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,rgba(0,92,139,.2),rgba(50,173,120,.06));border:1px solid rgba(0,140,200,.48);box-shadow:0 0 28px rgba(0,120,180,.24);will-change:transform"></div>
+        <div data-float data-depth="0.9" style="position:absolute;left:86%;top:66%;width:78px;height:78px;border-radius:20px;background:linear-gradient(145deg,rgba(106,187,140,.14),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.38);box-shadow:0 0 44px rgba(50,173,120,.16),inset 0 0 18px rgba(106,187,140,.1);will-change:transform"></div>
+        <div data-float data-depth="3.0" style="position:absolute;left:33%;top:9%;width:22px;height:22px;border-radius:7px;background:rgba(0,92,139,.18);border:1px solid rgba(0,140,200,.55);box-shadow:0 0 14px rgba(0,120,180,.3);will-change:transform"></div>
+        <div data-float data-depth="1.6" style="position:absolute;left:55%;top:92%;width:52px;height:52px;border-radius:15px;background:linear-gradient(145deg,rgba(50,173,120,.16),rgba(3,6,12,0));border:1px solid rgba(106,187,140,.35);box-shadow:0 0 32px rgba(50,173,120,.16);will-change:transform"></div>
+        <div data-float data-depth="2.4" style="position:absolute;left:11%;top:44%;width:32px;height:32px;border-radius:10px;background:linear-gradient(145deg,rgba(0,92,139,.2),rgba(50,173,120,.04));border:1px solid rgba(0,92,139,.5);box-shadow:0 0 20px rgba(0,92,139,.22);will-change:transform"></div>
+        <div data-float data-depth="0.5" style="position:absolute;left:72%;top:52%;width:62px;height:62px;border-radius:17px;background:linear-gradient(145deg,rgba(106,187,140,.12),rgba(0,92,139,.05));border:1px solid rgba(106,187,140,.28);box-shadow:0 0 36px rgba(50,173,120,.12),inset 0 0 16px rgba(106,187,140,.08);will-change:transform"></div>
+        <div data-float data-depth="1.9" style="position:absolute;left:93%;top:82%;width:38px;height:38px;border-radius:12px;background:rgba(50,173,120,.1);border:1px solid rgba(106,187,140,.44);box-shadow:0 0 24px rgba(50,173,120,.22);will-change:transform"></div>
+        <div data-float data-depth="2.8" style="position:absolute;left:26%;top:88%;width:24px;height:24px;border-radius:8px;background:rgba(0,92,139,.14);border:1px solid rgba(0,140,200,.48);box-shadow:0 0 16px rgba(0,120,180,.26);will-change:transform"></div>
+        <div data-float data-depth="1.2" style="position:absolute;left:48%;top:5%;width:56px;height:56px;border-radius:16px;background:linear-gradient(145deg,rgba(50,173,120,.14),rgba(0,92,139,.06));border:1px solid rgba(106,187,140,.36);box-shadow:0 0 34px rgba(50,173,120,.15),inset 0 0 14px rgba(106,187,140,.09);will-change:transform"></div>
       </div>
 
-      <div data-hero-pad style="position:relative;z-index:2;max-width:920px;margin:0 auto;padding:120px 24px 96px;width:100%;display:flex;flex-direction:column;align-items:center;text-align:center">
-        <span data-reveal style="display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.06em;color:#6ABB8C;background:rgba(50,173,120,.12);border:1px solid rgba(106,187,140,.28);padding:7px 16px;border-radius:100px;text-transform:uppercase">Tecnologia em segurança do trabalho</span>
-        <h1 data-reveal style="font-size:clamp(38px,6.2vw,68px);line-height:1.04;letter-spacing:-.03em;font-weight:700;color:#fff;margin:22px 0 0">A <span style="background:linear-gradient(100deg,#6ABB8C,#32AD78,#3FA9D6);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:tcgrad 6s ease infinite">plataforma</span> que gerencia seus treinamentos de <span style="background:linear-gradient(100deg,#6ABB8C,#32AD78,#3FA9D6);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:tcgrad 6s ease infinite">ponta a ponta.</span></h1>
-        <p data-reveal style="font-size:clamp(17px,2vw,20px);line-height:1.6;color:rgba(255,255,255,.74);margin:24px 0 0;max-width:560px">Teoria na nossa plataforma digital, prática na sua empresa. Lista de presença digital, gestão de validades e capacitação nas principais Normas Regulamentadoras.</p>
-        <div data-reveal style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:36px">
-          <button onClick="{{ goServicos }}" style="font-family:inherit;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:16px;font-weight:600;padding:15px 28px;border-radius:12px;box-shadow:0 10px 30px rgba(50,173,120,.38);transition:transform .2s,background .2s" style-hover="background:#2b9568;transform:translateY(-2px)">Conheça nossos serviços</button>
-          <button onClick="{{ goContato }}" style="font-family:inherit;cursor:pointer;background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.26);font-size:16px;font-weight:600;padding:15px 28px;border-radius:12px;transition:background .2s,transform .2s" style-hover="background:rgba(255,255,255,.16);transform:translateY(-2px)">Fale com a gente</button>
+      <div data-hero-pad style="position:relative;z-index:2;max-width:760px;margin:0 auto;padding:130px 24px 72px;width:100%;display:flex;flex-direction:column;align-items:center;text-align:center">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:600;letter-spacing:.06em;color:#10ffcb;background:rgba(68,229,231,.1);border:1px solid rgba(115,251,211,.24);padding:5px 13px;border-radius:100px;text-transform:uppercase;animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .05s both">Tecnologia em segurança do trabalho</span>
+        <h1 style="font-size:clamp(30px,4.8vw,54px);line-height:1.06;letter-spacing:-.03em;font-weight:700;color:#fff;margin:18px 0 0;text-shadow:0 2px 24px rgba(0,0,0,.6),0 0 60px rgba(0,0,0,.35);animation:tcSlideUp .82s cubic-bezier(.22,.61,.36,1) .18s both">A <span style="color:#10ffcb">plataforma</span> que gerencia seus treinamentos de <span style="color:#10ffcb">ponta a ponta.</span></h1>
+        <p style="font-size:clamp(14px,1.55vw,16px);line-height:1.65;color:rgba(255,255,255,.74);margin:20px 0 0;max-width:460px;text-shadow:0 1px 12px rgba(0,0,0,.7);animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .34s both">Teoria na nossa plataforma digital, prática na sua empresa. Lista de presença digital, gestão de validades e capacitação nas principais Normas Regulamentadoras.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:11px;justify-content:center;margin-top:28px;animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .48s both">
+          <button onClick="{{ goServicos }}" style="font-family:inherit;border:none;cursor:pointer;background:#10ffcb;color:#070F1E;font-size:13px;font-weight:600;padding:12px 22px;border-radius:10px;box-shadow:0 8px 24px rgba(68,229,231,.36);transition:transform .2s,background .2s" style-hover="background:#0de0b3;transform:translateY(-2px)">Conheça nossos serviços</button>
+          <button onClick="{{ goContato }}" style="font-family:inherit;cursor:pointer;background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.26);font-size:13px;font-weight:600;padding:12px 22px;border-radius:10px;transition:background .2s,transform .2s" style-hover="background:rgba(255,255,255,.16);transform:translateY(-2px)">Fale com a gente</button>
         </div>
-        <div data-reveal style="display:flex;gap:30px;margin-top:48px;flex-wrap:wrap;justify-content:center">
-          <div><div style="font-size:26px;font-weight:700;color:#fff">+20 anos</div><div style="font-size:13px;color:rgba(255,255,255,.58)">de experiência</div></div>
-          <div style="width:1px;background:rgba(255,255,255,.16)"></div>
-          <div><div style="font-size:26px;font-weight:700;color:#fff">+180 mil</div><div style="font-size:13px;color:rgba(255,255,255,.58)">inscritos em<br/>treinamentos</div></div>
-          <div style="width:1px;background:rgba(255,255,255,.16)"></div>
-          <div><div style="font-size:26px;font-weight:700;color:#fff">+60 mil</div><div style="font-size:13px;color:rgba(255,255,255,.58)">treinamentos<br/>realizados</div></div>
+        <div class="tc-stats-row" style="display:flex;gap:40px;margin-top:44px;flex-wrap:wrap;justify-content:center;animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .62s both">
+          <div style="text-align:center"><div data-counter="20" data-counter-prefix="+" data-counter-suffix=" anos" style="font-size:28px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em">+20 anos</div><div style="font-size:13.5px;color:rgba(255,255,255,.65);margin-top:6px">de experiência</div></div>
+          <div class="tc-stat-sep" style="width:1px;background:rgba(255,255,255,.18);align-self:stretch"></div>
+          <div style="text-align:center"><div data-counter="320" data-counter-prefix="+" data-counter-suffix=" mil" style="font-size:28px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em">+320 mil</div><div style="font-size:13.5px;color:rgba(255,255,255,.65);margin-top:6px">inscritos em treinamentos</div></div>
+          <div class="tc-stat-sep" style="width:1px;background:rgba(255,255,255,.18);align-self:stretch"></div>
+          <div style="text-align:center"><div data-counter="250" data-counter-prefix="+" data-counter-suffix=" mil" style="font-size:28px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em">+250 mil</div><div style="font-size:13.5px;color:rgba(255,255,255,.65);margin-top:6px">capacitados</div></div>
         </div>
       </div>
     </section>
 
     <!-- PARTNERS -->
-    <section style="position:relative;background:linear-gradient(180deg,#0A1326,#0C1C36);padding:clamp(48px,6vw,72px) 0;overflow:hidden">
-      
-      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(54% 86% at 50% 50%,rgba(0,92,139,.34),transparent 62%)"></div>
-      <div style="position:relative;max-width:1200px;margin:0 auto;padding:0 24px">
-        <p data-reveal style="text-align:center;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 30px;opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Empresas que confiam na TecnoCursos</p>
-        <div style="overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)">
-          <div style="display:flex;width:max-content;align-items:center;animation:tcmarquee 34s linear infinite">
-            <div style="display:flex;align-items:center;gap:64px;padding-right:64px;flex:none">{{ partnerNodes }}</div>
-            <div style="display:flex;align-items:center;gap:64px;padding-right:64px;flex:none" aria-hidden="true">{{ partnerNodesB }}</div>
-          </div>
+    <section style="position:relative;overflow:hidden;padding:clamp(40px,5vw,62px) 0;background:linear-gradient(180deg,#03060A 0%,#03060A 55%,#070C16 100%)">
+
+      <!-- título -->
+      <p data-reveal style="text-align:center;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.38);margin:0 0 36px;opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Empresas que confiam na TecnoCursos</p>
+
+      <!-- marquee edge-to-edge -->
+      <div style="overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 9%,#000 91%,transparent 100%)">
+        <div style="display:flex;width:max-content;align-items:center;animation:tcmarquee 76s linear infinite;will-change:transform">
+          <div style="display:flex;align-items:center;flex:none">{{ partnerNodes }}</div>
+          <div style="display:flex;align-items:center;flex:none" aria-hidden="true">{{ partnerNodesB }}</div>
+          <div style="display:flex;align-items:center;flex:none" aria-hidden="true">{{ partnerNodesC }}</div>
+          <div style="display:flex;align-items:center;flex:none" aria-hidden="true">{{ partnerNodesD }}</div>
         </div>
       </div>
     </section>
 
     <!-- O QUE OFERECEMOS -->
-    <section style="position:relative;background:linear-gradient(180deg,#070C16 0%,#0A1326 42%,#0C2247 100%);padding:clamp(76px,9vw,128px) 0;overflow:hidden">
+    <section style="position:relative;background:linear-gradient(180deg,#070C16 0%,#0A1326 45%,#0C1C36 100%);padding:clamp(76px,9vw,128px) 0;overflow:hidden">
       
       <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 64% at 22% 18%,rgba(50,173,120,.2),transparent 60%),radial-gradient(54% 70% at 92% 96%,rgba(0,92,139,.4),transparent 62%)"></div>
-      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
-        <div data-float data-depth="1.4" style="position:absolute;left:90%;top:14%;width:56px;height:56px;border-radius:15px;background:linear-gradient(145deg,rgba(50,173,120,.16),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.36);box-shadow:0 0 32px rgba(50,173,120,.2);will-change:transform"></div>
-        <div data-float data-depth="2.3" style="position:absolute;left:4%;top:70%;width:30px;height:30px;border-radius:9px;background:rgba(0,92,139,.2);border:1px solid rgba(63,169,214,.5);box-shadow:0 0 20px rgba(0,92,139,.3);will-change:transform"></div>
-      </div>
-      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px">
-        <div data-reveal style="max-width:720px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
-          <h2 style="font-size:clamp(40px,6.6vw,76px);line-height:.98;letter-spacing:-.035em;font-weight:800;color:#fff;margin:0;text-transform:uppercase">O que <span style="background:linear-gradient(100deg,#6ABB8C,#32AD78,#3FA9D6);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:tcgrad 6s ease infinite">oferecemos?</span></h2>
-          <h3 style="font-size:clamp(22px,3vw,34px);line-height:1.18;letter-spacing:-.02em;font-weight:700;color:#fff;margin:26px 0 0">Treinamento, tecnologia e gestão — em <span style="color:#32AD78">um só lugar.</span></h3>
-          <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.62);margin:16px 0 0;max-width:540px">A parte teórica acontece na nossa plataforma digital; a prática, na sua empresa, com instrutores especializados.</p>
+      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;zoom:0.9">
+        <div style="max-width:720px">
+          <h2 data-tw-of style="font-size:clamp(40px,6.6vw,76px);line-height:.98;letter-spacing:-.035em;font-weight:800;color:#fff;margin:0;opacity:0">O que <span style="color:#10ffcb">oferecemos?</span></h2>
+          <h3 data-reveal data-delay="110" style="font-size:clamp(18px,2.2vw,26px);line-height:1.35;letter-spacing:.01em;font-weight:400;color:rgba(255,255,255,.78);margin:20px 0 0;opacity:0;transform:translateY(26px);transition:opacity .65s cubic-bezier(.22,.61,.36,1),transform .65s cubic-bezier(.22,.61,.36,1)">Treinamento, tecnologia e gestão — em <span style="color:#10ffcb;font-weight:500">um só lugar.</span></h3>
+          <p data-reveal data-delay="200" style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.62);margin:16px 0 0;max-width:540px;opacity:0;transform:translateY(26px);transition:opacity .65s cubic-bezier(.22,.61,.36,1),transform .65s cubic-bezier(.22,.61,.36,1)">A parte teórica acontece na nossa plataforma digital; a prática, na sua empresa, com instrutores especializados.</p>
         </div>
         <div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));margin-top:54px">
           <sc-for list="{{ offerings }}" as="s" hint-placeholder-count="3">
-            <div data-reveal data-tilt style="position:relative;background:linear-gradient(180deg,rgba(13,22,42,.92),rgba(9,16,31,.92));border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:34px 30px;cursor:pointer;overflow:hidden;opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s,border-color .35s;box-shadow:0 1px 3px rgba(0,0,0,.3)" style-hover="box-shadow:0 30px 64px rgba(0,0,0,.5),0 0 0 1px rgba(50,173,120,.2);border-color:rgba(106,187,140,.45);transform:translateY(-6px)" onClick="{{ s.onClick }}">
-              <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#005C8B,#32AD78);opacity:.85"></div>
-              <div style="position:absolute;top:-60px;right:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(50,173,120,.16),transparent 70%);pointer-events:none"></div>
-              <div style="position:relative;width:54px;height:54px;border-radius:15px;background:rgba(50,173,120,.1);border:1px solid rgba(106,187,140,.32);display:flex;align-items:center;justify-content:center;margin-bottom:24px" data-svg="{{ s.icon }}" data-stroke="#6ABB8C"></div>
-              <h4 style="position:relative;font-size:20px;font-weight:700;color:#fff;margin:0 0 12px;line-height:1.25">{{ s.title }}</h4>
-              <p style="position:relative;font-size:15px;line-height:1.66;color:rgba(255,255,255,.66);margin:0">{{ s.descNode }}</p>
+            <div data-tilt data-offering-card style="position:relative;background:linear-gradient(145deg,rgba(10,20,40,.97) 0%,rgba(7,14,28,.97) 100%);border:1.5px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 28px 28px;cursor:pointer;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.4);display:flex;flex-direction:column" onClick="{{ s.onClick }}">
+              <!-- top accent line -->
+              <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#10ffcb,#44e5e7)"></div>
+              <!-- glow top-left -->
+              <div style="position:absolute;top:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(16,255,203,.1),transparent 70%);pointer-events:none"></div>
+              <!-- watermark number -->
+              <div style="position:absolute;bottom:-12px;right:18px;font-size:110px;font-weight:900;line-height:1;color:rgba(16,255,203,.04);pointer-events:none;user-select:none;letter-spacing:-.04em">{{ s.num }}</div>
+              <!-- icon badge -->
+              <div style="width:48px;height:48px;border-radius:13px;background:rgba(16,255,203,.08);border:1px solid rgba(16,255,203,.22);display:flex;align-items:center;justify-content:center;margin-bottom:18px" data-svg="{{ s.icon }}" data-stroke="#10ffcb"></div>
+              <h4 style="position:relative;font-size:20px;font-weight:700;color:#fff;margin:0 0 20px;line-height:1.25">{{ s.title }}</h4>
+              <ul style="position:relative;list-style:none;padding:0;margin:0 0 28px;flex:1">{{ s.pointsNode }}</ul>
+              <button onClick="{{ s.onClick }}" style="font-family:inherit;border:none;cursor:pointer;position:relative;align-self:flex-start;display:inline-flex;align-items:center;gap:7px;background:#10ffcb;color:#070F1E;font-size:13px;font-weight:600;padding:11px 22px;border-radius:10px;box-shadow:0 8px 24px rgba(68,229,231,.28);transition:background .2s,transform .2s" style-hover="background:#0de0b3;transform:translateY(-2px)">Conheça <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
             </div>
           </sc-for>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURE: PLATAFORMA / LISTA DE PRESENÇA (DARK) -->
-    <section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#0A1326,#0C1C36);padding:clamp(80px,10vw,140px) 0">
-      <div style="position:absolute;inset:0;background:radial-gradient(68% 85% at 86% -8%,rgba(0,92,139,.52),transparent 58%),radial-gradient(58% 78% at 2% 110%,rgba(50,173,120,.32),transparent 58%),radial-gradient(46% 60% at 52% 46%,rgba(0,92,139,.2),transparent 66%);pointer-events:none"></div>
-      
-      <div style="position:relative;max-width:1200px;margin:0 auto;padding:0 24px;display:grid;gap:56px;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));align-items:center">
-        <div data-reveal style="opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
-          <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:16px">Lista de presença digital</span>
-          <h2 style="font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-.025em;font-weight:700;color:#fff;margin:0">Sem papel. Sem planilha. Sem retrabalho.</h2>
-          <p style="font-size:18px;line-height:1.65;color:rgba(255,255,255,.7);margin:18px 0 28px">Organize turmas, registre presença com assinatura digital, gere relatórios detalhados e acompanhe o desempenho dos participantes — tudo em tempo real.</p>
-          <div style="display:flex;flex-direction:column;gap:13px">
-            <sc-for list="{{ platformBenefits }}" as="b" hint-placeholder-count="4">
-              <div style="display:flex;gap:12px;align-items:center"><span style="width:24px;height:24px;border-radius:7px;background:rgba(50,173,120,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6ABB8C" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span style="font-size:16px;color:rgba(255,255,255,.86)">{{ b }}</span></div>
-            </sc-for>
-          </div>
-        </div>
-        <div data-reveal style="opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,.61,.36,1) .12s,transform .8s cubic-bezier(.22,.61,.36,1) .12s">
-          <div style="background:#fff;border-radius:18px;box-shadow:0 30px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);overflow:hidden">
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#1B2848"><div style="display:flex;align-items:center;gap:10px"><span style="width:9px;height:9px;border-radius:50%;background:#32AD78;box-shadow:0 0 8px #32AD78;animation:tcpulse 2s infinite"></span><span style="color:#fff;font-size:14px;font-weight:600">NR-35 · Trabalho em Altura</span></div><span style="font-size:11px;font-weight:600;color:#6ABB8C;background:rgba(50,173,120,.16);padding:4px 10px;border-radius:100px">AO VIVO</span></div>
-            <div style="padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #EEF1F6"><div><div style="font-size:12px;color:#8A93A6">Presenças confirmadas</div><div style="font-size:22px;font-weight:700;color:#1B2848">18<span style="color:#B6BECC;font-weight:600;font-size:16px"> / 20</span></div></div><div style="flex:1;max-width:150px;margin-left:18px"><div style="height:8px;border-radius:8px;background:#EEF1F6;overflow:hidden"><div style="width:90%;height:100%;background:linear-gradient(90deg,#005C8B,#32AD78)"></div></div></div></div>
-            <div style="padding:8px 10px">
-              <div style="display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px" style-hover="background:#F6F8FB"><span style="width:34px;height:34px;border-radius:50%;background:#E7F4ED;color:#218a5d;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">CM</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1B2848">Carlos Mendes</div><div style="font-size:12px;color:#9098A8">Operador · 09:02</div></div><span style="font-size:12px;font-weight:600;color:#218a5d;display:flex;align-items:center;gap:5px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#32AD78" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Assinado</span></div>
-              <div style="display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px"><span style="width:34px;height:34px;border-radius:50%;background:#E7EEF6;color:#005C8B;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">AS</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1B2848">Ana Souza</div><div style="font-size:12px;color:#9098A8">Técnica · 09:03</div></div><span style="font-size:12px;font-weight:600;color:#218a5d;display:flex;align-items:center;gap:5px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#32AD78" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Assinado</span></div>
-              <div style="display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px"><span style="width:34px;height:34px;border-radius:50%;background:#F2EEF8;color:#6a4bb5;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">RP</span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1B2848">Rafael Pinto</div><div style="font-size:12px;color:#9098A8">Supervisor</div></div><span style="font-size:12px;font-weight:600;color:#C99A2E;background:#FBF3DF;padding:3px 9px;border-radius:100px">Pendente</span></div>
-            </div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#F6F8FB;border-top:1px solid #EEF1F6"><span style="font-size:12px;color:#6B7488;display:flex;align-items:center;gap:7px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#32AD78" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Assinatura digital validada</span><span style="font-size:12px;font-weight:600;color:#005C8B">Exportar PDF</span></div>
-          </div>
         </div>
       </div>
     </section>
 
     <!-- NRs PREVIEW (Netflix posters) -->
-    <section style="position:relative;background:linear-gradient(180deg,#0C2247 0%,#0A1326 38%,#0A1326 100%);padding:clamp(72px,9vw,120px) 0;overflow:hidden">
-      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(56% 74% at 50% 12%,rgba(0,92,139,.42),transparent 60%),radial-gradient(46% 64% at 6% 100%,rgba(50,173,120,.24),transparent 60%)"></div>
+    <section style="position:relative;background:#edfdf8;padding:clamp(72px,9vw,120px) 0;overflow-x:clip">
+      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(55% 75% at 85% 8%,rgba(16,255,203,.45),transparent 58%),radial-gradient(48% 65% at 8% 92%,rgba(16,255,203,.38),transparent 56%),radial-gradient(36% 48% at 50% 50%,rgba(68,229,231,.18),transparent 62%),radial-gradient(30% 40% at 20% 20%,rgba(115,251,211,.22),transparent 55%)"></div>
       <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px">
-        <div data-reveal style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:40px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
-          <div style="max-width:620px">
-            <span style="display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6ABB8C;background:rgba(50,173,120,.12);border:1px solid rgba(106,187,140,.28);padding:6px 14px;border-radius:100px;margin-bottom:20px">Normas Regulamentadoras</span>
-            <h2 style="font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.03em;font-weight:800;color:#fff;margin:0;text-transform:uppercase">Capacitação nas<br/><span style="background:linear-gradient(100deg,#6ABB8C,#32AD78,#3FA9D6);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:tcgrad 6s ease infinite">principais NRs</span></h2>
-            <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,.66);margin:18px 0 0">Online e presencial, em <span style="color:#6ABB8C;font-weight:600">todo o território nacional</span>, com suporte em Libras nos treinamentos teóricos.</p>
+        <div class="tc-nr-header" style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:40px">
+          <div class="tc-nr-header-text" style="max-width:620px">
+            <span data-reveal-pop data-delay="0" style="display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#070F1E;background:#10ffcb;border:none;padding:7px 16px;border-radius:100px;margin-bottom:20px">Normas Regulamentadoras</span>
+            <h2 data-reveal-pop data-delay="180" style="font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.03em;font-weight:800;color:#070F1E;margin:0">Capacitação nas<br/><span style="font-style:italic;letter-spacing:-.05em">principais NRs</span></h2>
+            <p data-reveal-pop data-delay="340" style="font-size:17px;line-height:1.6;color:rgba(7,15,30,.6);margin:18px 0 0">Online e presencial, em <span style="color:#070F1E;font-weight:700">todo o território nacional</span>, com suporte em Libras nos treinamentos teóricos.</p>
           </div>
-          <div data-hide-sm style="display:flex;gap:10px">
-            <button data-nr-prev style="font-family:inherit;cursor:pointer;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s" style-hover="background:rgba(255,255,255,.14);border-color:#32AD78"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-            <button data-nr-next style="font-family:inherit;cursor:pointer;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s" style-hover="background:rgba(255,255,255,.14);border-color:#32AD78"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div style="display:flex;gap:10px;flex-shrink:0">
+            <button data-nr-prev style="font-family:inherit;cursor:pointer;width:46px;height:46px;border-radius:50%;background:#fff;border:1.5px solid rgba(0,168,138,.25);color:#070F1E;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s,box-shadow .2s" style-hover="background:#f0fdf9;border-color:#10ffcb;box-shadow:0 0 0 3px rgba(16,255,203,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button data-nr-next style="font-family:inherit;cursor:pointer;width:46px;height:46px;border-radius:50%;background:#fff;border:1.5px solid rgba(0,168,138,.25);color:#070F1E;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s,box-shadow .2s" style-hover="background:#f0fdf9;border-color:#10ffcb;box-shadow:0 0 0 3px rgba(16,255,203,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
           </div>
         </div>
-        <div data-nr-track style="display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 22px;scrollbar-width:none;-ms-overflow-style:none">
+        <div data-nr-track style="overflow:hidden;position:relative;padding:20px 0 22px">
+          <div data-nr-inner style="display:flex;gap:18px;will-change:transform;padding:0 4px">
           <sc-for list="{{ nrs }}" as="n" hint-placeholder-count="6">
-            <div data-card onClick="{{ goServicos }}" style="scroll-snap-align:start;flex:0 0 auto;width:248px;cursor:pointer;position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(165deg,#0E1E3C,#070F1E);border:1px solid rgba(255,255,255,.09);box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s,border-color .3s" style-hover="transform:translateY(-8px) scale(1.025);box-shadow:0 30px 64px rgba(0,0,0,.55);border-color:rgba(106,187,140,.5)">
-              <div style="position:absolute;top:-50px;right:-50px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(50,173,120,.18),transparent 70%);pointer-events:none"></div>
+            <div data-card data-nr-card onClick="{{ goServicos }}" style="scroll-snap-align:start;flex:0 0 auto;width:248px;cursor:pointer;position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(165deg,#0E1E3C,#070F1E);border:1px solid rgba(16,255,203,.18);box-shadow:0 4px 20px rgba(0,0,0,.12);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s,border-color .3s" style-hover="transform:translateY(-10px) scale(1.03);box-shadow:0 24px 52px rgba(0,0,0,.2),0 0 24px rgba(16,255,203,.2);border-color:rgba(16,255,203,.5)">
+              <div style="position:absolute;top:-50px;right:-50px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(16,255,203,.15),transparent 70%);pointer-events:none"></div>
               <div style="position:relative;padding:26px 24px 22px;min-height:228px;display:flex;flex-direction:column">
                 <span style="font-size:11px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase">Treinamento NR</span>
-                <div style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#32AD78;line-height:1;margin:14px 0 0">{{ n.big }}</div>
+                <div style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#10ffcb;line-height:1;margin:14px 0 0">{{ n.big }}</div>
                 <div style="font-size:14.5px;font-weight:600;line-height:1.3;color:#fff;margin-top:14px">{{ n.label }}</div>
                 <div style="font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.55);margin-top:8px;flex:1">{{ n.full }}</div>
-                <div style="height:5px;border-radius:5px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:16px"><div style="width:{{ n.bar }};height:100%;background:linear-gradient(90deg,#005C8B,#32AD78)"></div></div>
               </div>
             </div>
           </sc-for>
+          </div>
         </div>
-        <div data-reveal style="margin-top:8px;opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .1s,transform .7s cubic-bezier(.22,.61,.36,1) .1s">
-          <button onClick="{{ goServicos }}" style="font-family:inherit;cursor:pointer;background:#32AD78;border:none;color:#fff;font-size:15px;font-weight:600;padding:14px 26px;border-radius:12px;box-shadow:0 10px 28px rgba(50,173,120,.34);transition:background .2s,transform .2s" style-hover="background:#2b9568;transform:translateY(-2px)">Ver todos os treinamentos</button>
+<div data-reveal-pop data-delay="120" style="margin-top:8px">
+          <button onClick="{{ goServicos }}" style="font-family:inherit;cursor:pointer;background:#10ffcb;border:none;color:#070F1E;font-size:15px;font-weight:700;padding:14px 26px;border-radius:12px;box-shadow:0 10px 28px rgba(16,255,203,.32);transition:background .2s,transform .2s,box-shadow .2s" style-hover="background:#0de0b3;transform:translateY(-2px);box-shadow:0 16px 36px rgba(16,255,203,.4)">Ver todos os treinamentos</button>
         </div>
       </div>
     </section>
 
     <!-- QUALQUER LUGAR (phone + features) -->
-    <section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#0A1326 0%,#0A2A22 52%,#0A1326 100%);padding:clamp(72px,9vw,124px) 0">
-      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 70% at 50% 42%,rgba(50,173,120,.3),transparent 62%),radial-gradient(46% 60% at 92% 90%,rgba(0,92,139,.34),transparent 62%)"></div>
-      <div style="position:absolute;inset:0;pointer-events:none;z-index:1">
-        <div data-float data-depth="1.4" style="position:absolute;left:8%;top:20%;width:54px;height:54px;border-radius:15px;background:linear-gradient(145deg,rgba(50,173,120,.18),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.4);box-shadow:0 0 32px rgba(50,173,120,.22);will-change:transform"></div>
-        <div data-float data-depth="2.3" style="position:absolute;left:90%;top:30%;width:30px;height:30px;border-radius:9px;background:rgba(0,92,139,.2);border:1px solid rgba(63,169,214,.5);box-shadow:0 0 20px rgba(0,92,139,.3);will-change:transform"></div>
-        <div data-float data-depth="1" style="position:absolute;left:84%;top:74%;width:44px;height:44px;border-radius:12px;background:linear-gradient(145deg,rgba(106,187,140,.14),transparent);border:1px solid rgba(106,187,140,.32);will-change:transform"></div>
-      </div>
+    <section data-feat-section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#0C1C36 0%,#071E30 52%,#0C1C36 100%);padding:clamp(68px,6vw,80px) 0 clamp(90px,10vw,130px)">
+      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 70% at 50% 42%,rgba(16,255,203,.18),transparent 62%),radial-gradient(46% 60% at 92% 90%,rgba(0,92,139,.34),transparent 62%)"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;opacity:.055;mix-blend-mode:screen;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22260%22 height=%22260%22%3E%3Cfilter id=%22gr%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.72%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22/%3E%3C/filter%3E%3Crect width=%22260%22 height=%22260%22 filter=%22url(%23gr)%22/%3E%3C/svg%3E');background-size:260px 260px"></div>
       <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px">
-        <h2 data-reveal style="text-align:center;font-size:clamp(30px,5vw,58px);line-height:1.04;letter-spacing:-.03em;font-weight:800;color:#fff;margin:0 auto;max-width:880px;text-transform:uppercase;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Treinamento que acompanha o aluno em <span style="background:linear-gradient(100deg,#6ABB8C,#32AD78,#3FA9D6);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:tcgrad 6s ease infinite">qualquer lugar</span></h2>
-        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:28px;align-items:center;margin-top:clamp(44px,6vw,72px)">
+        <h2 data-reveal style="text-align:center;font-size:clamp(20px,3vw,40px);line-height:1.06;letter-spacing:-.03em;font-weight:800;color:#fff;margin:0 auto;max-width:800px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Treinamento que acompanha o aluno em <span style="color:#10ffcb">qualquer lugar!</span></h2>
+        <div data-feat-grid style="position:relative;display:grid;grid-template-columns:1fr auto 1fr;column-gap:88px;row-gap:0;align-items:center;margin-top:clamp(36px,4vw,52px)">
           <!-- left features -->
-          <div style="display:flex;flex-direction:column;gap:22px">
-            <sc-for list="{{ featLeft }}" as="f" hint-placeholder-count="2">
-              <div data-reveal data-feat style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:24px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .35s cubic-bezier(.22,.61,.36,1),background .3s,border-color .3s,box-shadow .3s" style-hover="background:rgba(255,255,255,.08);border-color:rgba(106,187,140,.45);transform:translateY(-4px);box-shadow:0 24px 50px rgba(0,0,0,.4)">
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="width:42px;height:42px;border-radius:12px;background:rgba(50,173,120,.12);border:1px solid rgba(106,187,140,.3);display:flex;align-items:center;justify-content:center" data-svg="{{ f.icon }}" data-stroke="#6ABB8C"></span><h3 style="font-size:17px;font-weight:700;color:#fff;margin:0;line-height:1.2">{{ f.title }}</h3></div>
-                <p style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.62);margin:0">{{ f.desc }}</p>
-                <div style="height:3px;width:46px;border-radius:3px;background:linear-gradient(90deg,#32AD78,#3FA9D6);margin-top:14px"></div>
+          <div style="position:relative;height:478px;align-self:center">
+            <!-- Card 1L — Aprendizado inclusivo · nível 17% do tel. -->
+            <div data-reveal data-feat style="position:absolute;top:14px;left:0;right:0;background:rgba(255,255,255,.07);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:24px 22px;opacity:0;transform:translateY(24px);box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .35s cubic-bezier(.22,.61,.36,1),background .3s,border-color .3s,box-shadow .3s" style-hover="background:rgba(16,255,203,.07);border-color:rgba(16,255,203,.4);transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,.5),0 0 24px rgba(16,255,203,.14),inset 0 1px 0 rgba(16,255,203,.15)">
+              <div style="display:flex;align-items:center;gap:13px;margin-bottom:14px">
+                <span style="width:42px;height:42px;border-radius:12px;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 14px rgba(16,255,203,.14)" data-svg="libras" data-stroke="#10ffcb"></span>
+                <h3 style="font-size:15.5px;font-weight:700;color:#fff;margin:0;line-height:1.25">Aprendizado inclusivo</h3>
               </div>
-            </sc-for>
+              <p style="font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:0">Recursos de áudio, Libras e transcrição trabalham juntos para atender diferentes formas de aprendizagem.</p>
+            </div>
+            <!-- Card 2L — Interação com games · nível 67% do tel. -->
+            <div data-reveal data-feat style="position:absolute;top:254px;left:0;right:0;background:rgba(255,255,255,.07);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:24px 22px;opacity:0;transform:translateY(24px);box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .35s cubic-bezier(.22,.61,.36,1),background .3s,border-color .3s,box-shadow .3s" style-hover="background:rgba(16,255,203,.07);border-color:rgba(16,255,203,.4);transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,.5),0 0 24px rgba(16,255,203,.14),inset 0 1px 0 rgba(16,255,203,.15)">
+              <div style="display:flex;align-items:center;gap:13px;margin-bottom:14px">
+                <span style="width:42px;height:42px;border-radius:12px;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 14px rgba(16,255,203,.14)" data-svg="plataforma" data-stroke="#10ffcb"></span>
+                <h3 style="font-size:15.5px;font-weight:700;color:#fff;margin:0;line-height:1.25">Interação com games</h3>
+              </div>
+              <p style="font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:0">Os treinamentos contam com seções de games e atividades interativas, tornando os conteúdos mais dinâmicos e fixando melhor o conhecimento.</p>
+            </div>
           </div>
           <!-- phone -->
-          <div data-hide-sm data-float data-depth="0.5" style="will-change:transform">
-            <div style="position:relative;width:268px;height:548px;border-radius:42px;background:linear-gradient(160deg,#1a1f2e,#05080f);padding:11px;box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08),inset 0 0 0 2px rgba(255,255,255,.04)">
-              <div style="position:absolute;top:18px;left:50%;transform:translateX(-50%);width:96px;height:26px;background:#05080f;border-radius:0 0 16px 16px;z-index:3"></div>
-              <div style="position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:linear-gradient(180deg,#0E1B33,#070F1E)">
-                <div style="padding:30px 18px 14px;display:flex;align-items:center;gap:8px"><img src="assets/logo-white.png" alt="TecnoCursos" style="height:18px;width:auto"/></div>
+          <div data-hide-sm data-phone-float>
+            <div style="position:relative;width:234px;height:478px;border-radius:38px;background:linear-gradient(160deg,#1a1f2e,#05080f);padding:9px;box-shadow:0 32px 72px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08),inset 0 0 0 2px rgba(255,255,255,.04)">
+              <div style="position:absolute;top:14px;left:50%;transform:translateX(-50%);width:82px;height:20px;background:#05080f;border-radius:0 0 13px 13px;z-index:3"></div>
+              <div style="position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;background:linear-gradient(180deg,#0E1B33,#070F1E)">
+                <div style="padding:22px 14px 10px;display:flex;align-items:center;gap:8px"><img src="uploads/NOVA%20LOGO%20TECNOCURSOS%20BRANCO%20SEM%20SLOGAN%201.png" alt="TecnoCursos" style="height:18px;width:auto"/></div>
                 <div style="display:flex;justify-content:space-around;padding:0 12px 14px;border-bottom:1px solid rgba(255,255,255,.08)">
-                  <span style="font-size:9px;color:rgba(255,255,255,.4);display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:30px;height:30px;border-radius:9px;background:rgba(50,173,120,.18);display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6ABB8C" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>Início</span>
+                  <span style="font-size:9px;color:rgba(255,255,255,.4);display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:30px;height:30px;border-radius:9px;background:rgba(16,255,203,.1);display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10ffcb" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>Início</span>
                   <span style="font-size:9px;color:rgba(255,255,255,.4);display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/></svg></span>Cursos</span>
                   <span style="font-size:9px;color:rgba(255,255,255,.4);display:flex;flex-direction:column;align-items:center;gap:5px"><span style="width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0112 0v1"/></svg></span>Perfil</span>
                 </div>
                 <div style="padding:14px 16px">
                   <div style="font-size:9.5px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.4);text-transform:uppercase">Módulo de treinamento</div>
-                  <div style="font-size:21px;font-weight:800;color:#32AD78;line-height:1;margin-top:8px">NR-10 — ATEX</div>
+                  <div style="font-size:21px;font-weight:800;color:#10ffcb;line-height:1;margin-top:8px">NR-10 — ATEX</div>
                   <div style="font-size:14px;font-weight:700;color:#fff;margin-top:3px">Áreas Classificadas</div>
                   <p style="font-size:11px;line-height:1.5;color:rgba(255,255,255,.55);margin:10px 0 0">Capacitação em segurança nas Áreas Classificadas conforme NR-10 e ATEX.</p>
-                  <div style="margin-top:14px;height:128px;border-radius:14px;background:linear-gradient(150deg,#102A4A,#0A1326);border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center">
+                  <div style="margin-top:10px;height:96px;border-radius:12px;background:linear-gradient(150deg,#102A4A,#0A1326);border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center">
                     <div style="position:absolute;inset:0;background:radial-gradient(60% 70% at 50% 40%,rgba(50,173,120,.22),transparent 70%)"></div>
                     <span style="position:relative;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
                   </div>
-                  <button style="font-family:inherit;border:none;cursor:pointer;width:100%;margin-top:14px;background:#6a4bb5;color:#fff;font-size:12px;font-weight:600;padding:12px;border-radius:11px;display:flex;align-items:center;justify-content:center;gap:7px"><svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>Iniciar o treinamento</button>
+                  <button style="font-family:inherit;border:none;cursor:pointer;width:100%;margin-top:14px;background:#10ffcb;color:#070F1E;font-size:12px;font-weight:600;padding:12px;border-radius:11px;display:flex;align-items:center;justify-content:center;gap:7px"><svg width="13" height="13" viewBox="0 0 24 24" fill="#070F1E"><path d="M8 5v14l11-7z"/></svg>Iniciar o treinamento</button>
                 </div>
               </div>
             </div>
           </div>
           <!-- right features -->
-          <div style="display:flex;flex-direction:column;gap:22px">
-            <sc-for list="{{ featRight }}" as="f" hint-placeholder-count="2">
-              <div data-reveal data-feat style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:24px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .35s cubic-bezier(.22,.61,.36,1),background .3s,border-color .3s,box-shadow .3s" style-hover="background:rgba(255,255,255,.08);border-color:rgba(106,187,140,.45);transform:translateY(-4px);box-shadow:0 24px 50px rgba(0,0,0,.4)">
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="width:42px;height:42px;border-radius:12px;background:rgba(50,173,120,.12);border:1px solid rgba(106,187,140,.3);display:flex;align-items:center;justify-content:center" data-svg="{{ f.icon }}" data-stroke="#6ABB8C"></span><h3 style="font-size:17px;font-weight:700;color:#fff;margin:0;line-height:1.2">{{ f.title }}</h3></div>
-                <p style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.62);margin:0">{{ f.desc }}</p>
-                <div style="height:3px;width:46px;border-radius:3px;background:linear-gradient(90deg,#32AD78,#3FA9D6);margin-top:14px"></div>
+          <div style="position:relative;height:478px;align-self:center">
+            <!-- Card 1R — 100% responsiva · nível 41% do tel. -->
+            <div data-reveal data-feat style="position:absolute;top:136px;left:0;right:0;background:rgba(255,255,255,.07);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:24px 22px;opacity:0;transform:translateY(24px);box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .35s cubic-bezier(.22,.61,.36,1),background .3s,border-color .3s,box-shadow .3s" style-hover="background:rgba(16,255,203,.07);border-color:rgba(16,255,203,.4);transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,.5),0 0 24px rgba(16,255,203,.14),inset 0 1px 0 rgba(16,255,203,.15)">
+              <div style="display:flex;align-items:center;gap:13px;margin-bottom:14px">
+                <span style="width:42px;height:42px;border-radius:12px;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 14px rgba(16,255,203,.14)" data-svg="online" data-stroke="#10ffcb"></span>
+                <h3 style="font-size:15.5px;font-weight:700;color:#fff;margin:0;line-height:1.25">100% responsiva</h3>
               </div>
-            </sc-for>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VANTAGENS (DARK BAND) -->
-    <section style="position:relative;overflow:hidden;background:linear-gradient(120deg,#0C1A30,#102A4A);padding:clamp(64px,8vw,104px) 0">
-      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(58% 78% at 50% 50%,rgba(0,92,139,.5),transparent 60%),radial-gradient(40% 60% at 88% 8%,rgba(50,173,120,.32),transparent 60%),radial-gradient(42% 60% at 6% 100%,rgba(106,187,140,.24),transparent 60%);will-change:transform"></div>
-      <div style="position:relative;max-width:1200px;margin:0 auto;padding:0 24px">
-        <h2 data-reveal style="font-size:clamp(26px,3.6vw,40px);font-weight:700;color:#fff;margin:0 0 40px;letter-spacing:-.02em;max-width:560px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Por que treinar com a TecnoCursos.</h2>
-        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))">
-          <sc-for list="{{ advantages }}" as="a" hint-placeholder-count="5">
-            <div data-reveal style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:26px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),background .25s,border-color .25s" style-hover="background:rgba(255,255,255,.09);border-color:rgba(106,187,140,.4)">
-              <div style="width:44px;height:44px;border-radius:12px;background:rgba(50,173,120,.16);display:flex;align-items:center;justify-content:center;margin-bottom:18px" data-svg="{{ a.icon }}"></div>
-              <h3 style="font-size:17px;font-weight:600;color:#fff;margin:0 0 8px;line-height:1.3">{{ a.title }}</h3>
-              <p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,.62);margin:0">{{ a.desc }}</p>
+              <p style="font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:0">Acesse os treinamentos em qualquer dispositivo, com navegação adaptada para celular, tablet e computador.</p>
             </div>
-          </sc-for>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTEÚDO PREVIEW -->
-    <section style="position:relative;background:linear-gradient(180deg,#E6EDF6,#F2F6FB);padding:clamp(72px,9vw,120px) 0;overflow:hidden">
-      
-      <div style="position:absolute;top:-8%;left:-6%;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(50,173,120,.1),transparent 68%);pointer-events:none"></div>
-      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px">
-        <div data-reveal style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:42px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
-          <div>
-            <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#218a5d;margin-bottom:16px">Central de conhecimento</span>
-            <h2 style="font-size:clamp(28px,4vw,42px);line-height:1.08;letter-spacing:-.025em;font-weight:700;color:#1B2848;margin:0">Conteúdo sobre NR e segurança do trabalho.</h2>
+            <!-- Card 2R — Navegação simples · nível 84% do tel. -->
+            <div data-reveal data-feat style="position:absolute;top:344px;left:0;right:0;background:rgba(255,255,255,.07);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:24px 22px;opacity:0;transform:translateY(24px);box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .35s cubic-bezier(.22,.61,.36,1),background .3s,border-color .3s,box-shadow .3s" style-hover="background:rgba(16,255,203,.07);border-color:rgba(16,255,203,.4);transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,.5),0 0 24px rgba(16,255,203,.14),inset 0 1px 0 rgba(16,255,203,.15)">
+              <div style="display:flex;align-items:center;gap:13px;margin-bottom:14px">
+                <span style="width:42px;height:42px;border-radius:12px;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 14px rgba(16,255,203,.14)" data-svg="consultoria" data-stroke="#10ffcb"></span>
+                <h3 style="font-size:15.5px;font-weight:700;color:#fff;margin:0;line-height:1.25">Navegação simples</h3>
+              </div>
+              <p style="font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:0">Uma interface intuitiva para que o aluno encontre conteúdos, recursos de acessibilidade e seu progresso com facilidade.</p>
+            </div>
           </div>
-          <button onClick="{{ goBlog }}" style="font-family:inherit;cursor:pointer;background:#fff;border:1px solid #D6DDE6;color:#1B2848;font-size:15px;font-weight:600;padding:12px 22px;border-radius:11px" style-hover="border-color:#1B2848">Ver todos os artigos</button>
-        </div>
-        <div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))">
-          <sc-for list="{{ featuredPosts }}" as="p" hint-placeholder-count="3">
-            <article data-reveal onClick="{{ goBlog }}" style="cursor:pointer;border:1px solid rgba(27,40,72,.08);border-radius:16px;overflow:hidden;background:#fff;opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),box-shadow .25s" style-hover="box-shadow:0 18px 44px rgba(16,24,40,.12)">
-              <div style="height:152px;background:{{ p.cover }};position:relative"></div>
-              <div style="padding:22px"><span style="font-size:12px;font-weight:600;color:#005C8B;text-transform:uppercase;letter-spacing:.06em">{{ p.cat }}</span><h3 style="font-size:18px;font-weight:600;line-height:1.3;color:#1B2848;margin:10px 0 0">{{ p.title }}</h3><div style="font-size:13px;color:#9098A8;margin-top:14px">{{ p.date }} · {{ p.read }}</div></div>
-            </article>
-          </sc-for>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section style="background:linear-gradient(180deg,#0A1326,#070F1E);padding:0 24px clamp(72px,9vw,120px)">
+    <section style="background:linear-gradient(180deg,#0A1326,#070F1E);padding:clamp(72px,9vw,120px) 24px clamp(72px,9vw,120px)">
       <div data-reveal style="max-width:1200px;margin:0 auto;background:linear-gradient(120deg,#0C1A30,#005C8B);border-radius:26px;padding:clamp(48px,7vw,82px) clamp(28px,5vw,72px);position:relative;overflow:hidden;opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1)">
         <div style="position:absolute;bottom:-40%;right:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(50,173,120,.32),transparent 68%)"></div>
         
@@ -331,12 +317,13 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
           <h2 style="font-size:clamp(28px,4.4vw,46px);line-height:1.08;letter-spacing:-.02em;font-weight:700;color:#fff;margin:0">Pronto para digitalizar a segurança do trabalho?</h2>
           <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.78);margin:18px 0 34px">Fale com nosso time e veja a plataforma funcionando com os treinamentos da sua empresa.</p>
           <div style="display:flex;flex-wrap:wrap;gap:14px">
-            <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:16px;font-weight:600;padding:15px 28px;border-radius:12px;box-shadow:0 10px 30px rgba(50,173,120,.35)" style-hover="background:#2b9568;transform:translateY(-2px)">Fale com a gente</button>
+            <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#10ffcb;color:#070F1E;font-size:16px;font-weight:600;padding:15px 28px;border-radius:12px;box-shadow:0 10px 30px rgba(68,229,231,.32)" style-hover="background:#0de0b3;transform:translateY(-2px)">Fale com a gente</button>
             <button onClick="{{ goServicos }}" style="font-family:inherit;cursor:pointer;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:16px;font-weight:600;padding:15px 28px;border-radius:12px" style-hover="background:rgba(255,255,255,.2)">Ver serviços</button>
           </div>
         </div>
       </div>
     </section>
+
   </main>
   </sc-if>
 
@@ -352,7 +339,7 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
         <div data-float data-depth="0.8" style="position:absolute;left:72%;top:6%;width:46px;height:46px;border-radius:13px;background:linear-gradient(145deg,rgba(106,187,140,.13),transparent);border:1px solid rgba(106,187,140,.3);will-change:transform"></div>
       </div>
       <div style="position:relative;max-width:900px;margin:0 auto;padding:0 24px">
-        <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:18px">Sobre nós</span>
+        <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#10ffcb;margin-bottom:18px">Sobre nós</span>
         <h1 style="font-size:clamp(34px,5.4vw,60px);line-height:1.04;letter-spacing:-.03em;font-weight:700;color:#fff;margin:0;max-width:760px">Uma jornada de dedicação e crescimento.</h1>
         <p style="font-size:clamp(18px,2.2vw,22px);line-height:1.6;color:rgba(255,255,255,.72);margin:24px 0 0;max-width:680px">Desde 2004 ajudando empresas a manterem-se em conformidade com as Normas Regulamentadoras — hoje, com tecnologia para gerir tudo isso.</p>
       </div>
@@ -367,13 +354,13 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
       </div>
       <div style="position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:28px">
         <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
-          <p style="font-size:19px;line-height:1.75;color:rgba(255,255,255,.8);margin:0">Tudo começou em <strong style="color:#6ABB8C">2004</strong>, quando João Arthur fundou uma escola de capacitação focada em Normas Regulamentadoras. A missão era clara: ajudar empresas a se manterem em conformidade, garantindo um ambiente mais seguro para todos.</p>
+          <p style="font-size:19px;line-height:1.75;color:rgba(255,255,255,.8);margin:0">Tudo começou em <strong style="color:#10ffcb">2004</strong>, quando João Arthur fundou uma escola de capacitação focada em Normas Regulamentadoras. A missão era clara: ajudar empresas a se manterem em conformidade, garantindo um ambiente mais seguro para todos.</p>
         </div>
         <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .05s,transform .7s cubic-bezier(.22,.61,.36,1) .05s">
           <p style="font-size:19px;line-height:1.75;color:rgba(255,255,255,.8);margin:0">Nos primeiros anos, João fazia de tudo — criava conteúdos, ministrava treinamentos e até dirigia a Unidade Móvel para treinamentos práticos, como os de brigada de incêndio. Ao seu lado, Alessandra cuidava da logística, do financeiro e da emissão dos certificados, com excelência em cada detalhe.</p>
         </div>
         <div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .1s,transform .7s cubic-bezier(.22,.61,.36,1) .1s">
-          <p style="font-size:19px;line-height:1.75;color:rgba(255,255,255,.8);margin:0">Em <strong style="color:#6ABB8C">2009</strong>, a formalização do CNPJ consolidou nossa atuação e expandiu horizontes. Desde então crescemos de forma expressiva e hoje contamos com uma equipe altamente qualificada — administração, TI, suporte e instrutores espalhados por diversas regiões do Brasil.</p>
+          <p style="font-size:19px;line-height:1.75;color:rgba(255,255,255,.8);margin:0">Em <strong style="color:#10ffcb">2009</strong>, a formalização do CNPJ consolidou nossa atuação e expandiu horizontes. Desde então crescemos de forma expressiva e hoje contamos com uma equipe altamente qualificada — administração, TI, suporte e instrutores espalhados por diversas regiões do Brasil.</p>
         </div>
       </div>
     </section>
@@ -385,7 +372,7 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
         <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))">
           <sc-for list="{{ values }}" as="v" hint-placeholder-count="4">
             <div data-reveal style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
-              <div style="font-size:13px;font-weight:700;color:#6ABB8C;margin-bottom:14px;letter-spacing:.05em">{{ v.n }}</div>
+              <div style="font-size:13px;font-weight:700;color:#10ffcb;margin-bottom:14px;letter-spacing:.05em">{{ v.n }}</div>
               <h3 style="font-size:19px;font-weight:600;color:#fff;margin:0 0 8px">{{ v.title }}</h3>
               <p style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.62);margin:0">{{ v.desc }}</p>
             </div>
@@ -408,9 +395,9 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
         <div data-float data-depth="0.7" style="position:absolute;left:88%;top:80%;width:48px;height:48px;border-radius:13px;background:linear-gradient(145deg,rgba(106,187,140,.13),transparent);border:1px solid rgba(106,187,140,.3);will-change:transform"></div>
       </div>
       <div style="position:relative;max-width:900px;margin:0 auto;padding:0 24px">
-        <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:18px">Serviços</span>
-        <h1 style="font-size:clamp(34px,5.4vw,58px);line-height:1.04;letter-spacing:-.03em;font-weight:700;color:#fff;margin:0;max-width:720px">Soluções de treinamento e segurança do trabalho.</h1>
-        <p style="font-size:20px;line-height:1.6;color:rgba(255,255,255,.72);margin:22px 0 0;max-width:640px">Treinamentos teóricos e práticos, plataforma digital, lista de presença e consultoria nas Normas Regulamentadoras.</p>
+        <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#10ffcb;margin-bottom:18px;animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .04s both">Serviços</span>
+        <h1 style="font-size:clamp(34px,5.4vw,58px);line-height:1.04;letter-spacing:-.03em;font-weight:700;color:#fff;margin:0;max-width:720px;animation:tcSlideUp .75s cubic-bezier(.22,.61,.36,1) .16s both">Soluções de treinamento e segurança do trabalho.</h1>
+        <p style="font-size:20px;line-height:1.6;color:rgba(255,255,255,.72);margin:22px 0 0;max-width:640px;animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .3s both">Treinamentos teóricos e práticos, plataforma digital, lista de presença e consultoria nas Normas Regulamentadoras.</p>
       </div>
     </section>
 
@@ -421,9 +408,9 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
         <div data-float data-depth="1.3" style="position:absolute;left:90%;top:12%;width:54px;height:54px;border-radius:15px;background:linear-gradient(145deg,rgba(50,173,120,.16),rgba(0,92,139,.04));border:1px solid rgba(106,187,140,.36);box-shadow:0 0 32px rgba(50,173,120,.18);will-change:transform"></div>
         <div data-float data-depth="2.2" style="position:absolute;left:3%;top:64%;width:28px;height:28px;border-radius:9px;background:rgba(0,92,139,.18);border:1px solid rgba(63,169,214,.5);box-shadow:0 0 20px rgba(0,92,139,.3);will-change:transform"></div>
       </div>
-      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:22px">
+      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:13px">
         <sc-for list="{{ servicesFull }}" as="s" hint-placeholder-count="6">
-          <div data-reveal style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:clamp(26px,4vw,40px);display:grid;gap:26px;grid-template-columns:64px 1fr;align-items:start;opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),box-shadow .25s,border-color .25s,background .25s;box-shadow:0 1px 3px rgba(0,0,0,.2)" style-hover="box-shadow:0 24px 50px rgba(0,0,0,.4);border-color:rgba(106,187,140,.4);background:rgba(255,255,255,.08)">
+          <div data-reveal style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:clamp(26px,4vw,40px);display:grid;gap:26px;grid-template-columns:64px 1fr;align-items:start;opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),box-shadow .25s,border-color .25s,background .25s;box-shadow:0 1px 3px rgba(0,0,0,.2)" style-hover="box-shadow:0 24px 52px rgba(0,0,0,.45),0 0 20px rgba(68,229,231,.12);border-color:rgba(68,229,231,.4);background:rgba(68,229,231,.04);transform:translateY(-4px)">
             <div style="width:64px;height:64px;border-radius:16px;background:{{ s.iconBg }};display:flex;align-items:center;justify-content:center" data-svg="{{ s.icon }}"></div>
             <div>
               <h2 style="font-size:23px;font-weight:700;color:#fff;margin:0 0 10px;letter-spacing:-.01em">{{ s.title }}</h2>
@@ -442,13 +429,13 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
       </div>
       <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px">
         <div data-reveal style="margin-bottom:36px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
-          <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:14px">Treinamentos disponíveis</span>
+          <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#10ffcb;margin-bottom:14px">Treinamentos disponíveis</span>
           <h2 style="font-size:clamp(26px,3.6vw,40px);font-weight:700;color:#fff;margin:0;letter-spacing:-.02em">Capacitação nas principais NRs</h2>
         </div>
         <div data-reveal style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(168px,100%),1fr));opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .08s,transform .7s cubic-bezier(.22,.61,.36,1) .08s">
           <sc-for list="{{ nrs }}" as="n" hint-placeholder-count="13">
-            <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 16px;transition:border-color .2s,transform .2s,box-shadow .2s,background .2s" style-hover="border-color:#32AD78;transform:translateY(-3px);box-shadow:0 16px 32px rgba(0,0,0,.4);background:rgba(255,255,255,.08)">
-              <div style="font-size:19px;font-weight:700;color:#6ABB8C">{{ n.code }}</div>
+            <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 16px;transition:border-color .2s,transform .2s,box-shadow .2s,background .2s" style-hover="border-color:rgba(68,229,231,.5);transform:translateY(-5px) scale(1.03);box-shadow:0 18px 38px rgba(0,0,0,.45),0 0 16px rgba(68,229,231,.15);background:rgba(68,229,231,.06)">
+              <div style="font-size:19px;font-weight:700;color:#10ffcb">{{ n.code }}</div>
               <div style="font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.6);margin-top:6px">{{ n.label }}</div>
             </div>
           </sc-for>
@@ -459,10 +446,136 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
     <section style="position:relative;overflow:hidden;background:linear-gradient(120deg,#0C1A30,#005C8B);padding:0 24px">
       <div style="position:absolute;bottom:-40%;right:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(50,173,120,.3),transparent 68%);pointer-events:none"></div>
       <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(52px,6vw,80px) 0;text-align:center">
-        <h2 style="font-size:clamp(26px,3.6vw,38px);font-weight:700;color:#fff;margin:0 0 24px;letter-spacing:-.02em">Quer ver a plataforma na prática?</h2>
-        <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#32AD78;color:#fff;font-size:16px;font-weight:600;padding:15px 30px;border-radius:12px;box-shadow:0 10px 30px rgba(50,173,120,.35)" style-hover="background:#2b9568;transform:translateY(-2px)">Agendar demonstração</button>
+        <h2 data-reveal style="font-size:clamp(26px,3.6vw,38px);font-weight:700;color:#fff;margin:0 0 24px;letter-spacing:-.02em;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Quer ver a plataforma na prática?</h2>
+        <button data-reveal onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;background:#10ffcb;color:#070F1E;font-size:16px;font-weight:600;padding:15px 30px;border-radius:12px;box-shadow:0 10px 30px rgba(68,229,231,.32);opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .14s,transform .7s cubic-bezier(.22,.61,.36,1) .14s" style-hover="background:#0de0b3;transform:translateY(-2px)">Agendar demonstração</button>
       </div>
     </section>
+
+    <!-- FAQ -->
+    <section style="position:relative;background:#06090F;padding:clamp(80px,10vw,120px) 0 clamp(100px,13vw,160px);overflow:hidden">
+
+      <!-- Glow de fundo (sem grid) -->
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:0">
+        <div style="position:absolute;top:-180px;right:-140px;width:560px;height:560px;background:radial-gradient(circle,rgba(16,255,203,.07),transparent 65%);border-radius:50%"></div>
+        <div style="position:absolute;bottom:-100px;left:-80px;width:460px;height:460px;background:radial-gradient(circle,rgba(68,229,231,.05),transparent 65%);border-radius:50%"></div>
+      </div>
+
+      <div style="position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1.55fr;gap:clamp(40px,6vw,96px);align-items:start">
+
+        <!-- Lado esquerdo: texto + card -->
+        <div style="align-self:start">
+          <span style="display:inline-flex;align-items:center;gap:7px;background:rgba(16,255,203,.1);border:1px solid rgba(16,255,203,.25);border-radius:100px;padding:5px 15px;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#10ffcb;margin-bottom:22px;animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .05s both">
+            <span style="width:5px;height:5px;background:#10ffcb;border-radius:50%;display:inline-block;box-shadow:0 0 6px #10ffcb"></span>
+            Central de ajuda
+          </span>
+          <h2 style="font-size:clamp(30px,4vw,52px);font-weight:800;color:#fff;margin:0 0 16px;letter-spacing:-.03em;line-height:1.1;animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .15s both">Ficou alguma <span style="background:linear-gradient(90deg,#10ffcb 20%,#44e5e7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">dúvida?</span></h2>
+          <p style="font-size:16px;color:rgba(255,255,255,.48);line-height:1.65;margin:0 0 36px;max-width:320px;animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .25s both">Confira as respostas para as perguntas mais frequentes sobre a plataforma.</p>
+
+          <!-- Card contato moderno -->
+          <div style="position:relative;background:linear-gradient(145deg,rgba(16,255,203,.08) 0%,rgba(6,9,15,.95) 70%);border:1px solid rgba(16,255,203,.22);border-radius:22px;padding:30px 26px;overflow:hidden;animation:tcSlideUp .7s cubic-bezier(.22,.61,.36,1) .38s both">
+            <div style="position:absolute;top:-70px;right:-70px;width:210px;height:210px;background:radial-gradient(circle,rgba(16,255,203,.13),transparent 65%);pointer-events:none"></div>
+            <div style="width:50px;height:50px;border-radius:14px;background:rgba(16,255,203,.1);border:1px solid rgba(16,255,203,.3);display:flex;align-items:center;justify-content:center;margin-bottom:18px" data-svg="headset" data-stroke="#10ffcb"></div>
+            <h3 style="font-size:19px;font-weight:800;color:#fff;margin:0 0 8px;letter-spacing:-.02em">Fale com nosso time</h3>
+            <p style="font-size:13.5px;color:rgba(255,255,255,.5);line-height:1.65;margin:0 0 24px">Não encontrou o que procurava? Nossos especialistas estão prontos para te ajudar.</p>
+            <button onClick="{{ goContato }}" style="font-family:inherit;border:none;cursor:pointer;width:100%;background:linear-gradient(135deg,#10ffcb,#44e5e7);color:#070F1E;font-size:14px;font-weight:700;padding:14px 20px;border-radius:12px;box-shadow:0 10px 28px rgba(16,255,203,.28);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px" style-hover="transform:translateY(-2px);box-shadow:0 16px 36px rgba(16,255,203,.4)">
+              Quero tirar uma dúvida
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Lado direito: accordion -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+
+          <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;cursor:pointer;transition:border-color .25s,background .25s;animation:tcSlideUp .68s cubic-bezier(.22,.61,.36,1) .08s both" onClick="{{ toggleFaq }}">
+            <div style="display:flex;align-items:center;gap:14px;padding:20px 22px">
+              <span style="font-size:10.5px;font-weight:800;color:#10ffcb;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.2);border-radius:7px;padding:3px 9px;flex-shrink:0;letter-spacing:.05em">01</span>
+              <span style="font-size:15px;font-weight:600;color:#fff;line-height:1.4;flex:1">O que é a plataforma TecnoCursos?</span>
+              <span data-plus style="width:30px;height:30px;border:1.5px solid rgba(16,255,203,.35);border-radius:50%;color:#10ffcb;font-size:20px;flex-shrink:0;transition:transform .28s,background .28s,border-color .28s;display:flex;align-items:center;justify-content:center;line-height:1">+</span>
+            </div>
+            <div data-ans style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,.61,.36,1)">
+              <div style="height:1px;background:rgba(255,255,255,.07);margin:0 22px"></div>
+              <p style="padding:16px 22px 20px 60px;font-size:14.5px;line-height:1.75;color:rgba(255,255,255,.55);margin:0">A TecnoCursos é uma plataforma completa de gestão e capacitação em Normas Regulamentadoras, que une teoria online, treinamentos práticos presenciais e ferramentas de gestão como lista de presença digital e controle de validade.</p>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;cursor:pointer;transition:border-color .25s,background .25s;animation:tcSlideUp .68s cubic-bezier(.22,.61,.36,1) .18s both" onClick="{{ toggleFaq }}">
+            <div style="display:flex;align-items:center;gap:14px;padding:20px 22px">
+              <span style="font-size:10.5px;font-weight:800;color:#10ffcb;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.2);border-radius:7px;padding:3px 9px;flex-shrink:0;letter-spacing:.05em">02</span>
+              <span style="font-size:15px;font-weight:600;color:#fff;line-height:1.4;flex:1">Quais tipos de treinamentos estão disponíveis na plataforma?</span>
+              <span data-plus style="width:30px;height:30px;border:1.5px solid rgba(16,255,203,.35);border-radius:50%;color:#10ffcb;font-size:20px;flex-shrink:0;transition:transform .28s,background .28s,border-color .28s;display:flex;align-items:center;justify-content:center;line-height:1">+</span>
+            </div>
+            <div data-ans style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,.61,.36,1)">
+              <div style="height:1px;background:rgba(255,255,255,.07);margin:0 22px"></div>
+              <p style="padding:16px 22px 20px 60px;font-size:14.5px;line-height:1.75;color:rgba(255,255,255,.55);margin:0">Oferecemos treinamentos teóricos (online, em vídeo e texto) e práticos (presenciais, conduzidos por instrutores especializados na sua empresa), cobrindo as principais NRs como NR5, NR10, NR12, NR33, NR35 e muitas outras.</p>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;cursor:pointer;transition:border-color .25s,background .25s;animation:tcSlideUp .68s cubic-bezier(.22,.61,.36,1) .28s both" onClick="{{ toggleFaq }}">
+            <div style="display:flex;align-items:center;gap:14px;padding:20px 22px">
+              <span style="font-size:10.5px;font-weight:800;color:#10ffcb;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.2);border-radius:7px;padding:3px 9px;flex-shrink:0;letter-spacing:.05em">03</span>
+              <span style="font-size:15px;font-weight:600;color:#fff;line-height:1.4;flex:1">Os cursos possuem certificado de conclusão?</span>
+              <span data-plus style="width:30px;height:30px;border:1.5px solid rgba(16,255,203,.35);border-radius:50%;color:#10ffcb;font-size:20px;flex-shrink:0;transition:transform .28s,background .28s,border-color .28s;display:flex;align-items:center;justify-content:center;line-height:1">+</span>
+            </div>
+            <div data-ans style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,.61,.36,1)">
+              <div style="height:1px;background:rgba(255,255,255,.07);margin:0 22px"></div>
+              <p style="padding:16px 22px 20px 60px;font-size:14.5px;line-height:1.75;color:rgba(255,255,255,.55);margin:0">Sim. Ao concluir o treinamento teórico e prático, o aluno recebe o certificado de conclusão. A plataforma gerencia automaticamente a validade dos certificados e envia alertas de vencimento.</p>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;cursor:pointer;transition:border-color .25s,background .25s;animation:tcSlideUp .68s cubic-bezier(.22,.61,.36,1) .36s both" onClick="{{ toggleFaq }}">
+            <div style="display:flex;align-items:center;gap:14px;padding:20px 22px">
+              <span style="font-size:10.5px;font-weight:800;color:#10ffcb;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.2);border-radius:7px;padding:3px 9px;flex-shrink:0;letter-spacing:.05em">04</span>
+              <span style="font-size:15px;font-weight:600;color:#fff;line-height:1.4;flex:1">Existe suporte para alunos, gestores e administradores?</span>
+              <span data-plus style="width:30px;height:30px;border:1.5px solid rgba(16,255,203,.35);border-radius:50%;color:#10ffcb;font-size:20px;flex-shrink:0;transition:transform .28s,background .28s,border-color .28s;display:flex;align-items:center;justify-content:center;line-height:1">+</span>
+            </div>
+            <div data-ans style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,.61,.36,1)">
+              <div style="height:1px;background:rgba(255,255,255,.07);margin:0 22px"></div>
+              <p style="padding:16px 22px 20px 60px;font-size:14.5px;line-height:1.75;color:rgba(255,255,255,.55);margin:0">Sim. Oferecemos suporte dedicado para cada perfil: alunos contam com suporte no uso da plataforma; gestores e administradores têm acesso a relatórios detalhados, painel de gestão e atendimento prioritário.</p>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;cursor:pointer;transition:border-color .25s,background .25s;animation:tcSlideUp .68s cubic-bezier(.22,.61,.36,1) .44s both" onClick="{{ toggleFaq }}">
+            <div style="display:flex;align-items:center;gap:14px;padding:20px 22px">
+              <span style="font-size:10.5px;font-weight:800;color:#10ffcb;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.2);border-radius:7px;padding:3px 9px;flex-shrink:0;letter-spacing:.05em">05</span>
+              <span style="font-size:15px;font-weight:600;color:#fff;line-height:1.4;flex:1">É possível realizar treinamentos teóricos e práticos pela plataforma?</span>
+              <span data-plus style="width:30px;height:30px;border:1.5px solid rgba(16,255,203,.35);border-radius:50%;color:#10ffcb;font-size:20px;flex-shrink:0;transition:transform .28s,background .28s,border-color .28s;display:flex;align-items:center;justify-content:center;line-height:1">+</span>
+            </div>
+            <div data-ans style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,.61,.36,1)">
+              <div style="height:1px;background:rgba(255,255,255,.07);margin:0 22px"></div>
+              <p style="padding:16px 22px 20px 60px;font-size:14.5px;line-height:1.75;color:rgba(255,255,255,.55);margin:0">A parte teórica acontece integralmente na plataforma digital (vídeo aulas, materiais e avaliações). A parte prática é conduzida presencialmente na empresa pelo nosso time de instrutores especializados.</p>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;cursor:pointer;transition:border-color .25s,background .25s;animation:tcSlideUp .68s cubic-bezier(.22,.61,.36,1) .52s both" onClick="{{ toggleFaq }}">
+            <div style="display:flex;align-items:center;gap:14px;padding:20px 22px">
+              <span style="font-size:10.5px;font-weight:800;color:#10ffcb;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.2);border-radius:7px;padding:3px 9px;flex-shrink:0;letter-spacing:.05em">06</span>
+              <span style="font-size:15px;font-weight:600;color:#fff;line-height:1.4;flex:1">A plataforma pode ser personalizada com a identidade da empresa?</span>
+              <span data-plus style="width:30px;height:30px;border:1.5px solid rgba(16,255,203,.35);border-radius:50%;color:#10ffcb;font-size:20px;flex-shrink:0;transition:transform .28s,background .28s,border-color .28s;display:flex;align-items:center;justify-content:center;line-height:1">+</span>
+            </div>
+            <div data-ans style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,.61,.36,1)">
+              <div style="height:1px;background:rgba(255,255,255,.07);margin:0 22px"></div>
+              <p style="padding:16px 22px 20px 60px;font-size:14.5px;line-height:1.75;color:rgba(255,255,255,.55);margin:0">Sim. A plataforma suporta personalização com logo, cores e nome da empresa, proporcionando uma experiência de marca coerente para os colaboradores durante os treinamentos.</p>
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;cursor:pointer;transition:border-color .25s,background .25s;animation:tcSlideUp .68s cubic-bezier(.22,.61,.36,1) .60s both" onClick="{{ toggleFaq }}">
+            <div style="display:flex;align-items:center;gap:14px;padding:20px 22px">
+              <span style="font-size:10.5px;font-weight:800;color:#10ffcb;background:rgba(16,255,203,.12);border:1px solid rgba(16,255,203,.2);border-radius:7px;padding:3px 9px;flex-shrink:0;letter-spacing:.05em">07</span>
+              <span style="font-size:15px;font-weight:600;color:#fff;line-height:1.4;flex:1">A plataforma funciona em qualquer navegador ou dispositivo?</span>
+              <span data-plus style="width:30px;height:30px;border:1.5px solid rgba(16,255,203,.35);border-radius:50%;color:#10ffcb;font-size:20px;flex-shrink:0;transition:transform .28s,background .28s,border-color .28s;display:flex;align-items:center;justify-content:center;line-height:1">+</span>
+            </div>
+            <div data-ans style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,.61,.36,1)">
+              <div style="height:1px;background:rgba(255,255,255,.07);margin:0 22px"></div>
+              <p style="padding:16px 22px 20px 60px;font-size:14.5px;line-height:1.75;color:rgba(255,255,255,.55);margin:0">Sim. A plataforma é 100% responsiva e funciona em qualquer navegador moderno (Chrome, Edge, Firefox, Safari) e em todos os dispositivos — computador, tablet e celular.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
   </main>
   </sc-if>
 
@@ -479,7 +592,7 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
       </div>
       <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;display:grid;gap:48px;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));align-items:center">
         <div>
-          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6ABB8C;background:rgba(50,173,120,.14);border:1px solid rgba(106,187,140,.3);padding:7px 14px;border-radius:100px">★ Em destaque · {{ featured.tag }}</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#10ffcb;background:rgba(68,229,231,.1);border:1px solid rgba(115,251,211,.26);padding:7px 14px;border-radius:100px">★ Em destaque · {{ featured.tag }}</span>
           <h1 style="font-size:clamp(34px,5.4vw,60px);line-height:1.03;letter-spacing:-.03em;font-weight:700;color:#fff;margin:20px 0 0">{{ featured.title }}</h1>
           <p style="font-size:clamp(16px,2vw,19px);line-height:1.62;color:rgba(255,255,255,.74);margin:18px 0 0;max-width:520px">{{ featured.desc }}</p>
           <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px">
@@ -520,7 +633,7 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
             </div>
             <div data-rail id="{{ r.domId }}" style="display:flex;gap:16px;overflow-x:auto;scroll-padding:24px;padding:6px 24px 14px;scroll-snap-type:x mandatory">
               <sc-for list="{{ r.items }}" as="it" hint-placeholder-count="6">
-                <div data-card onClick="{{ it.onClick }}" style="scroll-snap-align:start;flex:0 0 auto;width:262px;cursor:pointer;border-radius:14px;overflow:hidden;background:#0E1B33;border:1px solid rgba(255,255,255,.08);transition:transform .25s cubic-bezier(.22,.61,.36,1),box-shadow .25s,border-color .25s" style-hover="transform:translateY(-6px);box-shadow:0 24px 50px rgba(0,0,0,.5);border-color:rgba(106,187,140,.45)">
+                <div data-card onClick="{{ it.onClick }}" style="scroll-snap-align:start;flex:0 0 auto;width:262px;cursor:pointer;border-radius:14px;overflow:hidden;background:#0E1B33;border:1px solid rgba(255,255,255,.08);transition:transform .25s cubic-bezier(.22,.61,.36,1),box-shadow .25s,border-color .25s" style-hover="transform:translateY(-8px) scale(1.02);box-shadow:0 28px 56px rgba(0,0,0,.55),0 0 22px rgba(68,229,231,.14);border-color:rgba(68,229,231,.48)">
                   <div style="position:relative;height:148px;background:{{ it.cover }}">
                     
                     <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(7,15,30,.55))"></div>
@@ -553,13 +666,13 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
       </div>
       <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,104px) 24px;display:grid;gap:56px;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr))">
         <div>
-          <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6ABB8C;margin-bottom:16px">Contato</span>
+          <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#10ffcb;margin-bottom:16px">Contato</span>
           <h1 style="font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-.03em;font-weight:700;color:#fff;margin:0">Fale com a gente.</h1>
           <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.7);margin:18px 0 36px;max-width:420px">Conte sobre sua operação e mostramos como a TecnoCursos pode digitalizar seus treinamentos NR.</p>
           <div style="display:flex;flex-direction:column;gap:20px">
-            <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:42px;height:42px;border-radius:11px;background:rgba(50,173,120,.16);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ABB8C" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></span><div><div style="font-size:13px;color:rgba(255,255,255,.5)">E-mail</div><div style="font-size:16px;font-weight:600;color:#fff"><span>suporte</span><span>&#64;</span><span>escolatecnocursos.com.br</span></div></div></div>
+            <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:42px;height:42px;border-radius:11px;background:rgba(50,173,120,.16);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10ffcb" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></span><div><div style="font-size:13px;color:rgba(255,255,255,.5)">E-mail</div><div style="font-size:16px;font-weight:600;color:#fff"><span>suporte</span><span>&#64;</span><span>escolatecnocursos.com.br</span></div></div></div>
             <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:42px;height:42px;border-radius:11px;background:rgba(0,92,139,.22);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3FA9D6" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></span><div><div style="font-size:13px;color:rgba(255,255,255,.5)">Telefone</div><div style="font-size:16px;font-weight:600;color:#fff">(16) 99714-3932</div></div></div>
-            <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:42px;height:42px;border-radius:11px;background:rgba(106,187,140,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ABB8C" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><div style="font-size:13px;color:rgba(255,255,255,.5)">Endereço</div><div style="font-size:16px;font-weight:600;color:#fff">Av. Trolesi, 4495 · Parque Imperial</div><div style="font-size:14px;color:rgba(255,255,255,.6)">Matão · São Paulo</div></div></div>
+            <div style="display:flex;gap:14px;align-items:flex-start"><span style="width:42px;height:42px;border-radius:11px;background:rgba(106,187,140,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10ffcb" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><div style="font-size:13px;color:rgba(255,255,255,.5)">Endereço</div><div style="font-size:16px;font-weight:600;color:#fff">Av. Trolesi, 4495 · Parque Imperial</div><div style="font-size:14px;color:rgba(255,255,255,.6)">Matão · São Paulo</div></div></div>
           </div>
         </div>
         <div style="background:rgba(255,255,255,.97);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:clamp(26px,4vw,38px);box-shadow:0 30px 70px rgba(0,0,0,.4)">
@@ -577,48 +690,67 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
   </sc-if>
 
   <!-- ===================== FOOTER ===================== -->
-  <footer style="background:#070F1E;padding:clamp(48px,6vw,72px) 0 40px">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px">
-      <div style="display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1)">
-        <div style="max-width:300px">
-          <img src="assets/logo-white.png" alt="TecnoCursos" style="height:30px;width:auto;margin-bottom:16px"/>
-          <p style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.55);margin:0">Tecnologia, treinamento e segurança. A plataforma de gestão de treinamentos em Normas Regulamentadoras.</p>
-        </div>
+  <footer style="position:relative;background:#070F1E;overflow:hidden">
+
+    <!-- conteúdo principal -->
+    <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:clamp(48px,6vw,68px) 24px 0">
+
+      <!-- 3 colunas -->
+      <div class="tc-footer-grid" style="display:grid;gap:48px;grid-template-columns:2fr 1fr 1.4fr;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1)">
+
+        <!-- coluna 1: logo + tagline + social -->
         <div>
-          <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Navegação</div>
-          <div style="display:flex;flex-direction:column;gap:11px">
-            <span onClick="{{ goHome }}" style="font-size:15px;color:rgba(255,255,255,.78);cursor:pointer">Home</span>
-            <span onClick="{{ goSobre }}" style="font-size:15px;color:rgba(255,255,255,.78);cursor:pointer">Sobre nós</span>
-            <span onClick="{{ goServicos }}" style="font-size:15px;color:rgba(255,255,255,.78);cursor:pointer">Serviços</span>
-            <span onClick="{{ goBlog }}" style="font-size:15px;color:rgba(255,255,255,.78);cursor:pointer">Conteúdo</span>
+          <img src="uploads/NOVA%20LOGO%20TECNOCURSOS%20BRANCO%20SEM%20SLOGAN%201.png" alt="TecnoCursos" style="height:28px;width:auto;margin-bottom:14px;display:block"/>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(255,255,255,.5);margin:0 0 22px;max-width:260px">Tecnologia, treinamento e segurança. A plataforma de gestão de treinamentos em Normas Regulamentadoras.</p>
+          <!-- ícones sociais -->
+          <div style="display:flex;gap:12px;align-items:center">
+            <a href="https://facebook.com" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s,border-color .2s" style-hover="background:rgba(115,251,211,.14);border-color:rgba(115,251,211,.3)"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="https://instagram.com" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s,border-color .2s" style-hover="background:rgba(115,251,211,.14);border-color:rgba(115,251,211,.3)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://linkedin.com" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s,border-color .2s" style-hover="background:rgba(115,251,211,.14);border-color:rgba(115,251,211,.3)"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://youtube.com" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s,border-color .2s" style-hover="background:rgba(115,251,211,.14);border-color:rgba(115,251,211,.3)"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#070F1E"/></svg></a>
           </div>
         </div>
+
+        <!-- coluna 2: links úteis -->
         <div>
-          <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Plataforma</div>
-          <div style="display:flex;flex-direction:column;gap:11px">
-            <span style="font-size:15px;color:rgba(255,255,255,.78)">Lista de presença digital</span>
-            <span style="font-size:15px;color:rgba(255,255,255,.78)">Treinamentos NR</span>
-            <span style="font-size:15px;color:rgba(255,255,255,.78)">Gestão de validades</span>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:20px">Links Úteis</div>
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <span onClick="{{ goHome }}" style="font-size:14px;color:rgba(255,255,255,.62);cursor:pointer;transition:color .2s" style-hover="color:#10ffcb">Home</span>
+            <span onClick="{{ goSobre }}" style="font-size:14px;color:rgba(255,255,255,.62);cursor:pointer;transition:color .2s" style-hover="color:#10ffcb">Sobre nós</span>
+            <span onClick="{{ goServicos }}" style="font-size:14px;color:rgba(255,255,255,.62);cursor:pointer;transition:color .2s" style-hover="color:#10ffcb">Serviços</span>
+            <span onClick="{{ goContato }}" style="font-size:14px;color:rgba(255,255,255,.62);cursor:pointer;transition:color .2s" style-hover="color:#10ffcb">Contato</span>
           </div>
         </div>
+
+        <!-- coluna 3: contato -->
         <div>
-          <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Contato</div>
-          <div style="display:flex;flex-direction:column;gap:11px">
-            <span style="font-size:15px;color:rgba(255,255,255,.78)"><span>suporte</span><span>&#64;</span><span>escolatecnocursos.com.br</span></span>
-            <span style="font-size:15px;color:rgba(255,255,255,.78)">(16) 99714-3932</span>
-            <span style="font-size:15px;color:rgba(255,255,255,.78)">Matão · São Paulo</span>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:20px">Contato</div>
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <span style="font-size:14px;color:rgba(255,255,255,.62)">16 99714-3932</span>
+            <span style="font-size:14px;color:rgba(255,255,255,.62)"><span>contato</span><span>&#64;</span><span>tecnocursos.com.br</span></span>
+            <span style="font-size:14px;color:rgba(255,255,255,.62);line-height:1.5">Avenida Trolesi, 4495,<br/>Parque Imperial · Matão-SP</span>
           </div>
         </div>
+
       </div>
-      <div style="padding-top:26px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.4)">
-        <span>© 2026 TecnoCursos. Todos os direitos reservados.</span>
+
+      <!-- barra copyright -->
+      <div style="padding:18px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:12.5px;color:rgba(255,255,255,.32)">
+        <span>© 2026 todos os direitos reservados.</span>
         <span>Tecnologia · Treinamento · Segurança</span>
       </div>
     </div>
+
+    <!-- marca d'água: logo gigante -->
+    <div style="position:relative;z-index:1;width:100%;display:flex;justify-content:center;align-items:flex-end;padding-top:8px;overflow:hidden">
+      <img src="uploads/NOVA%20LOGO%20TECNOCURSOS%20BRANCO%202.png" alt="" aria-hidden="true"
+           style="width:90%;max-width:1100px;height:auto;opacity:.07;display:block;pointer-events:none;user-select:none;filter:grayscale(1) brightness(2)"/>
+    </div>
+
   </footer>
 
   <!-- ===================== ASSISTENTE VIRTUAL ===================== -->
-  <button onClick="{{ toggleAssist }}" style="position:fixed;right:24px;bottom:24px;z-index:201;width:62px;height:62px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#005C8B,#32AD78);box-shadow:0 12px 34px rgba(50,173,120,.45);display:flex;align-items:center;justify-content:center" style-hover="transform:translateY(-2px)">
+  <button onClick="{{ toggleAssist }}" style="position:fixed;right:24px;bottom:24px;z-index:201;width:62px;height:62px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#0de0b3,#10ffcb);box-shadow:0 12px 34px rgba(16,255,203,.45);display:flex;align-items:center;justify-content:center;animation:tcChatEntry .75s cubic-bezier(.22,.61,.36,1) 1.2s both,tcChatAttention .85s cubic-bezier(.22,.61,.36,1) 3.8s both" style-hover="transform:translateY(-2px) scale(1.06)">
     <sc-if value="{{ assistClosed }}" hint-placeholder-val="{{ true }}">
       <span style="position:absolute;inset:0;border-radius:50%;border:2px solid rgba(50,173,120,.5);animation:tcpulse 2.4s infinite"></span>
       <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/><path d="M9.5 10.5h.01M13.5 10.5h.01"/></svg>
@@ -632,7 +764,7 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
   <div style="position:fixed;right:24px;bottom:98px;z-index:201;width:min(384px,calc(100vw - 32px));height:min(580px,calc(100vh - 140px));display:flex;flex-direction:column;border-radius:20px;overflow:hidden;background:#0B1426;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 70px rgba(0,0,0,.55);animation:tcpop .32s cubic-bezier(.22,.61,.36,1)">
     <!-- header -->
     <div style="display:flex;align-items:center;gap:12px;padding:16px 18px;background:linear-gradient(120deg,#0C1A30,#005C8B);border-bottom:1px solid rgba(255,255,255,.1)">
-      <span style="position:relative;width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#32AD78,#6ABB8C);display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:0 6px 16px rgba(50,173,120,.4)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 4.6L18.5 8l-3.5 3.2.9 4.8L12 13.7 8.1 16l.9-4.8L5.5 8l4.7-1.4z"/></svg></span>
+      <span style="position:relative;width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#44e5e7,#73fbd3);display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:0 6px 16px rgba(50,173,120,.4)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 4.6L18.5 8l-3.5 3.2.9 4.8L12 13.7 8.1 16l.9-4.8L5.5 8l4.7-1.4z"/></svg></span>
       <div style="flex:1;min-width:0">
         <div style="font-size:15px;font-weight:700;color:#fff">Assistente TecnoCursos</div>
         <div style="font-size:12px;color:rgba(255,255,255,.66);display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#32AD78;box-shadow:0 0 8px #32AD78"></span>Online · responde na hora</div>
@@ -648,7 +780,7 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
             <sc-if value="{{ m.hasActions }}">
               <div style="display:flex;flex-wrap:wrap;gap:8px">
                 <sc-for list="{{ m.actions }}" as="a" hint-placeholder-count="0">
-                  <button onClick="{{ a.onClick }}" style="font-family:inherit;cursor:pointer;font-size:13px;font-weight:600;color:#fff;background:linear-gradient(135deg,#005C8B,#32AD78);border:none;padding:9px 14px;border-radius:9px;display:inline-flex;align-items:center;gap:6px" style-hover="opacity:.92">{{ a.label }} →</button>
+                  <button onClick="{{ a.onClick }}" style="font-family:inherit;cursor:pointer;font-size:13px;font-weight:600;color:#070F1E;background:linear-gradient(135deg,#0de0b3,#10ffcb);border:none;padding:9px 14px;border-radius:9px;display:inline-flex;align-items:center;gap:6px" style-hover="opacity:.92">{{ a.label }} →</button>
                 </sc-for>
               </div>
             </sc-if>
@@ -672,7 +804,7 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
     <!-- input -->
     <div style="padding:12px;border-top:1px solid rgba(255,255,255,.1);background:#0C1426;display:flex;gap:9px;align-items:center">
       <input value="{{ draft }}" onInput="{{ setDraft }}" onKeyDown="{{ onAssistKey }}" placeholder="Escreva sua pergunta..." style="font-family:inherit;flex:1;min-width:0;background:#16233E;border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:12px 14px;font-size:14px;color:#fff"/>
-      <button onClick="{{ sendAssist }}" style="font-family:inherit;flex:0 0 auto;cursor:pointer;width:44px;height:44px;border-radius:11px;border:none;background:linear-gradient(135deg,#005C8B,#32AD78);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(50,173,120,.36)" style-hover="opacity:.92"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
+      <button onClick="{{ sendAssist }}" style="font-family:inherit;flex:0 0 auto;cursor:pointer;width:44px;height:44px;border-radius:11px;border:none;background:linear-gradient(135deg,#0de0b3,#10ffcb);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(16,255,203,.36)" style-hover="opacity:.92"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
     </div>
   </div>
   </sc-if>
@@ -733,17 +865,19 @@ class Component extends DCLogic {
     this.t0 = performance.now();
     this.seen = new WeakSet();
     this._move = (e) => { this.mouse = { x: e.clientX / window.innerWidth - 0.5, y: e.clientY / window.innerHeight - 0.5 }; };
-    this._scroll = () => { this.scrollY = window.scrollY; };
+    this._lastScrollY = window.scrollY; this._scrollDir = 'down';
+    this._scroll = () => { const y = window.scrollY; this._scrollDir = y >= this._lastScrollY ? 'down' : 'up'; this._lastScrollY = y; this.scrollY = y; };
     window.addEventListener('mousemove', this._move);
     window.addEventListener('scroll', this._scroll, { passive: true });
     this._loop = () => {
       const t = (performance.now() - this.t0) / 1000;
       document.querySelectorAll('[data-float]').forEach((el, i) => {
         const d = parseFloat(el.getAttribute('data-depth')) || 1;
-        const dx = Math.sin(t * 0.4 + i * 1.7) * 18 * d;
-        const dy = Math.cos(t * 0.33 + i * 1.1) * 20 * d - (this.scrollY || 0) * 0.035 * d;
-        const rot = Math.sin(t * 0.28 + i) * 6;
-        el.style.transform = `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) rotate(${rot.toFixed(2)}deg)`;
+        const dx = (Math.sin(t * 0.38 + i * 1.7) * 20 + Math.sin(t * 0.69 + i * 0.9) * 8) * d;
+        const dy = (Math.cos(t * 0.31 + i * 1.1) * 24 + Math.cos(t * 0.55 + i * 1.4) * 10) * d - (this.scrollY || 0) * 0.035 * d;
+        const rot = Math.sin(t * 0.25 + i * 0.8) * 9;
+        const sc = 1 + Math.sin(t * 0.48 + i * 0.7) * 0.07;
+        el.style.transform = `translate(${dx.toFixed(2)}px,${dy.toFixed(2)}px) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
       });
       this.raf = requestAnimationFrame(this._loop);
     };
@@ -752,9 +886,50 @@ class Component extends DCLogic {
     if ('IntersectionObserver' in window) {
       this.io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
-          if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this.io.unobserve(e.target); }
+          const isPop = e.target.hasAttribute('data-reveal-pop');
+          const isNrCard = e.target.hasAttribute('data-nr-card');
+          const alreadyRevealed = e.target.dataset.revealed === '1';
+          const scrollingDown = this._scrollDir !== 'up';
+
+          if (e.isIntersecting) {
+            if (alreadyRevealed) {
+              // Já foi revelado antes — só garante visível, sem animação
+              e.target.style.opacity = '1';
+              if (!isPop) e.target.style.transform = 'none';
+              return;
+            }
+            // Ainda não revelado: só anima quando descendo
+            if (!scrollingDown) return;
+            const d = +e.target.dataset.delay || 0;
+            const show = () => {
+              if (isPop) {
+                e.target.style.opacity = '0';
+                e.target.classList.remove('tc-pop');
+                void e.target.offsetWidth;
+                e.target.classList.add('tc-pop');
+                e.target.addEventListener('animationend', () => {
+                  e.target.style.opacity = '1';
+                  e.target.classList.remove('tc-pop');
+                }, { once: true });
+              } else {
+                e.target.style.opacity = '1'; e.target.style.transform = 'none';
+              }
+              e.target.dataset.revealed = '1';
+            };
+            d ? setTimeout(show, d) : show();
+          } else {
+            // Saiu do viewport — se já revelado, nunca reseta
+            if (alreadyRevealed || isNrCard) return;
+            if (isPop) {
+              e.target.classList.remove('tc-pop');
+              e.target.style.opacity = '0';
+            } else {
+              e.target.style.opacity = '0';
+              e.target.style.transform = 'translateY(26px)';
+            }
+          }
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+      }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
     }
     this.scanReveal();
     this.paintSvgs();
@@ -764,18 +939,251 @@ class Component extends DCLogic {
     document.addEventListener('mouseover', this._cardOver);
     document.addEventListener('mouseout', this._cardOut);
 
+    // NR carousel — GPU-accelerated transform marquee with seamless loop
+    let _nrPaused = false;
+    let _nrLoopWidth = 0;
+    let _nrOffset = 0;
+    let _nrInnerEl = null;
+    let _nrCardW = 266;
+
     this._nrNav = (e) => {
       const btn = e.target.closest && e.target.closest('[data-nr-prev],[data-nr-next]');
-      if (!btn) return;
-      const track = document.querySelector('[data-nr-track]');
-      if (!track) return;
+      if (!btn || !_nrInnerEl) return;
       const dir = btn.hasAttribute('data-nr-next') ? 1 : -1;
-      track.scrollBy({ left: dir * 540, behavior: 'smooth' });
+      const cardW = _nrCardW;
+      const startOff = _nrOffset;
+      const duration = 420;
+      const t0 = performance.now();
+      _nrPaused = true;
+      const animArrow = (now) => {
+        const p = Math.min((now - t0) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        _nrOffset = startOff + dir * cardW * ease;
+        if (_nrOffset >= _nrLoopWidth) _nrOffset -= _nrLoopWidth;
+        if (_nrOffset < 0) _nrOffset += _nrLoopWidth;
+        _nrInnerEl.style.transform = `translateX(-${_nrOffset}px)`;
+        if (p < 1) { requestAnimationFrame(animArrow); } else { _nrPaused = false; }
+      };
+      requestAnimationFrame(animArrow);
     };
     document.addEventListener('click', this._nrNav);
+
+    const nrTrack = document.querySelector('[data-nr-track]');
+    if (nrTrack) {
+      const initNrCarousel = () => {
+        const inner = document.querySelector('[data-nr-inner]');
+        if (!inner) { setTimeout(initNrCarousel, 250); return; }
+        const cards = [...inner.querySelectorAll('[data-nr-card]')];
+        if (cards.length < 2) { setTimeout(initNrCarousel, 250); return; }
+        // Wait for real content — reject empty placeholders
+        if (!cards[0].textContent.replace(/\s/g,'')) { setTimeout(initNrCarousel, 250); return; }
+        // Avoid double-init
+        if (inner.dataset.nrReady) return;
+        inner.dataset.nrReady = '1';
+        _nrInnerEl = inner;
+        // Make all originals visible (bypass data-reveal-pop)
+        cards.forEach(c => { c.style.opacity='1'; c.style.animation='none'; c.style.transform='none'; });
+        // Measure actual rendered card width
+        _nrCardW = (cards[0].getBoundingClientRect().width || 248) + 18;
+        _nrLoopWidth = cards.length * _nrCardW;
+        // Clone for seamless loop
+        cards.forEach(card => {
+          const clone = card.cloneNode(true);
+          clone.removeAttribute('data-reveal-pop');
+          clone.removeAttribute('data-nr-card');
+          clone.removeAttribute('data-card');
+          clone.setAttribute('aria-hidden', 'true');
+          clone.style.opacity = '1';
+          clone.style.animation = 'none';
+          clone.style.transform = 'none';
+          inner.appendChild(clone);
+        });
+        // Explicit width — critical: without this, flex container is constrained by parent
+        // and translateX has no room to move
+        inner.style.width = (_nrLoopWidth * 2) + 'px';
+        const tick = () => {
+          if (!_nrPaused) {
+            _nrOffset += 0.55;
+            if (_nrOffset >= _nrLoopWidth) _nrOffset -= _nrLoopWidth;
+            inner.style.transform = `translateX(-${_nrOffset}px)`;
+          }
+          this._nrAutoRAF = requestAnimationFrame(tick);
+        };
+        this._nrAutoRAF = requestAnimationFrame(tick);
+        nrTrack.addEventListener('mouseenter', () => { _nrPaused = true; });
+        nrTrack.addEventListener('mouseleave', () => { _nrPaused = false; });
+      };
+      setTimeout(initNrCarousel, 80);
+    }
+
+    this._connResize = () => this.drawConnectors();
+    window.addEventListener('resize', this._connResize);
+    setTimeout(() => this.setupFeatScroll(), 800);
+
+    // Counter animation
+    if ('IntersectionObserver' in window) {
+      const counterEls = document.querySelectorAll('[data-counter]');
+      const counterIO = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = +el.dataset.counter;
+          const prefix = el.dataset.counterPrefix || '';
+          const suffix = el.dataset.counterSuffix || '';
+          const duration = 3500;
+          const startTime = performance.now();
+          el.style.display = 'inline-block';
+          el.style.transformOrigin = 'left center';
+          const tick = (now) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            el.textContent = prefix + Math.round(ease * target) + suffix;
+            const scale = 0.55 + ease * 0.45;
+            el.style.transform = 'scale(' + scale.toFixed(3) + ')';
+            el.style.opacity = (0.25 + ease * 0.75).toFixed(3);
+            if (progress < 1) {
+              requestAnimationFrame(tick);
+            } else {
+              el.style.transition = 'transform .35s cubic-bezier(.34,1.56,.64,1)';
+              el.style.transform = 'scale(1.12)';
+              setTimeout(() => {
+                el.style.transform = 'scale(1)';
+                setTimeout(() => { el.style.transition = ''; el.style.transform = ''; el.style.opacity = ''; }, 360);
+              }, 360);
+            }
+          };
+          requestAnimationFrame(tick);
+          counterIO.unobserve(el);
+        });
+      }, { threshold: 0.6 });
+      counterEls.forEach(el => counterIO.observe(el));
+    }
+
+    // "O que oferecemos?" typewriter
+    const ofTitle = document.querySelector('[data-tw-of]');
+    if (ofTitle && 'IntersectionObserver' in window) {
+      const ofSegs = [];
+      ofTitle.childNodes.forEach(node => {
+        if (node.nodeType === 3 && node.textContent.length) ofSegs.push({ text: node.textContent, color: '' });
+        else if (node.nodeType === 1) ofSegs.push({ text: node.textContent, color: node.style.color || '' });
+      });
+      ofTitle.innerHTML = '';
+      const ofIO = new IntersectionObserver((entries) => {
+        if (!entries[0].isIntersecting) return;
+        ofIO.disconnect();
+        ofTitle.style.opacity = '1';
+        const cur = document.createElement('span');
+        cur.style.cssText = 'display:inline-block;width:3px;height:.75em;background:#10ffcb;margin-left:3px;vertical-align:middle;border-radius:1px;animation:tcCursor .65s steps(1) infinite';
+        ofTitle.appendChild(cur);
+        let si = 0, ci = 0;
+        const tick = () => {
+          if (si >= ofSegs.length) {
+            setTimeout(() => { cur.style.transition='opacity .4s'; cur.style.opacity='0'; setTimeout(() => cur.remove(), 420); }, 650);
+            return;
+          }
+          const seg = ofSegs[si];
+          const sp = document.createElement('span');
+          sp.textContent = seg.text[ci];
+          if (seg.color) sp.style.color = seg.color;
+          ofTitle.insertBefore(sp, cur);
+          ci++;
+          if (ci >= seg.text.length) { si++; ci = 0; }
+          setTimeout(tick, 85);
+        };
+        tick();
+      }, { threshold: 0.5 });
+      ofIO.observe(ofTitle);
+    }
+
+    // Animated cursor demo — aparece perto do chat, clica pra abrir e depois fechar
+    (() => {
+      const W = window.innerWidth, H = window.innerHeight;
+      const BX = W - 55, BY = H - 55;   // centro do botão chat
+      const SX = W - 170, SY = H - 130; // ponto de aparição — acima/esquerda do botão
+
+      const cursorSVG = `<svg width="26" height="28" viewBox="0 0 20 22" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="acs" x="-40%" y="-30%" width="200%" height="200%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1.4"/>
+            <feOffset dx="1" dy="1.5"/>
+            <feComponentTransfer><feFuncA type="linear" slope=".38"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <path d="M4 1 L4 22 L9 17 L14 27 L17 26 L12 16 L20 16 Z"
+              fill="white" stroke="rgba(0,0,0,.25)" stroke-width="0.7"
+              stroke-linejoin="round" stroke-linecap="round" filter="url(#acs)"/>
+      </svg>`;
+
+      const cur = document.createElement('div');
+      cur.style.cssText = 'position:fixed;z-index:9999;pointer-events:none;opacity:0;will-change:opacity,left,top,transform;transition:opacity .4s ease,left .75s cubic-bezier(.25,.46,.45,.94),top .75s cubic-bezier(.25,.46,.45,.94),transform .13s ease;left:' + SX + 'px;top:' + SY + 'px';
+      cur.innerHTML = cursorSVG;
+      document.body.appendChild(cur);
+
+      const click = (cb) => {
+        cur.style.transform = 'scale(.8)';
+        setTimeout(() => { cur.style.transform = 'scale(1)'; setTimeout(cb, 120); }, 140);
+      };
+
+      const resetPos = () => {
+        cur.style.transition = 'opacity .4s ease,transform .13s ease'; // sem animar posição
+        cur.style.left = SX + 'px'; cur.style.top = SY + 'px';
+        setTimeout(() => {
+          cur.style.transition = 'opacity .4s ease,left .75s cubic-bezier(.25,.46,.45,.94),top .75s cubic-bezier(.25,.46,.45,.94),transform .13s ease';
+        }, 40);
+      };
+
+      const openMsgs = [{ role:'bot', text:'Olá! 👋 Sou a assistente virtual da TecnoCursos. Posso explicar nossos treinamentos, a plataforma, contar quem somos e indicar os melhores caminhos. Como posso ajudar?', chips:['quem','treinos','plataforma','conteudo','contato'] }];
+
+      // FASE 1: brota perto do chat → move → clica → ABRE
+      setTimeout(() => { cur.style.opacity = '1'; }, 1800);
+      setTimeout(() => { cur.style.left = BX + 'px'; cur.style.top = BY + 'px'; }, 2150);
+      setTimeout(() => {
+        click(() => {
+          if (!this.state.assistOpen) {
+            this.setState({ assistOpen: true, messages: openMsgs });
+            setTimeout(() => this.scrollChat && this.scrollChat(), 80);
+          }
+        });
+        setTimeout(() => { cur.style.opacity = '0'; }, 500);
+      }, 3000);
+
+      // FASE 2: volta invisível ao ponto de início → rebrota → move → clica → FECHA
+      setTimeout(() => { resetPos(); }, 6200);
+      setTimeout(() => { cur.style.opacity = '1'; }, 6300);
+      setTimeout(() => { cur.style.left = BX + 'px'; cur.style.top = BY + 'px'; }, 6600);
+      setTimeout(() => {
+        click(() => { this.setState(s => s.assistOpen ? { assistOpen: false } : s); });
+        setTimeout(() => { cur.style.opacity = '0'; setTimeout(() => cur.remove(), 450); }, 500);
+      }, 7500);
+    })();
+
+    // Offering cards — blur+scale reveal, one by one
+    const svcCards = [...document.querySelectorAll('[data-offering-card]')];
+    if (svcCards.length && 'IntersectionObserver' in window) {
+      let svcStarted = false;
+      const startSvc = () => {
+        if (svcStarted) return;
+        svcStarted = true;
+        svcCards.forEach((card, i) => {
+          setTimeout(() => {
+            card.classList.add('tc-svc-on');
+            setTimeout(() => {
+              card.style.transition = 'transform .32s cubic-bezier(.22,.61,.36,1),box-shadow .32s,border-color .32s,background .3s';
+            }, 1500);
+          }, 200 + i * 320);
+        });
+      };
+      const svcIO = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { svcIO.disconnect(); startSvc(); }
+      }, { threshold: 0.15 });
+      svcIO.observe(svcCards[0].closest('[style*="display:grid"]') || svcCards[0]);
+    }
+
   }
 
-  componentDidUpdate() { this.scanReveal(); this.paintSvgs(); }
+  componentDidUpdate() { this.scanReveal(); this.paintSvgs(); this.drawConnectors(); }
 
   componentWillUnmount() {
     cancelAnimationFrame(this.raf);
@@ -784,11 +1192,175 @@ class Component extends DCLogic {
     if (this._cardOver) document.removeEventListener('mouseover', this._cardOver);
     if (this._cardOut) document.removeEventListener('mouseout', this._cardOut);
     if (this._nrNav) document.removeEventListener('click', this._nrNav);
+    if (this._nrAutoRAF) cancelAnimationFrame(this._nrAutoRAF);
     if (this.io) this.io.disconnect();
+    if (this._connResize) window.removeEventListener('resize', this._connResize);
+    if (this._featIO)         { this._featIO.disconnect(); }
+    if (this._featScrollCheck){ window.removeEventListener('scroll',     this._featScrollCheck); }
+    if (this._featWheel)      { window.removeEventListener('wheel',      this._featWheel,      { capture: true }); }
+    if (this._featTouchStart) { window.removeEventListener('touchstart', this._featTouchStart); }
+    if (this._featTouchMove)  { window.removeEventListener('touchmove',  this._featTouchMove,  { capture: true }); }
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.paddingRight = '';
+  }
+
+  drawConnectors() {
+    const grid = document.querySelector('[data-feat-grid]');
+    const phone = document.querySelector('[data-phone-float]');
+    const cards = [...document.querySelectorAll('[data-feat]')];
+    if (!grid || !phone || !cards.length) return;
+
+    let svg = grid.querySelector('svg[data-conn]');
+    if (!svg) {
+      svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('data-conn','');
+      svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:4';
+      svg.innerHTML =
+        '<defs>' +
+        '<linearGradient id="tcGL" gradientUnits="objectBoundingBox" x1="1" y1="0" x2="0" y2="0">' +
+          '<stop offset="0%" stop-color="#10ffcb" stop-opacity="0.05"/>' +
+          '<stop offset="100%" stop-color="#10ffcb" stop-opacity="0.55"/>' +
+        '</linearGradient>' +
+        '<linearGradient id="tcGR" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">' +
+          '<stop offset="0%" stop-color="#10ffcb" stop-opacity="0.05"/>' +
+          '<stop offset="100%" stop-color="#10ffcb" stop-opacity="0.55"/>' +
+        '</linearGradient>' +
+        '</defs>';
+      grid.insertBefore(svg, grid.firstChild);
+    }
+    svg.querySelectorAll('[data-cp]').forEach(p => p.remove());
+
+    // Horizontal positions from LAYOUT geometry — immune to CSS rotate/translateY
+    const PHONE_W = 234, PHONE_H = 478, GRID_GAP = 88;
+    const TILT = 13 * Math.PI / 180;
+    const cosT = Math.cos(TILT), sinT = Math.sin(TILT);
+    const halfW = PHONE_W / 2, halfH = PHONE_H / 2;
+
+    const cols = [...grid.children].filter(c => c.tagName.toLowerCase() !== 'svg' && !c.hasAttribute('data-phone-float'));
+    if (cols.length < 2) return;
+    const leftColW = cols[0].offsetWidth;
+    const phoneCx = leftColW + GRID_GAP + halfW;
+
+    const gr = grid.getBoundingClientRect();
+    const pr = phone.getBoundingClientRect();
+    const phoneCy = pr.top - gr.top + pr.height / 2;
+
+    // Exact rotated corners (CW rotation: x'=x·cosT−y·sinT, y'=x·sinT+y·cosT)
+    const tlX = -halfW*cosT + halfH*sinT, tlY = -halfW*sinT - halfH*cosT; // top-left
+    const blX = -halfW*cosT - halfH*sinT, blY = -halfW*sinT + halfH*cosT; // bottom-left
+    const trX =  halfW*cosT + halfH*sinT, trY =  halfW*sinT - halfH*cosT; // top-right
+    const brX =  halfW*cosT - halfH*sinT, brY =  halfW*sinT + halfH*cosT; // bottom-right
+
+    // Returns the exact x of the phone visual left/right edge at vertical offset dy from phoneCy
+    const phoneEdgeAt = (dy, isLeft) => {
+      const [ax, ay, bx, by] = isLeft ? [tlX,tlY,blX,blY] : [trX,trY,brX,brY];
+      const t = Math.max(0, Math.min(1, (dy - ay) / (by - ay)));
+      return phoneCx + ax + t * (bx - ax);
+    };
+
+    const MARGIN = 14; // px outside phone visual edge
+    let li = 0, ri = 0;
+    const spreadY = [-74, 74];
+
+    cards.forEach(card => {
+      if (!card.classList.contains('tc-feat-on') && parseFloat(card.style.opacity || '0') < 0.5) return;
+      const cr = card.getBoundingClientRect();
+      const cardCy = cr.top - gr.top + cr.height / 2;
+      const isLeft = (cr.left - gr.left + cr.width / 2) < phoneCx;
+
+      const dy     = spreadY[isLeft ? li++ % 2 : ri++ % 2];
+      const startY = phoneCy + dy;
+      const edgeX  = phoneEdgeAt(dy, isLeft);
+      const startX = isLeft ? edgeX - MARGIN : edgeX + MARGIN; // always outside phone
+      const endX   = isLeft ? leftColW + 5 : grid.offsetWidth - leftColW - 5;
+      const endY   = cardCy;
+
+      const arm  = 18;
+      const cp1x = isLeft ? startX - arm : startX + arm;
+      const cp2x = isLeft ? endX   + arm : endX   - arm;
+      const d = `M${startX.toFixed(1)},${startY.toFixed(1)} C${cp1x.toFixed(1)},${startY.toFixed(1)} ${cp2x.toFixed(1)},${endY.toFixed(1)} ${endX.toFixed(1)},${endY.toFixed(1)}`;
+
+      // Main line — no glow, no arrowhead, rounded caps
+      const line = document.createElementNS('http://www.w3.org/2000/svg','path');
+      line.setAttribute('data-cp','');
+      line.setAttribute('d', d);
+      line.setAttribute('fill','none');
+      line.setAttribute('stroke', `url(#${isLeft ? 'tcGL' : 'tcGR'})`);
+      line.setAttribute('stroke-width','2');
+      line.setAttribute('stroke-linecap','round');
+      svg.appendChild(line);
+    });
+  }
+
+  setupFeatScroll() {
+    const section = document.querySelector('[data-feat-section]');
+    const cards   = [...document.querySelectorAll('[data-feat]')];
+    if (!section || !cards.length) return;
+
+    // ── Per-card h3 typewriter ────────────────────────────────────────────────
+    const titleData = new Map();
+    cards.forEach(card => {
+      const h3 = card.querySelector('h3');
+      if (!h3) return;
+      titleData.set(card, { h3, text: h3.textContent });
+      h3.textContent = '';
+    });
+
+    const typewrite = (card) => {
+      const d = titleData.get(card);
+      if (!d) return;
+      const { h3, text } = d;
+      const cursor = document.createElement('span');
+      cursor.style.cssText = 'display:inline-block;width:2px;height:.8em;background:#10ffcb;margin-left:2px;vertical-align:middle;border-radius:1px;animation:tcCursor .65s steps(1) infinite';
+      h3.appendChild(cursor);
+      let i = 0;
+      const tick = () => {
+        if (i >= text.length) {
+          setTimeout(() => { cursor.style.transition='opacity .4s'; cursor.style.opacity='0'; setTimeout(() => cursor.remove(), 420); }, 600);
+          return;
+        }
+        const sp = document.createElement('span');
+        sp.textContent = text[i++];
+        h3.insertBefore(sp, cursor);
+        setTimeout(tick, 60);
+      };
+      tick();
+    };
+
+    const sorted = [...cards].sort((a, b) => {
+      const ar = a.getBoundingClientRect(), br = b.getBoundingClientRect();
+      const dy = ar.top - br.top;
+      return Math.abs(dy) > 60 ? dy : ar.left - br.left;
+    });
+
+    let started = false;
+
+    const start = () => {
+      if (started) return;
+      started = true;
+      // Cards appear sequentially after 600ms, each 1100ms apart
+      sorted.forEach((card, i) => {
+        setTimeout(() => {
+          card.classList.add('tc-feat-on');
+          setTimeout(() => this.drawConnectors(), 80);
+          setTimeout(() => typewrite(card), 380);
+        }, 600 + i * 1300);
+      });
+    };
+
+    this._featIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) start();
+        else if (!started && e.boundingClientRect.bottom < 0) start();
+      });
+    }, { threshold: 0.28 });
+    this._featIO.observe(section);
   }
 
   scanReveal() {
-    const els = document.querySelectorAll('[data-reveal]');
+    document.querySelectorAll('[data-offering-card]').forEach((el, i) => { el.dataset.delay = String(i * 280); });
+    document.querySelectorAll('[data-nr-card]').forEach((el, i) => { el.dataset.delay = String(i * 130); });
+    const els = document.querySelectorAll('[data-reveal]:not([data-feat]),[data-reveal-pop]');
     if (!this.io) { els.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); return; }
     els.forEach(el => { if (!this.seen.has(el)) { this.seen.add(el); this.io.observe(el); } });
   }
@@ -796,6 +1368,7 @@ class Component extends DCLogic {
   highlight(text, words) {
     if (!words || !words.length) return text;
     let parts = [text];
+
     words.forEach(w => {
       const next = [];
       parts.forEach(part => {
@@ -803,7 +1376,7 @@ class Component extends DCLogic {
         const idx = part.indexOf(w);
         if (idx === -1) { next.push(part); return; }
         if (idx > 0) next.push(part.slice(0, idx));
-        next.push(React.createElement('span', { key: w + idx, style: { color: '#6ABB8C', fontWeight: 600 } }, w));
+        next.push(React.createElement('span', { key: w + idx, style: { color: '#10ffcb', fontWeight: 600 } }, w));
         next.push(part.slice(idx + w.length));
       });
       parts = next;
@@ -856,7 +1429,6 @@ class Component extends DCLogic {
       { key: 'home', label: 'Home' },
       { key: 'sobre', label: 'Sobre nós' },
       { key: 'servicos', label: 'Serviços' },
-      { key: 'blog', label: 'Conteúdo' },
       { key: 'contato', label: 'Contato' },
     ];
     const navItems = nav.map(n => ({ label: n.label, active: page === n.key, onClick: () => this.go(n.key) }));
@@ -871,21 +1443,37 @@ class Component extends DCLogic {
       { name: 'Coca-Cola', logo: base + 'COCA%20COLA.png' },
       { name: 'Coca-Cola Andina', logo: base + 'COCA%20COLA%20ANDINA.png' },
     ];
-    const mkPartner = (p, i, kp) => React.createElement('img', {
-      key: kp + i, src: p.logo, alt: p.name, loading: 'lazy',
-      style: { height: '38px', width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.55, transition: 'filter .25s,opacity .25s' },
-      onMouseEnter: (e) => { e.currentTarget.style.filter = 'none'; e.currentTarget.style.opacity = '1'; },
-      onMouseLeave: (e) => { e.currentTarget.style.filter = 'brightness(0) invert(1)'; e.currentTarget.style.opacity = '0.55'; },
-      onError: (e) => { e.currentTarget.style.display = 'none'; },
-    });
-    const partnerNodes = partners.map((p, i) => mkPartner(p, i, 'a'));
+    const mkPartner = (p, i, kp) => React.createElement('div', {
+      key: kp + i,
+      style: { width: '180px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' },
+    }, React.createElement('img', {
+      src: p.logo, alt: p.name, loading: 'eager',
+      style: { maxWidth: '140px', height: '44px', width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.72, transition: 'filter .3s,opacity .3s,transform .3s', display: 'block' },
+      onMouseEnter: (e) => { e.currentTarget.style.filter = 'none'; e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'scale(1.08)'; },
+      onMouseLeave: (e) => { e.currentTarget.style.filter = 'brightness(0) invert(1)'; e.currentTarget.style.opacity = '0.72'; e.currentTarget.style.transform = 'scale(1)'; },
+      onError: (e) => { e.currentTarget.style.opacity = '0'; },
+    }));
+    const partnerNodes  = partners.map((p, i) => mkPartner(p, i, 'a'));
     const partnerNodesB = partners.map((p, i) => mkPartner(p, i, 'b'));
+    const partnerNodesC = partners.map((p, i) => mkPartner(p, i, 'c'));
+    const partnerNodesD = partners.map((p, i) => mkPartner(p, i, 'd'));
 
     const offerings = [
-      { title: 'Treinamentos Teóricos e Práticos', icon: 'treino', iconBg: '#E7EEF6', desc: 'Completos e alinhados às Normas Regulamentadoras. A teoria acontece na nossa plataforma digital; a prática, na sua empresa, com instrutores especializados.', hi: ['plataforma digital', 'instrutores especializados'], onClick: () => this.go('servicos') },
-      { title: 'Normas Regulamentadoras', icon: 'nr', iconBg: '#EFEAF8', desc: 'Capacitação nas principais NRs — NR5, NR6, NR10, NR11, NR12, NR13, NR17, NR18, NR23, NR33, NR34 e NR35. Online e presencial, com suporte em Libras.', hi: ['Online e presencial', 'suporte em Libras'], onClick: () => this.go('servicos') },
-      { title: 'Lista de Presença Digital', icon: 'presenca', iconBg: '#E7F4ED', desc: 'Eficiência e praticidade na gestão de treinamentos: sem papel, com turmas organizadas, relatórios detalhados, controle de validade e acompanhamento de desempenho.', hi: ['sem papel', 'controle de validade'], onClick: () => this.go('servicos') },
-    ].map(o => ({ ...o, descNode: this.highlight(o.desc, o.hi) }));
+      { title: 'Treinamentos Teóricos e Práticos', icon: 'treino', num: '01', points: ['Plataforma digital com vídeo aulas e materiais', 'Instrutores especializados in loco', 'Alinhamento com as principais NRs'], onClick: () => this.go('servicos') },
+      { title: 'Normas Regulamentadoras', icon: 'nr', num: '02', points: ['Auditoria e conformidade normativa', 'NR5, NR6, NR10, NR11, NR12, NR13, NR17, NR18, NR23, NR33, NR34 e NR35', 'Online e presencial, com suporte em Libras'], onClick: () => this.go('servicos') },
+      { title: 'Lista de Presença Digital', icon: 'presenca', num: '03', points: ['Totalmente sem papel', 'Controle automático de validade das capacitações', 'Relatórios detalhados e acompanhamento de desempenho'], onClick: () => this.go('servicos') },
+    ].map(o => ({
+      ...o,
+      pointsNode: React.createElement(React.Fragment, null,
+        ...o.points.map((pt, i) => React.createElement('li', {
+          key: i,
+          style: { display: 'flex', alignItems: 'flex-start', gap: '11px', marginBottom: i < o.points.length - 1 ? '13px' : '0', fontSize: '14.5px', lineHeight: '1.55', color: 'rgba(255,255,255,0.72)' }
+        },
+          React.createElement('span', { style: { color: '#10ffcb', fontWeight: 700, flexShrink: 0, fontSize: '15px', marginTop: '1px' } }, '✓'),
+          React.createElement('span', null, pt)
+        ))
+      )
+    }));
 
     const platformBenefits = [
       'Eliminação do papel na gestão de turmas',
@@ -1000,8 +1588,9 @@ class Component extends DCLogic {
       menu: this.state.menu, navItems,
       goHome: () => this.go('home'), goSobre: () => this.go('sobre'), goServicos: () => this.go('servicos'),
       goBlog: () => this.go('blog'), goContato: () => this.go('contato'),
+      toggleFaq: (e) => { const el = e.currentTarget, a = el.querySelector('[data-ans]'), p = el.querySelector('[data-plus]'), open = a.style.maxHeight && a.style.maxHeight !== '0px'; a.style.maxHeight = open ? '0px' : a.scrollHeight + 'px'; p.style.transform = open ? 'rotate(0deg)' : 'rotate(45deg)'; p.style.background = open ? '' : 'rgba(16,255,203,.15)'; p.style.borderColor = open ? 'rgba(16,255,203,.35)' : '#10ffcb'; el.style.borderColor = open ? 'rgba(255,255,255,.08)' : 'rgba(16,255,203,.4)'; el.style.background = open ? 'rgba(255,255,255,.025)' : 'rgba(16,255,203,.04)'; },
       toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
-      partners, partnerNodes, partnerNodesB, offerings, platformBenefits, servicesFull, nrs, featLeft, featRight, advantages, values,
+      partners, partnerNodes, partnerNodesB, partnerNodesC, partnerNodesD, offerings, platformBenefits, servicesFull, nrs, featLeft, featRight, advantages, values,
       cats, filteredPosts, featuredPosts: allPosts.slice(0, 3),
       featured, rails,
       assistOpen: this.state.assistOpen, assistClosed: !this.state.assistOpen, typing: this.state.typing, draft: this.state.draft || '',
