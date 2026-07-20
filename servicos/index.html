@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <!-- Poppins: usada pelo header/footer compartilhados com o restante do site -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
     /* ========== TOKENS ========== */
@@ -865,6 +867,7 @@
       position: sticky;
       top: 0;
       padding-block: 0;
+      margin-bottom: 20px;
       min-height: unset;
       background: #000;
     }
@@ -882,7 +885,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 62%;
+      object-position: center 40%;
       z-index: 0;
       pointer-events: none;
       transform: translateZ(0);
@@ -959,8 +962,8 @@
       max-width: 1100px;
       margin-inline: auto;
       padding-inline: 24px;
-      /* pt-[28px] pb-[clamp(40px,6vw,60px)] */
-      padding-top: 28px;
+      /* pt-[28px] pb-[clamp(40px,6vw,60px)] (aumentado para 56px: dar folga do header fixo) */
+      padding-top: 82px;
       padding-bottom: clamp(40px, 6vw, 60px);
       /* min-h-[clamp(380px,44vw,500px)] */
       min-height: clamp(380px, 44vw, 500px);
@@ -2312,6 +2315,53 @@
   </style>
 </head>
 <body>
+  <!-- ========== HEADER/FOOTER COMPARTILHADOS (iguais a todas as páginas do site) ========== -->
+  <style>
+    [data-tc-burger] { display: none; }
+    @media (max-width: 900px) {
+      [data-tc-navlinks] { display: none !important; }
+      [data-tc-burger] { display: flex !important; }
+    }
+    @media (max-width: 640px) {
+      .tc-shared-footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    }
+    /* escurece o topo do vídeo do hero para o menu translúcido se misturar nele em vez de cortar o gráfico, igual às outras páginas do site */
+    .hero-video-overlay--top {
+      background: linear-gradient(180deg, rgba(5, 7, 11, .88) 0%, rgba(5, 7, 11, .5) 45%, rgba(5, 7, 11, 0) 100%);
+      height: 170px;
+      inset: 0 0 auto 0;
+    }
+  </style>
+
+  <header style="position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);background:rgba(10,19,38,.72);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Poppins',system-ui,sans-serif">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <img src="../uploads/NOVA%20LOGO%20TECNOCURSOS%20BRANCO%20SEM%20SLOGAN%201.png" alt="TecnoCursos" onclick="location.href='../index.html'" style="height:44px;width:auto;cursor:pointer"/>
+      <nav data-tc-navlinks style="display:flex;align-items:center;gap:34px">
+        <span onclick="location.href='../index.html'" style="position:relative;font-size:15px;font-weight:500;cursor:pointer;padding:6px 0;color:rgba(255,255,255,.82)">Home</span>
+        <span onclick="location.href='../index.html#sobre'" style="position:relative;font-size:15px;font-weight:500;cursor:pointer;padding:6px 0;color:rgba(255,255,255,.82)">Sobre nós</span>
+        <span style="position:relative;font-size:15px;font-weight:500;cursor:default;padding:6px 0;color:#fff">Serviços<span style="position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:#10ffcb;box-shadow:0 0 8px #10ffcb"></span></span>
+        <span onclick="location.href='../index.html#contato'" style="position:relative;font-size:15px;font-weight:500;cursor:pointer;padding:6px 0;color:rgba(255,255,255,.82)">Contato</span>
+      </nav>
+      <div data-tc-navlinks style="display:flex;align-items:center;gap:16px">
+        <button onclick="location.href='../index.html#contato'" style="font-family:inherit;border:none;cursor:pointer;background:#10ffcb;color:#070F1E;font-size:15px;font-weight:600;padding:11px 20px;border-radius:10px;box-shadow:0 6px 18px rgba(68,229,231,.32)">Fale com a gente</button>
+      </div>
+      <button data-tc-burger onclick="var m=document.getElementById('tc-shared-mobile-menu');m.style.display=(m.style.display==='flex'?'none':'flex')" style="font-family:inherit;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px">
+        <span style="width:22px;height:2px;background:#fff;border-radius:2px;display:block"></span>
+        <span style="width:22px;height:2px;background:#fff;border-radius:2px;display:block"></span>
+        <span style="width:22px;height:2px;background:#fff;border-radius:2px;display:block"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== MOBILE MENU ===================== -->
+  <div id="tc-shared-mobile-menu" style="display:none;position:fixed;inset:0;z-index:99;background:rgba(10,19,38,.97);backdrop-filter:blur(10px);padding:96px 28px 40px;flex-direction:column;gap:4px;font-family:'Poppins',system-ui,sans-serif">
+    <span onclick="location.href='../index.html'" style="font-size:24px;font-weight:600;color:#fff;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer">Home</span>
+    <span onclick="location.href='../index.html#sobre'" style="font-size:24px;font-weight:600;color:#fff;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer">Sobre nós</span>
+    <span onclick="document.getElementById('tc-shared-mobile-menu').style.display='none'" style="font-size:24px;font-weight:600;color:#10ffcb;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer">Serviços</span>
+    <span onclick="location.href='../index.html#contato'" style="font-size:24px;font-weight:600;color:#fff;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer">Contato</span>
+    <button onclick="location.href='../index.html#contato'" style="font-family:inherit;margin-top:24px;border:none;cursor:pointer;background:#10ffcb;color:#070F1E;font-size:17px;font-weight:600;padding:16px;border-radius:12px">Fale com a gente</button>
+  </div>
+
   <div class="ambient" aria-hidden="true">
     <div class="ambient-orb ambient-orb--1" id="orb-1"></div>
     <div class="ambient-orb ambient-orb--2" id="orb-2"></div>
@@ -2357,6 +2407,7 @@
         >
           <source src="./assets/videofundo.mp4?v=202607101512" type="video/mp4" />
         </video>
+        <div class="hero-video-overlay hero-video-overlay--top"></div>
         <div class="hero-video-overlay hero-video-overlay--side"></div>
         <div class="hero-video-overlay hero-video-overlay--bottom"></div>
         <div class="hero-shader-fallback"></div>
@@ -2499,38 +2550,57 @@
 
   </main>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="#" class="brand" aria-label="Tecno Cursos - Página inicial">
-            <span class="brand-mark" aria-hidden="true">TC</span>
-            <span>Tecno Cursos</span>
-          </a>
-          <p>Plataforma de treinamento, catálogo de NRs e lista de presença digital em um só ecossistema.</p>
+  <!-- ========== FOOTER (compartilhado, igual a todas as páginas do site) ========== -->
+  <footer style="position:relative;background:#070F1E;overflow:hidden;font-family:'Poppins',system-ui,sans-serif">
+
+    <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:clamp(48px,6vw,68px) 24px 0">
+
+      <div class="tc-shared-footer-grid" style="display:grid;gap:48px;grid-template-columns:2fr 1fr 1.4fr;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1)">
+
+        <div>
+          <img src="../uploads/NOVA%20LOGO%20TECNOCURSOS%20BRANCO%20SEM%20SLOGAN%201.png" alt="TecnoCursos" style="height:28px;width:auto;margin-bottom:14px;display:block"/>
+          <p style="font-size:13.5px;line-height:1.65;color:rgba(255,255,255,.5);margin:0 0 22px;max-width:260px">Tecnologia, treinamento e segurança. A plataforma de gestão de treinamentos em Normas Regulamentadoras.</p>
+          <div style="display:flex;gap:12px;align-items:center">
+            <a href="https://facebook.com" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="https://instagram.com" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://linkedin.com" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://youtube.com" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#070F1E"/></svg></a>
+            <a href="https://tiktok.com" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.9-.78-1.47-1.9-1.55-3.15h-2.9v13.6a2.7 2.7 0 11-2.13-2.64V10.6a5.62 5.62 0 105.03 5.6V9.4a7.5 7.5 0 004.3 1.36V7.87c-1-.02-1.98-.35-2.75-.98z"/></svg></a>
+          </div>
         </div>
-        <div class="footer-col">
-          <h4>Soluções</h4>
-          <ul role="list">
-            <li><a href="#plataforma">Plataforma de Treinamento</a></li>
-            <li><a href="#catalogo">Catálogo de NRs</a></li>
-            <li><a href="#lista-digital">Lista de Presença Digital</a></li>
-          </ul>
+
+        <div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:20px">Links Úteis</div>
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <span onclick="location.href='../index.html'" style="font-size:14px;color:rgba(255,255,255,.62);cursor:pointer">Home</span>
+            <span onclick="location.href='../index.html#sobre'" style="font-size:14px;color:rgba(255,255,255,.62);cursor:pointer">Sobre nós</span>
+            <span style="font-size:14px;color:#10ffcb;cursor:default">Serviços</span>
+            <span onclick="location.href='../index.html#contato'" style="font-size:14px;color:rgba(255,255,255,.62);cursor:pointer">Contato</span>
+          </div>
         </div>
-        <div class="footer-col">
-          <h4>Empresa</h4>
-          <ul role="list">
-            <!-- TODO: trocar o href pelo link da página de contato -->
-            <li><a href="contato.html">Fale conosco</a></li>
-          </ul>
+
+        <div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:20px">Contato</div>
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <span style="font-size:14px;color:rgba(255,255,255,.62)">16 99714-3932</span>
+            <span style="font-size:14px;color:rgba(255,255,255,.62)"><span>contato</span><span>&#64;</span><span>tecnocursos.com.br</span></span>
+            <span style="font-size:14px;color:rgba(255,255,255,.62);line-height:1.5">Avenida Trolesi, 4495,<br/>Parque Imperial · Matão-SP</span>
+          </div>
         </div>
+
       </div>
-      <div class="footer-bottom">
-        <span>&copy; <span id="year"></span> Tecno Cursos. Todos os direitos reservados.</span>
-        <span>Tecnologia que treina, comprova e protege.</span>
+
+      <div style="padding:18px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:12.5px;color:rgba(255,255,255,.32)">
+        <span>© 2026 todos os direitos reservados.</span>
+        <span>Tecnologia · Treinamento · Segurança</span>
       </div>
     </div>
+
+    <div style="position:relative;z-index:1;width:100%;display:flex;justify-content:center;align-items:flex-end;padding-top:8px;overflow:hidden">
+      <img src="../uploads/NOVA%20LOGO%20TECNOCURSOS%20BRANCO%202.png" alt="" aria-hidden="true"
+           style="width:90%;max-width:1100px;height:auto;opacity:.07;display:block;pointer-events:none;user-select:none;filter:grayscale(1) brightness(2)"/>
+    </div>
+
   </footer>
 
   <script type="module" src="./hero-shader.js"></script>

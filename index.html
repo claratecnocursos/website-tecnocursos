@@ -198,7 +198,7 @@ sc-for{display:contents}
         </div>
         <div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));margin-top:54px">
           <sc-for list="{{ offerings }}" as="s" hint-placeholder-count="3">
-            <div data-tilt data-offering-card style="position:relative;background:linear-gradient(145deg,rgba(10,20,40,.97) 0%,rgba(7,14,28,.97) 100%);border:1.5px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 28px 28px;cursor:pointer;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.4);display:flex;flex-direction:column" onClick="{{ s.onClick }}">
+            <div data-tilt data-offering-card data-reveal style="position:relative;background:linear-gradient(145deg,rgba(10,20,40,.97) 0%,rgba(7,14,28,.97) 100%);border:1.5px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 28px 28px;cursor:pointer;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.4);display:flex;flex-direction:column" onClick="{{ s.onClick }}">
               <!-- top accent line -->
               <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#10ffcb,#44e5e7)"></div>
               <!-- glow top-left -->
@@ -1128,11 +1128,10 @@ class Component extends DCLogic {
       }, 7500);
     })();
 
-    this.initOfferingReveal();
     this.initBrazilMap();
   }
 
-  componentDidUpdate() { this.scanReveal(); this.paintSvgs(); this.drawConnectors(); this.initTypewriters(); this.initPopText(); this.initCounters(); this.initVideoFallbacks(); this.initNativeVideoAttrs(); this.initNrCarousel(); this.initOfferingReveal(); this.setupFeatScroll(); this.initBrazilMap(); }
+  componentDidUpdate() { this.scanReveal(); this.paintSvgs(); this.drawConnectors(); this.initTypewriters(); this.initPopText(); this.initCounters(); this.initVideoFallbacks(); this.initNativeVideoAttrs(); this.initNrCarousel(); this.setupFeatScroll(); this.initBrazilMap(); }
 
   componentWillUnmount() {
     cancelAnimationFrame(this.raf);
@@ -1471,90 +1470,6 @@ class Component extends DCLogic {
       });
       svg.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
     }
-  }
-
-  initOfferingReveal() {
-    const section = document.querySelector('[data-cards-pin]');
-    const cards = [...document.querySelectorAll('[data-offering-card]')];
-    if (!section || !cards.length) return;
-    if (section.dataset.pinReady) return;
-    section.dataset.pinReady = '1';
-
-    const total = cards.length;
-    let step = 0;
-    let locked = false;
-    let busy = false;
-    let touchY = null;
-
-    const showStep = (n) => {
-      cards.forEach((card, i) => {
-        if (i < n) {
-          card.classList.add('tc-svc-on');
-          card.style.transition = 'opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1),filter .5s cubic-bezier(.22,.61,.36,1),box-shadow .32s,border-color .32s,background .3s';
-        } else {
-          card.classList.remove('tc-svc-on');
-          card.style.transition = 'opacity 1.2s ease,transform 1.4s cubic-bezier(.34,1.18,.64,1),filter 1.1s ease';
-        }
-      });
-    };
-
-    const onWheel = (e) => {
-      if (Math.abs(e.deltaY) < 4) return;
-      e.preventDefault();
-      if (busy) return;
-      advance(e.deltaY > 0 ? 1 : -1);
-    };
-    const onTouchStart = (e) => { touchY = e.touches[0].clientY; };
-    const onTouchMove = (e) => {
-      if (touchY == null) return;
-      const dy = touchY - e.touches[0].clientY;
-      if (Math.abs(dy) < 26) return;
-      e.preventDefault();
-      if (busy) return;
-      touchY = e.touches[0].clientY;
-      advance(dy > 0 ? 1 : -1);
-    };
-
-    const engageLock = () => {
-      if (locked || section.dataset.cardsDone) return;
-      locked = true;
-      window.addEventListener('wheel', onWheel, { passive: false, capture: true });
-      window.addEventListener('touchstart', onTouchStart, { passive: true });
-      window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
-    };
-    const releaseLock = () => {
-      if (!locked) return;
-      locked = false;
-      window.removeEventListener('wheel', onWheel, { capture: true });
-      window.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchmove', onTouchMove, { capture: true });
-    };
-
-    const advance = (dir) => {
-      busy = true;
-      setTimeout(() => { busy = false; }, 620);
-      if (dir > 0) {
-        if (step >= total) return;
-        step++;
-        showStep(step);
-        if (step >= total) { section.dataset.cardsDone = '1'; setTimeout(releaseLock, 480); }
-      } else {
-        if (step <= 0) { releaseLock(); return; }
-        step--;
-        showStep(step);
-      }
-    };
-
-    this._offeringRelease = releaseLock;
-    this._offeringIO = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (section.dataset.cardsDone) return;
-        const r = e.target.getBoundingClientRect();
-        const inFocus = r.top <= window.innerHeight * 0.6 && r.bottom >= window.innerHeight * 0.35;
-        if (inFocus) engageLock(); else releaseLock();
-      });
-    }, { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
-    this._offeringIO.observe(section);
   }
 
   initNativeVideoAttrs() {
