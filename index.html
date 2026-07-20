@@ -68,6 +68,11 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
 @media(max-width:640px){.tc-stats-row{flex-direction:column!important;align-items:center!important;gap:20px!important}.tc-stat-sep{display:none!important}.tc-nr-header{flex-direction:column!important;align-items:flex-start!important;margin-bottom:16px!important}.tc-nr-header-text{max-width:100%!important}.tc-footer-grid{grid-template-columns:1fr!important;gap:32px!important}[data-hide-sm]{display:none!important}[data-feat-grid]{grid-template-columns:1fr!important;column-gap:0!important;gap:16px!important;animation:none!important}[data-feat-grid]>div:not([data-phone-float]){height:auto!important;display:flex!important;flex-direction:column!important;gap:16px!important}[data-feat-grid] [data-feat]{position:static!important;top:auto!important}[data-feat-grid]>svg{display:none!important}.tc-tl-grid{grid-template-columns:1fr!important;height:auto!important}.tc-history-grid{grid-template-columns:1fr!important}.tc-br-section{min-height:auto!important}.tc-br-map-wrap{position:relative!important;top:auto!important;right:auto!important;transform:none!important;width:100%!important;max-width:100%!important;margin-top:36px!important}.tc-about-grid{grid-template-columns:1fr!important;gap:32px!important}}
 sc-for{display:contents}
 [data-nr-card]{opacity:1!important;transform:none!important;animation:none!important}
+.tc-nr-desc-wrap{position:absolute;left:20px;right:20px;bottom:18px;opacity:0;transform:translateY(16px) scale(.98);pointer-events:none;transition:opacity .34s ease,transform .38s cubic-bezier(.22,1,.36,1),background .34s ease,box-shadow .34s ease;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;background:linear-gradient(180deg,rgba(7,15,30,0) 0%,rgba(7,15,30,.88) 100%);box-shadow:0 18px 36px rgba(7,15,30,.2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tc-nr-desc-wrap.tc-nr-desc-visible{opacity:1;transform:translateY(0) scale(1)}
+.tc-nr-desc{font-size:12.5px;line-height:1.46;color:rgba(255,255,255,.78);font-weight:500}
+.tc-nr-card-cta{margin-top:14px;align-self:flex-start;border:none;cursor:pointer;background:rgba(16,255,203,.12);color:#10ffcb;border:1px solid rgba(16,255,203,.24);font-size:12.5px;font-weight:700;padding:8px 12px;border-radius:999px;transition:background .2s ease,transform .2s ease,box-shadow .2s ease}
+.tc-nr-card-cta:hover{background:rgba(16,255,203,.22);transform:translateY(-1px);box-shadow:0 8px 18px rgba(16,255,203,.16)}
 [data-reveal-pop]{opacity:0}
 .tc-pop{animation:tcRevealPop 1.15s cubic-bezier(.22,.61,.36,1) both}
 @supports (animation-timeline: view()){
@@ -236,20 +241,23 @@ sc-for{display:contents}
         <div data-nr-track style="overflow:hidden;position:relative;padding:20px 0 22px">
           <div data-nr-inner style="display:flex;gap:18px;will-change:transform;padding:0 4px">
           <sc-for list="{{ nrs }}" as="n" hint-placeholder-count="6">
-            <div data-card data-nr-card onClick="{{ goServicos }}" style="scroll-snap-align:start;flex:0 0 auto;width:248px;cursor:pointer;position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(165deg,#0E1E3C,#070F1E);border:1px solid rgba(16,255,203,.18);box-shadow:0 4px 20px rgba(0,0,0,.12);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s,border-color .3s" style-hover="transform:translateY(-10px) scale(1.03);box-shadow:0 24px 52px rgba(0,0,0,.2),0 0 24px rgba(16,255,203,.2);border-color:rgba(16,255,203,.5)">
+            <div data-card data-nr-card onClick="{{ goCatalogo }}" style="scroll-snap-align:start;flex:0 0 auto;width:248px;cursor:pointer;position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(165deg,#0E1E3C,#070F1E);border:1px solid rgba(16,255,203,.18);box-shadow:0 4px 20px rgba(0,0,0,.12);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s,border-color .3s" style-hover="transform:translateY(-10px) scale(1.03);box-shadow:0 24px 52px rgba(0,0,0,.2),0 0 24px rgba(16,255,203,.2);border-color:rgba(16,255,203,.5)">
               <div style="position:absolute;top:-50px;right:-50px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(16,255,203,.15),transparent 70%);pointer-events:none"></div>
               <div style="position:relative;padding:26px 24px 22px;min-height:228px;display:flex;flex-direction:column">
                 <span style="font-size:11px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase">Treinamento NR</span>
                 <div style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#10ffcb;line-height:1;margin:14px 0 0">{{ n.big }}</div>
                 <div style="font-size:14.5px;font-weight:600;line-height:1.3;color:#fff;margin-top:14px">{{ n.label }}</div>
-                <div style="font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.55);margin-top:8px;flex:1">{{ n.full }}</div>
+                <button class="tc-nr-card-cta" type="button" onClick="{{ goCatalogo }}">Ver detalhes</button>
+                <div class="tc-nr-desc-wrap">
+                  <div class="tc-nr-desc">{{ n.full }}</div>
+                </div>
               </div>
             </div>
           </sc-for>
           </div>
         </div>
 <div data-reveal-pop data-delay="120" style="margin-top:8px">
-          <button onClick="{{ goServicos }}" style="font-family:inherit;cursor:pointer;background:#10ffcb;border:none;color:#070F1E;font-size:15px;font-weight:700;padding:14px 26px;border-radius:12px;box-shadow:0 10px 28px rgba(16,255,203,.32);transition:background .2s,transform .2s,box-shadow .2s" style-hover="background:#0de0b3;transform:translateY(-2px);box-shadow:0 16px 36px rgba(16,255,203,.4)">Ver todos os treinamentos</button>
+          <button onClick="{{ goCatalogo }}" style="font-family:inherit;cursor:pointer;background:#10ffcb;border:none;color:#070F1E;font-size:15px;font-weight:700;padding:14px 26px;border-radius:12px;box-shadow:0 10px 28px rgba(16,255,203,.32);transition:background .2s,transform .2s,box-shadow .2s" style-hover="background:#0de0b3;transform:translateY(-2px);box-shadow:0 16px 36px rgba(16,255,203,.4)">Ver todos os treinamentos</button>
         </div>
       </div>
     </section>
@@ -1195,6 +1203,7 @@ class Component extends DCLogic {
     };
     document.addEventListener('click', this._nrNav);
     this.initNrCarousel();
+    this.initNrCardHover();
 
     this._connResize = () => this.drawConnectors();
     window.addEventListener('resize', this._connResize);
@@ -1269,7 +1278,7 @@ class Component extends DCLogic {
     this.initBrazilMap();
   }
 
-  componentDidUpdate() { this.scanReveal(); this.paintSvgs(); this.drawConnectors(); this.initTypewriters(); this.initPopText(); this.initCounters(); this.initVideoFallbacks(); this.initNativeVideoAttrs(); this.initNrCarousel(); this.setupFeatScroll(); this.initBrazilMap(); }
+  componentDidUpdate() { this.scanReveal(); this.paintSvgs(); this.drawConnectors(); this.initTypewriters(); this.initPopText(); this.initCounters(); this.initVideoFallbacks(); this.initNativeVideoAttrs(); this.initNrCarousel(); this.initNrCardHover(); this.setupFeatScroll(); this.initBrazilMap(); }
 
   componentWillUnmount() {
     cancelAnimationFrame(this.raf);
@@ -1748,6 +1757,17 @@ class Component extends DCLogic {
   scrollRail(id, dir) {
     const el = document.getElementById(id);
     if (el) el.scrollBy({ left: dir * Math.min(el.clientWidth * 0.85, 560), behavior: 'smooth' });
+  }
+
+  initNrCardHover() {
+    document.querySelectorAll('[data-nr-card]').forEach((card) => {
+      if (card.dataset.nrHoverBound === '1') return;
+      card.dataset.nrHoverBound = '1';
+      const wrap = card.querySelector('.tc-nr-desc-wrap');
+      if (!wrap) return;
+      card.addEventListener('mouseenter', () => wrap.classList.add('tc-nr-desc-visible'));
+      card.addEventListener('mouseleave', () => wrap.classList.remove('tc-nr-desc-visible'));
+    });
   }
 
   renderVals() {
