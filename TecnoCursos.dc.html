@@ -46,6 +46,7 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
 @keyframes tcblink{0%,100%{opacity:.3}50%{opacity:1}}
 @keyframes tcspin{to{transform:rotate(360deg)}}
 @keyframes tcmarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tc-marquee-wrap:hover .tc-marquee-track{animation-play-state:paused}
 @keyframes tcSlideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
 @keyframes tcFadeIn{from{opacity:0}to{opacity:1}}
 @keyframes tcChatEntry{0%{opacity:0;transform:scale(0) translateY(16px)}65%{opacity:1;transform:scale(1.14) translateY(-4px)}85%{transform:scale(.96)}100%{opacity:1;transform:scale(1) translateY(0)}}
@@ -175,8 +176,8 @@ sc-for{display:contents}
       <p data-reveal style="text-align:center;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.38);margin:0 0 36px;opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Empresas que confiam na TecnoCursos</p>
 
       <!-- marquee edge-to-edge -->
-      <div style="overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 9%,#000 91%,transparent 100%)">
-        <div style="display:flex;width:max-content;align-items:center;animation:tcmarquee 76s linear infinite;will-change:transform">
+      <div class="tc-marquee-wrap" onMouseEnter="{{ pauseMarquee }}" onMouseLeave="{{ resumeMarquee }}" style="overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 9%,#000 91%,transparent 100%)">
+        <div class="tc-marquee-track" style="display:flex;width:max-content;align-items:center;animation:tcmarquee 76s linear infinite;will-change:transform">
           <div style="display:flex;align-items:center;flex:none">{{ partnerNodes }}</div>
           <div style="display:flex;align-items:center;flex:none" aria-hidden="true">{{ partnerNodesB }}</div>
           <div style="display:flex;align-items:center;flex:none" aria-hidden="true">{{ partnerNodesC }}</div>
@@ -186,7 +187,7 @@ sc-for{display:contents}
     </section>
 
     <!-- O QUE OFERECEMOS -->
-    <section style="position:relative;background:linear-gradient(180deg,#070C16 0%,#0A1326 45%,#0C1C36 100%);padding:clamp(76px,9vw,128px) 0;overflow:hidden">
+    <section data-cards-pin style="position:relative;background:linear-gradient(180deg,#070C16 0%,#0A1326 45%,#0C1C36 100%);padding:clamp(76px,9vw,128px) 0;overflow:hidden">
       
       <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 64% at 22% 18%,rgba(50,173,120,.2),transparent 60%),radial-gradient(54% 70% at 92% 96%,rgba(0,92,139,.4),transparent 62%)"></div>
       <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;zoom:0.9">
@@ -1340,6 +1341,8 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect();
     if (this._connResize) window.removeEventListener('resize', this._connResize);
     if (this._featIO)         { this._featIO.disconnect(); }
+    if (this._offeringIO)     { this._offeringIO.disconnect(); }
+    if (this._offeringRelease){ this._offeringRelease(); }
     if (this._featScrollCheck){ window.removeEventListener('scroll',     this._featScrollCheck); }
     if (this._featWheel)      { window.removeEventListener('wheel',      this._featWheel,      { capture: true }); }
     if (this._featTouchStart) { window.removeEventListener('touchstart', this._featTouchStart); }
@@ -1666,29 +1669,87 @@ class Component extends DCLogic {
   }
 
   initOfferingReveal() {
-    if (!('IntersectionObserver' in window)) return;
-    const svcCards = [...document.querySelectorAll('[data-offering-card]')];
-    if (!svcCards.length) return;
-    const target = svcCards[0].closest('[style*="display:grid"]') || svcCards[0];
-    if (target.dataset.svcInit) return;
-    target.dataset.svcInit = '1';
-    let svcStarted = false;
-    const startSvc = () => {
-      if (svcStarted) return;
-      svcStarted = true;
-      svcCards.forEach((card, i) => {
-        setTimeout(() => {
+    const section = document.querySelector('[data-cards-pin]');
+    const cards = [...document.querySelectorAll('[data-offering-card]')];
+    if (!section || !cards.length) return;
+    if (section.dataset.pinReady) return;
+    section.dataset.pinReady = '1';
+
+    const total = cards.length;
+    let step = 0;
+    let locked = false;
+    let busy = false;
+    let touchY = null;
+
+    const showStep = (n) => {
+      cards.forEach((card, i) => {
+        if (i < n) {
           card.classList.add('tc-svc-on');
-          setTimeout(() => {
-            card.style.transition = 'transform .32s cubic-bezier(.22,.61,.36,1),box-shadow .32s,border-color .32s,background .3s';
-          }, 1500);
-        }, 200 + i * 320);
+          card.style.transition = 'opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1),filter .5s cubic-bezier(.22,.61,.36,1),box-shadow .32s,border-color .32s,background .3s';
+        } else {
+          card.classList.remove('tc-svc-on');
+          card.style.transition = 'opacity 1.2s ease,transform 1.4s cubic-bezier(.34,1.18,.64,1),filter 1.1s ease';
+        }
       });
     };
-    const svcIO = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) { svcIO.disconnect(); startSvc(); }
-    }, { threshold: 0.15 });
-    svcIO.observe(target);
+
+    const onWheel = (e) => {
+      if (Math.abs(e.deltaY) < 4) return;
+      e.preventDefault();
+      if (busy) return;
+      advance(e.deltaY > 0 ? 1 : -1);
+    };
+    const onTouchStart = (e) => { touchY = e.touches[0].clientY; };
+    const onTouchMove = (e) => {
+      if (touchY == null) return;
+      const dy = touchY - e.touches[0].clientY;
+      if (Math.abs(dy) < 26) return;
+      e.preventDefault();
+      if (busy) return;
+      touchY = e.touches[0].clientY;
+      advance(dy > 0 ? 1 : -1);
+    };
+
+    const engageLock = () => {
+      if (locked || section.dataset.cardsDone) return;
+      locked = true;
+      window.addEventListener('wheel', onWheel, { passive: false, capture: true });
+      window.addEventListener('touchstart', onTouchStart, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
+    };
+    const releaseLock = () => {
+      if (!locked) return;
+      locked = false;
+      window.removeEventListener('wheel', onWheel, { capture: true });
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove, { capture: true });
+    };
+
+    const advance = (dir) => {
+      busy = true;
+      setTimeout(() => { busy = false; }, 620);
+      if (dir > 0) {
+        if (step >= total) return;
+        step++;
+        showStep(step);
+        if (step >= total) { section.dataset.cardsDone = '1'; setTimeout(releaseLock, 480); }
+      } else {
+        if (step <= 0) { releaseLock(); return; }
+        step--;
+        showStep(step);
+      }
+    };
+
+    this._offeringRelease = releaseLock;
+    this._offeringIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (section.dataset.cardsDone) return;
+        const r = e.target.getBoundingClientRect();
+        const inFocus = r.top <= window.innerHeight * 0.6 && r.bottom >= window.innerHeight * 0.35;
+        if (inFocus) engageLock(); else releaseLock();
+      });
+    }, { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+    this._offeringIO.observe(section);
   }
 
   initNativeVideoAttrs() {
@@ -2014,7 +2075,7 @@ class Component extends DCLogic {
     const stackPhotos = [
       { src: 'uploads/fachada.png', alt: 'Fachada da sede da TecnoCursos' },
       { src: 'uploads/segurança 1.jpg', alt: 'Treinamento de segurança do trabalho na TecnoCursos' },
-      { src: 'uploads/segurança 2.jpg', alt: 'Equipe TecnoCursos em treinamento de segurança' },
+      { src: 'uploads/caminhão.png', alt: 'Caminhão da frota da TecnoCursos' },
     ];
     const stackN = stackPhotos.length;
     const aboutPhotos = stackPhotos.map((p, i) => {
@@ -2041,6 +2102,8 @@ class Component extends DCLogic {
       videoOpen: this.state.videoOpen,
       toggleVideo: () => this.setState(s => ({ videoOpen: !s.videoOpen })),
       stopClick: (e) => e.stopPropagation(),
+      pauseMarquee: (e) => { const t = e.currentTarget.querySelector('.tc-marquee-track'); if (t) t.style.animationPlayState = 'paused'; },
+      resumeMarquee: (e) => { const t = e.currentTarget.querySelector('.tc-marquee-track'); if (t) t.style.animationPlayState = 'running'; },
       partners, partnerNodes, partnerNodesB, partnerNodesC, partnerNodesD, offerings, platformBenefits, servicesFull, nrs, featLeft, featRight, advantages, pillars,
       timeline, tlActive, tlDots, tlProgress, tlPrev, tlNext,
       cats, filteredPosts, featuredPosts: allPosts.slice(0, 3),
