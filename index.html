@@ -25,7 +25,11 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
 @keyframes tcpop{0%{opacity:0;transform:translateY(14px) scale(.96)}100%{opacity:1;transform:none}}
 [data-offering-card]{opacity:0;transform:translateY(44px) scale(.88);filter:blur(6px);transition:opacity 1.2s ease,transform 1.4s cubic-bezier(.34,1.18,.64,1),filter 1.1s ease}
 [data-offering-card].tc-svc-on{opacity:1;transform:none;filter:blur(0)}
-[data-offering-card]:hover{transform:translateY(-5px)!important;box-shadow:0 20px 48px rgba(0,0,0,.38),0 0 0 1px rgba(68,229,231,.3),0 0 24px rgba(68,229,231,.08)!important;border-color:rgba(68,229,231,.45)!important;background:linear-gradient(180deg,rgba(16,26,48,.95),rgba(10,18,34,.95))!important}
+[data-offering-card]:hover{transform:translateY(-5px)!important;box-shadow:0 20px 48px rgba(0,0,0,.38),0 0 0 1px rgba(68,229,231,.3),0 0 24px rgba(68,229,231,.08)!important;border-color:rgba(68,229,231,.45)!important}
+.tc-offering-points-wrap{display:grid;grid-template-rows:0fr;opacity:0;margin-bottom:0;transition:grid-template-rows .45s cubic-bezier(.22,.61,.36,1),opacity .35s ease,margin-bottom .45s cubic-bezier(.22,.61,.36,1)}
+.tc-offering-points-wrap>ul{overflow:hidden;min-height:0}
+[data-offering-card]:hover .tc-offering-points-wrap{grid-template-rows:1fr;opacity:1;margin-bottom:18px}
+[data-offering-card]:hover .tc-offering-shade{background:linear-gradient(0deg,rgba(5,9,18,.98) 0%,rgba(5,9,18,.96) 46%,rgba(5,9,18,.7) 74%,rgba(5,9,18,.32) 100%)}
 .tc-pillar-row{transition:padding-left .35s cubic-bezier(.22,.61,.36,1)}
 .tc-pillar-row:hover{padding-left:16px}
 .tc-shine-text{background:linear-gradient(100deg,#070F1E 25%,#070F1E 42%,#0d9488 50%,#070F1E 58%,#070F1E 75%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:tcShine 6s linear infinite}
@@ -65,12 +69,9 @@ input:focus,textarea:focus{border-color:#32AD78!important;box-shadow:0 0 0 3px r
 @keyframes tcreveal{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 @keyframes tcrevealCard{from{opacity:0;transform:translateY(36px) scale(.97)}to{opacity:1;transform:none}}
 @keyframes tcRevealPop{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-@media(max-width:640px){.tc-stats-row{flex-direction:column!important;align-items:center!important;gap:20px!important}.tc-stat-sep{display:none!important}.tc-nr-header{flex-direction:column!important;align-items:flex-start!important;margin-bottom:16px!important}.tc-nr-header-text{max-width:100%!important}.tc-footer-grid{grid-template-columns:1fr!important;gap:32px!important}[data-hide-sm]{display:none!important}[data-feat-grid]{grid-template-columns:1fr!important;column-gap:0!important;gap:16px!important;animation:none!important}[data-feat-grid]>div:not([data-phone-float]){height:auto!important;display:flex!important;flex-direction:column!important;gap:16px!important}[data-feat-grid] [data-feat]{position:static!important;top:auto!important}[data-feat-grid]>svg{display:none!important}.tc-tl-grid{grid-template-columns:1fr!important;height:auto!important}.tc-history-grid{grid-template-columns:1fr!important}.tc-br-section{min-height:auto!important}.tc-br-map-wrap{position:relative!important;top:auto!important;right:auto!important;transform:none!important;width:100%!important;max-width:100%!important;margin-top:36px!important}.tc-about-grid{grid-template-columns:1fr!important;gap:32px!important}}
+@media(max-width:640px){.tc-stats-row{flex-direction:column!important;align-items:center!important;gap:20px!important}.tc-stat-sep{display:none!important}.tc-nr-header{flex-direction:column!important;align-items:flex-start!important;margin-bottom:16px!important}.tc-nr-header-text{max-width:100%!important}.tc-footer-grid{grid-template-columns:1fr!important;gap:32px!important}[data-hide-sm]{display:none!important}[data-feat-grid]{grid-template-columns:1fr!important;column-gap:0!important;gap:16px!important;animation:none!important}[data-feat-grid]>div:not([data-phone-float]){height:auto!important;display:flex!important;flex-direction:column!important;gap:16px!important}[data-feat-grid] [data-feat]{position:static!important;top:auto!important}[data-feat-grid]>svg{display:none!important}.tc-tl-grid{grid-template-columns:1fr!important;height:auto!important}.tc-history-grid{grid-template-columns:1fr!important}.tc-br-section{min-height:auto!important}.tc-br-map-wrap{position:relative!important;top:auto!important;right:auto!important;transform:none!important;width:100%!important;max-width:100%!important;margin-top:36px!important}.tc-about-grid{grid-template-columns:1fr!important;gap:32px!important}.tc-brand-evo-row{flex-direction:column!important}.tc-brand-evo-arrow{transform:rotate(90deg)}}
 sc-for{display:contents}
 [data-nr-card]{opacity:1!important;transform:none!important;animation:none!important}
-.tc-nr-desc-wrap{position:absolute;left:20px;right:20px;bottom:18px;opacity:0;transform:translateY(16px) scale(.98);pointer-events:none;transition:opacity .34s ease,transform .38s cubic-bezier(.22,1,.36,1),background .34s ease,box-shadow .34s ease;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;background:linear-gradient(180deg,rgba(7,15,30,0) 0%,rgba(7,15,30,.88) 100%);box-shadow:0 18px 36px rgba(7,15,30,.2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.tc-nr-desc-wrap.tc-nr-desc-visible{opacity:1;transform:translateY(0) scale(1)}
-.tc-nr-desc{font-size:12.5px;line-height:1.46;color:rgba(255,255,255,.78);font-weight:500}
 .tc-nr-card-cta{margin-top:14px;align-self:flex-start;border:none;cursor:pointer;background:rgba(16,255,203,.12);color:#10ffcb;border:1px solid rgba(16,255,203,.24);font-size:12.5px;font-weight:700;padding:8px 12px;border-radius:999px;transition:background .2s ease,transform .2s ease,box-shadow .2s ease}
 .tc-nr-card-cta:hover{background:rgba(16,255,203,.22);transform:translateY(-1px);box-shadow:0 8px 18px rgba(16,255,203,.16)}
 [data-reveal-pop]{opacity:0}
@@ -88,6 +89,15 @@ sc-for{display:contents}
 }
 @media(max-width:620px){
   [data-hide-sm]{display:none!important}
+}
+.tc-offering-grid [data-offering-card]:first-child{grid-column:1/-1;min-height:360px}
+.tc-offering-grid [data-offering-card]:nth-child(2),
+.tc-offering-grid [data-offering-card]:nth-child(3){min-height:360px}
+@media(max-width:860px){
+  .tc-offering-grid{grid-template-columns:1fr!important}
+  .tc-offering-grid [data-offering-card]:first-child{grid-column:1/-1!important;min-height:340px!important}
+  .tc-offering-grid [data-offering-card]:nth-child(2),
+  .tc-offering-grid [data-offering-card]:nth-child(3){min-height:340px!important}
 }
 </style>
 </helmet>
@@ -195,26 +205,26 @@ sc-for{display:contents}
     <section data-cards-pin style="position:relative;background:linear-gradient(180deg,#070C16 0%,#0A1326 45%,#0C1C36 100%);padding:clamp(76px,9vw,128px) 0;overflow:hidden">
       
       <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 64% at 22% 18%,rgba(50,173,120,.2),transparent 60%),radial-gradient(54% 70% at 92% 96%,rgba(0,92,139,.4),transparent 62%)"></div>
-      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;zoom:0.9">
+      <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px">
         <div style="max-width:720px">
-          <h2 data-tw style="font-size:clamp(40px,6.6vw,76px);line-height:.98;letter-spacing:-.035em;font-weight:800;color:#fff;margin:0;opacity:0">O que <span style="color:#10ffcb">oferecemos?</span></h2>
+          <h2 data-tw style="font-family:inherit;font-size:clamp(26px,3.6vw,42px);line-height:1.15;letter-spacing:-.01em;font-weight:600;color:#fff;margin:0;opacity:0;white-space:nowrap">O que <span style="color:#10ffcb">oferecemos?</span></h2>
           <h3 data-reveal data-delay="110" style="font-size:clamp(18px,2.2vw,26px);line-height:1.35;letter-spacing:.01em;font-weight:400;color:rgba(255,255,255,.78);margin:20px 0 0;opacity:0;transform:translateY(26px);transition:opacity .65s cubic-bezier(.22,.61,.36,1),transform .65s cubic-bezier(.22,.61,.36,1)">Treinamento, tecnologia e gestão — em <span style="color:#10ffcb;font-weight:500">um só lugar.</span></h3>
           <p data-reveal data-delay="200" style="font-size:18px;line-height:1.6;color:rgba(255,255,255,.62);margin:16px 0 0;max-width:540px;opacity:0;transform:translateY(26px);transition:opacity .65s cubic-bezier(.22,.61,.36,1),transform .65s cubic-bezier(.22,.61,.36,1)">A parte teórica acontece na nossa plataforma digital; a prática, na sua empresa, com instrutores especializados.</p>
         </div>
-        <div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));margin-top:54px">
+        <div class="tc-offering-grid" style="display:grid;gap:22px;grid-template-columns:repeat(2,1fr);margin-top:54px">
           <sc-for list="{{ offerings }}" as="s" hint-placeholder-count="3">
-            <div data-tilt data-offering-card data-reveal style="position:relative;border-radius:20px;padding:0;cursor:pointer;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.4);display:flex;flex-direction:column;min-height:440px" onClick="{{ s.onClick }}">
+            <div data-tilt data-offering-card data-reveal style="position:relative;border-radius:20px;padding:0;cursor:pointer;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.4);display:flex;flex-direction:column" onClick="{{ s.onClick }}">
               <!-- top accent line -->
               <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#10ffcb,#44e5e7);z-index:3"></div>
               <!-- foto de fundo -->
               <img src="{{ s.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .5s cubic-bezier(.22,.61,.36,1)"/>
               <!-- degradê para legibilidade do texto -->
-              <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,9,18,.96) 0%,rgba(5,9,18,.82) 34%,rgba(5,9,18,.25) 62%,rgba(5,9,18,.15) 100%);z-index:1"></div>
+              <div class="tc-offering-shade" style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,9,18,.96) 0%,rgba(5,9,18,.82) 34%,rgba(5,9,18,.25) 62%,rgba(5,9,18,.15) 100%);transition:background .45s cubic-bezier(.22,.61,.36,1);z-index:1"></div>
               <!-- conteúdo -->
-              <div style="position:relative;z-index:2;margin-top:auto;padding:30px 26px 26px">
-                <div style="width:42px;height:42px;border-radius:12px;background:rgba(16,255,203,.14);border:1px solid rgba(16,255,203,.3);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;margin-bottom:16px" data-svg="{{ s.icon }}" data-stroke="#10ffcb"></div>
-                <h4 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 16px;line-height:1.25;text-shadow:0 2px 12px rgba(0,0,0,.5)">{{ s.title }}</h4>
-                <ul style="list-style:none;padding:0;margin:0 0 24px">{{ s.pointsNode }}</ul>
+              <div style="position:relative;z-index:2;margin-top:auto;padding:26px 26px 24px">
+                <div style="width:42px;height:42px;border-radius:12px;background:rgba(16,255,203,.14);border:1px solid rgba(16,255,203,.3);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;margin-bottom:14px" data-svg="{{ s.icon }}" data-stroke="#10ffcb"></div>
+                <h4 style="font-family:inherit;font-size:20px;font-weight:700;color:#fff;margin:0 0 12px;line-height:1.25;text-shadow:0 2px 12px rgba(0,0,0,.5)">{{ s.title }}</h4>
+                <div class="tc-offering-points-wrap"><ul style="list-style:none;padding:0;margin:0">{{ s.pointsNode }}</ul></div>
                 <button onClick="{{ s.onClick }}" style="font-family:inherit;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;background:#10ffcb;color:#070F1E;font-size:13px;font-weight:600;padding:11px 22px;border-radius:10px;box-shadow:0 8px 24px rgba(68,229,231,.28);transition:background .2s,transform .2s" style-hover="background:#0de0b3;transform:translateY(-2px)">Conheça <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
               </div>
             </div>
@@ -246,11 +256,8 @@ sc-for{display:contents}
               <div style="position:relative;padding:26px 24px 22px;min-height:228px;display:flex;flex-direction:column">
                 <span style="font-size:11px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase">Treinamento NR</span>
                 <div style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#10ffcb;line-height:1;margin:14px 0 0">{{ n.big }}</div>
-                <div style="font-size:14.5px;font-weight:600;line-height:1.3;color:#fff;margin-top:14px">{{ n.label }}</div>
+                <div style="font-size:14.5px;font-weight:600;line-height:1.3;color:#fff;margin-top:14px;min-height:2.6em">{{ n.label }}</div>
                 <button class="tc-nr-card-cta" type="button" onClick="{{ goCatalogo }}">Ver detalhes</button>
-                <div class="tc-nr-desc-wrap">
-                  <div class="tc-nr-desc">{{ n.full }}</div>
-                </div>
               </div>
             </div>
           </sc-for>
@@ -463,10 +470,14 @@ sc-for{display:contents}
               </div>
             </sc-for>
           </div>
-          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:18px">
-            <sc-for list="{{ aboutPhotos }}" as="photo" hint-placeholder-count="3">
-              <span style="width:7px;height:7px;border-radius:50%;transition:background .3s;background:{{ photo.dotOn ? '#0d9488' : 'rgba(13,148,136,.25)' }}"></span>
-            </sc-for>
+          <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px">
+            <button onClick="{{ stackPrev }}" aria-label="Foto anterior" style="font-family:inherit;cursor:pointer;width:34px;height:34px;border-radius:50%;background:#fff;border:1.5px solid rgba(13,148,136,.25);color:#0A1326;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s,box-shadow .2s" style-hover="background:#f0fdf9;border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.12)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <div style="display:flex;align-items:center;gap:6px">
+              <sc-for list="{{ aboutPhotos }}" as="photo" hint-placeholder-count="3">
+                <span style="width:7px;height:7px;border-radius:50%;transition:background .3s;background:{{ photo.dotOn ? '#0d9488' : 'rgba(13,148,136,.25)' }}"></span>
+              </sc-for>
+            </div>
+            <button onClick="{{ stackNext }}" aria-label="Próxima foto" style="font-family:inherit;cursor:pointer;width:34px;height:34px;border-radius:50%;background:#fff;border:1.5px solid rgba(13,148,136,.25);color:#0A1326;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s,box-shadow .2s" style-hover="background:#f0fdf9;border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.12)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
           </div>
         </div>
       </div>
@@ -523,10 +534,14 @@ sc-for{display:contents}
                 </div>
               </sc-for>
             </div>
-            <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:18px">
-              <sc-for list="{{ aboutPhotos }}" as="photo" hint-placeholder-count="3">
-                <span style="width:7px;height:7px;border-radius:50%;transition:background .3s;background:{{ photo.dotOn ? '#10ffcb' : 'rgba(16,255,203,.25)' }}"></span>
-              </sc-for>
+            <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px">
+              <button onClick="{{ stackPrev }}" aria-label="Foto anterior" style="font-family:inherit;cursor:pointer;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.16);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s" style-hover="background:rgba(255,255,255,.18);border-color:rgba(16,255,203,.5)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <div style="display:flex;align-items:center;gap:6px">
+                <sc-for list="{{ aboutPhotos }}" as="photo" hint-placeholder-count="3">
+                  <span style="width:7px;height:7px;border-radius:50%;transition:background .3s;background:{{ photo.dotOn ? '#10ffcb' : 'rgba(16,255,203,.25)' }}"></span>
+                </sc-for>
+              </div>
+              <button onClick="{{ stackNext }}" aria-label="Próxima foto" style="font-family:inherit;cursor:pointer;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.16);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s" style-hover="background:rgba(255,255,255,.18);border-color:rgba(16,255,203,.5)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
             </div>
           </div>
           <div style="display:flex;flex-direction:column;gap:28px">
@@ -589,14 +604,14 @@ sc-for{display:contents}
       <!-- Evolução da marca -->
       <div style="position:relative;max-width:1200px;margin:clamp(10px,1.5vw,20px) auto 0;padding:0 24px clamp(56px,7vw,96px)">
       <div class="tc-about-grid" style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center">
-        <div data-reveal style="display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,.61,.36,1) .1s,transform .8s cubic-bezier(.22,.61,.36,1) .1s">
+        <div data-reveal class="tc-brand-evo-row" style="display:flex;align-items:center;justify-content:center;gap:18px;opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,.61,.36,1) .1s,transform .8s cubic-bezier(.22,.61,.36,1) .1s">
           <div style="text-align:center">
             <div style="background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 44px rgba(10,19,38,.12);width:220px;height:150px;display:flex;align-items:center;justify-content:center">
               <img src="uploads/logotecnocursos.png" alt="Logo original da TecnoCursos" style="max-width:100%;max-height:100%;object-fit:contain"/>
             </div>
             <div style="margin-top:12px;font-size:13px;font-weight:700;color:#0A1326">Marca antiga</div>
           </div>
-          <span style="color:#0d9488;font-size:28px;font-weight:800;flex-shrink:0">›</span>
+          <span class="tc-brand-evo-arrow" style="color:#0d9488;font-size:28px;font-weight:800;flex-shrink:0">›</span>
           <div style="text-align:center">
             <div style="background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 44px rgba(10,19,38,.12);width:220px;height:150px;display:flex;align-items:center;justify-content:center">
               <img src="uploads/NOVA LOGO TECNOCURSOS 1.png" alt="Logo atual da TecnoCursos" style="max-width:100%;max-height:100%;object-fit:contain"/>
@@ -655,6 +670,48 @@ sc-for{display:contents}
               </div>
             </sc-for>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nossa localização -->
+    <section style="position:relative;overflow:hidden;background:radial-gradient(48% 60% at 12% 15%,rgba(16,255,203,.55),transparent 70%),radial-gradient(52% 65% at 88% 10%,rgba(16,255,203,.4),transparent 70%),radial-gradient(55% 70% at 20% 88%,rgba(16,255,203,.45),transparent 70%),radial-gradient(50% 60% at 92% 85%,rgba(16,255,203,.5),transparent 70%),radial-gradient(60% 70% at 50% 50%,rgba(16,255,203,.2),transparent 75%),#ffffff;padding:clamp(56px,7vw,96px) 0">
+      <div class="tc-about-grid" style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center">
+        <div>
+          <span data-reveal style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0d9488;margin-bottom:14px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Onde estamos</span>
+          <h2 data-reveal style="font-size:clamp(28px,3.6vw,42px);font-weight:800;color:#070F1E;margin:0 0 18px;letter-spacing:-.02em;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">Nossa Localização</h2>
+          <p data-reveal style="font-size:16px;line-height:1.65;color:#495264;margin:0 0 32px;max-width:460px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .05s,transform .7s cubic-bezier(.22,.61,.36,1) .05s">Com sede em Matão-SP, a TecnoCursos está posicionada para atender empresas de toda a região e do restante do Brasil, oferecendo treinamentos presenciais e online.</p>
+
+          <div data-reveal style="display:flex;flex-direction:column;gap:24px;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .1s,transform .7s cubic-bezier(.22,.61,.36,1) .1s">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:42px;height:42px;border-radius:11px;background:#fff;box-shadow:0 4px 14px rgba(7,15,30,.12);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <div>
+                <div style="font-size:15px;font-weight:700;color:#070F1E;margin-bottom:4px">Endereço</div>
+                <div style="font-size:15px;line-height:1.5;color:#495264">Avenida Trolesi, 4495, Parque Imperial<br/>Matão - SP</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:42px;height:42px;border-radius:11px;background:#fff;box-shadow:0 4px 14px rgba(7,15,30,.12);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+              <div>
+                <div style="font-size:15px;font-weight:700;color:#070F1E;margin-bottom:4px">Telefone</div>
+                <div style="font-size:15px;color:#495264">(16) 99714-3932</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:42px;height:42px;border-radius:11px;background:#fff;box-shadow:0 4px 14px rgba(7,15,30,.12);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+              <div>
+                <div style="font-size:15px;font-weight:700;color:#070F1E;margin-bottom:4px">Horário de Atendimento</div>
+                <div style="font-size:15px;color:#495264">Segunda a Sexta: 7h30 às 17h</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal style="border-radius:20px;overflow:hidden;box-shadow:0 24px 56px rgba(7,15,30,.14);border:1px solid rgba(7,15,30,.08);aspect-ratio:4/3;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1) .15s,transform .7s cubic-bezier(.22,.61,.36,1) .15s">
+          <iframe
+            src="https://www.google.com/maps?q=Avenida+Trolesi,+4495,+Parque+Imperial,+Mat%C3%A3o+-+SP&output=embed"
+            style="width:100%;height:100%;border:0;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Localização da TecnoCursos em Matão-SP"></iframe>
         </div>
       </div>
     </section>
@@ -1203,7 +1260,6 @@ class Component extends DCLogic {
     };
     document.addEventListener('click', this._nrNav);
     this.initNrCarousel();
-    this.initNrCardHover();
 
     this._connResize = () => this.drawConnectors();
     window.addEventListener('resize', this._connResize);
@@ -1278,7 +1334,7 @@ class Component extends DCLogic {
     this.initBrazilMap();
   }
 
-  componentDidUpdate() { this.scanReveal(); this.paintSvgs(); this.drawConnectors(); this.initTypewriters(); this.initPopText(); this.initCounters(); this.initVideoFallbacks(); this.initNativeVideoAttrs(); this.initNrCarousel(); this.initNrCardHover(); this.setupFeatScroll(); this.initBrazilMap(); }
+  componentDidUpdate() { this.scanReveal(); this.paintSvgs(); this.drawConnectors(); this.initTypewriters(); this.initPopText(); this.initCounters(); this.initVideoFallbacks(); this.initNativeVideoAttrs(); this.initNrCarousel(); this.setupFeatScroll(); this.initBrazilMap(); }
 
   componentWillUnmount() {
     cancelAnimationFrame(this.raf);
@@ -1759,17 +1815,6 @@ class Component extends DCLogic {
     if (el) el.scrollBy({ left: dir * Math.min(el.clientWidth * 0.85, 560), behavior: 'smooth' });
   }
 
-  initNrCardHover() {
-    document.querySelectorAll('[data-nr-card]').forEach((card) => {
-      if (card.dataset.nrHoverBound === '1') return;
-      card.dataset.nrHoverBound = '1';
-      const wrap = card.querySelector('.tc-nr-desc-wrap');
-      if (!wrap) return;
-      card.addEventListener('mouseenter', () => wrap.classList.add('tc-nr-desc-visible'));
-      card.addEventListener('mouseleave', () => wrap.classList.remove('tc-nr-desc-visible'));
-    });
-  }
-
   renderVals() {
     const page = this.state.page;
     const nav = [
@@ -1807,9 +1852,9 @@ class Component extends DCLogic {
     const partnerNodesD = partners.map((p, i) => mkPartner(p, i, 'd'));
 
     const offerings = [
-      { title: 'Treinamentos Teóricos e Práticos', icon: 'treino', num: '01', img: 'uploads/img1home.png', points: ['Plataforma digital com vídeo aulas e materiais', 'Instrutores especializados in loco', 'Alinhamento com as principais NRs'], onClick: () => this.go('servicos') },
-      { title: 'Normas Regulamentadoras', icon: 'nr', num: '02', img: 'uploads/img3home.png', points: ['Auditoria e conformidade normativa', 'NR5, NR6, NR10, NR11, NR12, NR13, NR17, NR18, NR23, NR33, NR34 e NR35', 'Online e presencial, com suporte em Libras'], onClick: () => this.go('servicos') },
-      { title: 'Lista de Presença Digital', icon: 'presenca', num: '03', img: 'uploads/img2home.png', points: ['Totalmente sem papel', 'Controle automático de validade das capacitações', 'Relatórios detalhados e acompanhamento de desempenho'], onClick: () => this.go('servicos') },
+      { title: 'Treinamentos Teóricos e Práticos', icon: 'treino', img: 'uploads/img1home.png', points: ['Plataforma digital com vídeo aulas e materiais', 'Instrutores especializados in loco', 'Alinhamento com as principais NRs'], onClick: () => this.go('servicos') },
+      { title: 'Normas Regulamentadoras', icon: 'nr', img: 'uploads/img3home.png', points: ['Auditoria e conformidade normativa', 'NR5, NR6, NR10, NR11, NR12, NR13, NR17, NR18, NR23, NR33, NR34 e NR35', 'Online e presencial, com suporte em Libras'], onClick: () => this.go('servicos') },
+      { title: 'Lista de Presença Digital', icon: 'presenca', img: 'uploads/img2home.png', points: ['Totalmente sem papel', 'Controle automático de validade das capacitações', 'Relatórios detalhados e acompanhamento de desempenho'], onClick: () => this.go('servicos') },
     ].map(o => ({
       ...o,
       pointsNode: React.createElement(React.Fragment, null,
@@ -2054,11 +2099,13 @@ class Component extends DCLogic {
       };
     });
     const cycleStack = () => this.setState(s => ({ aboutStack: (s.aboutStack + 1) % stackN }));
+    const stackPrev = () => this.setState(s => ({ aboutStack: (s.aboutStack - 1 + stackN) % stackN }));
+    const stackNext = () => this.setState(s => ({ aboutStack: (s.aboutStack + 1) % stackN }));
 
     return {
       home: page === 'home', sobre: page === 'sobre', servicos: page === 'servicos', catalogo: page === 'catalogo', nrDetail: page === 'nrDetail', blog: page === 'blog', contato: page === 'contato',
       menu: this.state.menu, navItems,
-      aboutPhotos, cycleStack,
+      aboutPhotos, cycleStack, stackPrev, stackNext,
       goHome: () => this.go('home'), goSobre: () => this.go('sobre'), goServicos: () => this.go('servicos'),
       goCatalogo: () => this.go('catalogo'), goBlog: () => this.go('blog'), goContato: () => this.go('contato'),
       catalogSearch: this.state.catalogSearch || '', catalogFiltered, catalogEmpty, catalogTotal: nrs.length,
